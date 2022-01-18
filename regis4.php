@@ -7,6 +7,8 @@ $_SESSION["email"] =  $_POST["email"];
 ?>
 <style media="screen">
 #im{
+
+
   border-radius: 99%;
   border-width: 1px;
   border: black;
