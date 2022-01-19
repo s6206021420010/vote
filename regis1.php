@@ -18,6 +18,7 @@ $count = mysqli_num_rows($result);
   #passnon,#use{
     color: red;
   }
+  
 </style>
 <img class="imgbg" src="images/document.png" style="position:absolute; left:80px; top:25px;"alt="">
 <div class="container" style="
