@@ -16,7 +16,7 @@ include "header.php"; ?>
   $org=$_SESSION['org'];
   $dep=$_SESSION['dep'];
   $dep2=$_SESSION['dep2'];
-  $sql = "SELECT event_id, event_name, event_detail, date_time, image, status_event FROM event";
+  $sql = "SELECT event_id, event_name, event_detail, date_start, date_end, image, status_event FROM event";
   $result = mysqli_query($conn, $sql);
   ?>
 

@@ -22,7 +22,7 @@
 </head>
 <style media="screen">
 body{
-  font-family: 'Prompt', sans-serif;S
+  font-family: 'Prompt', sans-serif;
   border-collapse: collapse;
 }
 .switch {

@@ -38,7 +38,6 @@ $img = $_SESSION['image'];
           <?php
           $sqls = "SELECT * FROM user WHERE user_id= $user_id  ";
           $results = mysqli_query($conn, $sqls);
-
           if ($results->num_rows > 0) {
               while($rows = $results->fetch_assoc()) {?>
                 <div class="table1">
@@ -83,7 +82,7 @@ $img = $_SESSION['image'];
               <textarea class="form-control"style="width:100%; height:50px; margin-top:5px;" name="name" rows="8" cols="80" disabled><?php echo $row["event_detail"]; ?></textarea>
                 <a href="list.php?event_id=<?php echo $row["event_id"]; ?>&user_id=<?php echo $row["user_id"]; ?>" class="btn btn-success" style="width: 49%; height:35px;margin-top:10px;">เพิ่มตัวเลือก</a>
                 <a href="delete.php?event_id=<?php echo $row["event_id"]; ?>" class="btn btn-danger "style="border-radius: 5px; height:35px; width: 48%;  margin-top: 10px;">ลบ</a><br>
-                <a href="delete.php?event_id=<?php echo $row["event_id"]; ?>" class="btn btn-primary "style="border-radius: 5px; height:35px; width: 100%;  margin-top: 10px;">เพิ่มผู้มีสิทธิ์เลือกตั้ง</a><br>
+                <a href="show_evet.php?event_id=<?php echo $row["event_id"]; ?>" class="btn btn-primary "style="border-radius: 5px; height:35px; width: 100%;  margin-top: 10px;">ดูรายละเอียด</a><br>
             </td>
           </tr>
       </table>
