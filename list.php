@@ -108,7 +108,7 @@ $_SESSION["event_id"] = $_GET["event_id"];
     <table class="table" style="border-radius:5px; color:white;">
       <thead>
         <tr>
-          <th scope="col" style="color:#E6772E;">หมายเลข</th>
+          <th scope="col" style="color:#E6772E;">หมายเลข</th> 
           <th scope="col" style="color:#E6772E;">ชื่อรายการโหวต</th>
           <th scope="col" style="color:#E6772E;">รูปภาพ</th>
           <th scope="col" style="color:#E6772E;">แก้ไข</th>
