@@ -21,7 +21,33 @@ include "header.php"; ?>
   ?>
 
   <div class="container" style="position:fixed;left:13%; top:13%;">
-    <h2 style="color:#373737;">เพิ่มสมาชิก</h2>
+  <h4 style="color:#565656;">เพิ่มตัวเลือกการโหวต</h4>
+  <a href="list.php?event_id=<?php echo $event_id?>&&user_id=<?php echo $user_id ?>" >
+
+    <button type="button" style="
+          background-color:#06b172;
+          border-width: 0px;
+          padding: 10px 10px;
+          color: white;
+          width:18%;
+          border-radius: 6px;
+          margin-bottom:10px;
+          " >รายชื่อผู้สมัคร</button>
+          </a>
+
+                <a href="add_xcell.php?event_id=<?php echo $event_id?>&&user_id=<?php echo $user_id ?>" >
+          
+          <button type="button" style="
+                    background-color:#06b172;
+                    border-width: 0px;
+                    padding: 10px 10px;
+                    color: white;
+                    width:18%;
+                    border-radius: 6px;
+                    margin-bottom:10px;
+                    " >รายชื่อผู้มีสิทธิ์เลือกตั้ง</button>
+          </a>
+          <hr>
     <i class=”fa fa-dashboard fa-2x”></i>
   <div class="row">
     <h4 style="color:#373737;">โหลดฟอร์มXcell</h4>

@@ -80,9 +80,9 @@ $img = $_SESSION['image'];
           <tr>
             <td>
               <textarea class="form-control"style="width:100%; height:50px; margin-top:5px;" name="name" rows="8" cols="80" disabled><?php echo $row["event_detail"]; ?></textarea>
-                <a href="list.php?event_id=<?php echo $row["event_id"]; ?>&user_id=<?php echo $row["user_id"]; ?>" class="btn btn-success" style="width: 49%; height:35px;margin-top:10px;">เพิ่มตัวเลือก</a>
+                <a href="list.php?event_id=<?php echo $row["event_id"]; ?>&user_id=<?php echo $row["user_id"]; ?>" class="btn btn-success" style="width: 49%; height:35px;margin-top:10px;">จัดการ</a>
                 <a href="delete.php?event_id=<?php echo $row["event_id"]; ?>" class="btn btn-danger "style="border-radius: 5px; height:35px; width: 48%;  margin-top: 10px;">ลบ</a><br>
-                <a href="show_evet.php?event_id=<?php echo $row["event_id"]; ?>" class="btn btn-primary "style="border-radius: 5px; height:35px; width: 100%;  margin-top: 10px;">ดูรายละเอียด</a><br>
+                <!-- <a href="show_evet.php?event_id=<?php echo $row["event_id"]; ?>" class="btn btn-primary "style="border-radius: 5px; height:35px; width: 100%;  margin-top: 10px;">ดูรายละเอียด</a><br> -->
             </td>
           </tr>
       </table>
