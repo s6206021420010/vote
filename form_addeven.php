@@ -30,14 +30,11 @@ include "navbar.php";
           <input type="text" value="<?php echo $sec ?>" name="user_id" class="form-control" hidden >
           <label for="">รายละเอียดการเลือกตั้ง</label>
           <textarea id="" name="event_detail" class="form-control" placeholder="รายละเอียดการเลือกตั้ง" ></textarea>
-          <label for="">วันเวลาเปิด</label>
-          <input type="date" id="" name="date_start" class="form-control" style="width:40%" placeholder="Your last name.."required>
-          <label for="">เวลาเปิดโหวต</label>
-          <input type="time" id="" name="date_start" class="form-control" style="width:40%" placeholder="Your last name.."required>
-          <label for="">วันเวลาปิด</label>
-          <input type="date" id="" name="date_end" class="form-control" style="width:40%" placeholder="Your last name.."required>
-          <label for="">เวลาปิดโหวต</label>
-          <input type="time" id="" name="date_end" class="form-control" style="width:40%" placeholder="Your last name.."required>
+          <label for="">วันเวลาเปิดโหวต</label>
+          <input type="datetime-local" id="birthdaytime" class="form-control"name="date_start" >
+          <label for="">วันเวลาปิดโหวต</label>
+          <input type="datetime-local" id="birthdaytime" class="form-control"name="date_end" >
+
           <button type="submit" class="btn btn-success" style="margin-top:9px;">สร้างการเลือกตั้ง</button>
           </div>
           <div class="col-5">

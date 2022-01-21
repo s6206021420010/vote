@@ -28,7 +28,7 @@
                 $_SESSION['dep'] = $row['department_id'];
                 $_SESSION['dep2'] = $row['department2_id'];
                 $_SESSION['fn'] = $row['name'];
-                 header("location: home.php?sweet='1'");
+                 header("location: show.php?sweet='1'");
               }
           if($row["status"]==3) {
                  header("location: index.php?sweet=0");

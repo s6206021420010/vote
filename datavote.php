@@ -14,7 +14,7 @@ $user_id = $_GET['user_id'];
 <div class="container" id="body" style="position:absolute; top:10%; left:12%;display:none;">
   <h3 style="margin:10px;">ลงคะแนน</h3>
 
-   <table class="table"style="width:100%;">
+   <table class="table "style="width:100%;">
      <tr>
        <th scope="col" style="text-align: center;">
          รูป

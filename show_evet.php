@@ -14,7 +14,10 @@
     <?php
     include "conn.php";
     include "header.php";
-
+    session_start();
+    $fn = $_SESSION['fn'];
+    $img = $_SESSION['image'];
+    $user_id = $_SESSION['user_id'];
     // if ($conn->connect_error) {
     //     die("Connection failed: " . $conn->connect_error);
     // }
@@ -22,7 +25,7 @@
     if ($_GET) {
         $userId = $_GET['event_id'];
     }
-    $sql = "SELECT event_id, event_name, event_detail, date_start, `image`, status_event, date_end FROM `event` WHERE event_id = '$userId'  ";
+    $sql = "SELECT * FROM `event` WHERE event_id = '$userId'  ";
     $results = $conn->query($sql);
 
     $sql2 = "SELECT * FROM applicant WHERE event_id = '$userId'";
@@ -50,7 +53,7 @@
                     <h3> ข้อมูล</h3>
                 </div>
             </div>
-            <table border="1" style="width:100%">
+            <table class="table table-hover" border="1" style="width:100%">
                 <thead>
                     <tr>
                         <th style="text-align:center">ID</th>
@@ -70,8 +73,8 @@
                             <td style="text-align:center"><?php echo $row["event_name"] ?></td>
                             <td style="text-align:center"><?php echo $row["event_detail"] ?></td>
                             <td style="text-align:center"><img src="images/<?php echo $row["image"] ?>" alt="" width="100px" height="100px"></td>
-                            <td style="text-align:center"><?php echo $row["date_start"] ?></td>
-                            <td style="text-align:center"><?php echo $row["date_end"] ?></td>
+                            <td style="text-align:center"><?php echo $row["date_time"] ?></td>
+                            <td style="text-align:center"><?php echo $row["time_end"] ?></td>
 
                         </tr>
                     <?php

@@ -29,7 +29,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <a style="margin-left:50px;"class="navbar-brand" href="home.php?user_id=<?php echo $user_id; ?>"><img style="width:3%; position:fixed; left:15px;"src="images/vote.png" alt="">รายการเลือกตั้ง</a>
+  <a style="margin-left:50px;"class="navbar-brand" href="#"><img style="width:3%; position:fixed; left:15px;"src="images/vote.png" alt="">รายการเลือกตั้ง</a>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
     <form class="form-inline my-2 my-lg-0" method="get" action="">
