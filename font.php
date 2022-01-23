@@ -9,6 +9,16 @@
     color: white;
     font-size: 24px;
   }
+  .btn-danger{
+    background:#ff5757;
+    border-radius:30px;
+  }
+  .btn-success{
+    background:#38d9a9;
+    border:#38d9a9 ;
+    border-radius:30px;
+    width:30%;
+  }
   .element {
   width: 0;
   height: 0;

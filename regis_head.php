@@ -1,118 +1,48 @@
 <?php
 include "conn.php";
 include "header.php";
-?><style media="screen">
-  input{
-    margin-bottom: 15px;
+?>
+<style media="screen">
+  .btn-danger{
+    background:#ff5757;
+    border-radius:30px;
   }
-  hr{
-    border-width: 0px;
-    width: 90%;
-    margin: 10% 5% 10%;
+  .btn-success{
+    background:#38d9a9;
+    border:#38d9a9 ;
+    border-radius:30px;
+    width:30%;
   }
-  .btn{
-    background: #ffce47;
-    width: 120px;
-    border-radius: 10px;
+  h7{
+    color: white;
+    font-size: 24px;
   }
-#back:hover{
-
-transition: all 1.0s ;
-transform :rotate(360deg);
-}
 </style>
-<!-- <img style="position:absolute;"src="images/registered.png" alt=""> -->
-<div class="container" style="margin-top:5%;"  >
-<a href="index.php">  <img id="back" style="width:5%; position:absolute; top:5; left:5;" src="images/previous.png" alt=""> </a>
-  <div class="row">
-    <center><h3 style="margin-bottom:30px;">สมัครสมาชิก</h3></center>
+<body>
+  <div class="" style="background-image: linear-gradient(45deg, #be4bdb 5%, #75cefa 95%); width:101%; height:8.5%;position:inherit; top:0px; left:0px;">
+    <h7>ระบบเลือกตั้งออนไลน์</h7>
   </div>
-  <div class="row">
-    <div href="" class="col-6">
-      <img id="im" style="   width: 10%;
-    position: absolute;
-    right: 113px;
-    top: -10px;"src="images/create (1).png" alt="">
-  </form>
-    <a  href="regis1.php" id="regis" style="float:right; border-radius:10px;  "class="btn">ผู้สร้างโหวต<p style="  position: absolute;
-      top: 47px;
-      left: 93px;
-      font-weight: 800;
-      color: #092a40;
-      text-align: left;
-      display: none;
-      " id="22">ผู้สร้างโหวต<br>
-      ผู้สร้างโหวต - จะมีหน้าที่ในการสร้างโหวตโดยจะสามารถ<br>ตรวจสอบผู้มีสิทธิ์ลงคะแนน
-    </p></a>
-</div>
-    <div class="col-6">
-      <img id="im2" style="    width: 10%;
-    position: absolute;
-    top: -11px;
-    left: 110px;"src="images/create (2).png" alt="">
-      <a  href="regis10.php" id="regis2" style="    background: #00dd80;"class="btn">ผู้ลงคะแนน<p style="  position: absolute;
-        top: 47px;
-        left: 93px;
-        font-weight: 800;
-        color: #092a40;
-        text-align: left;
-        display: none;
-        " id="23">ผู้ลงคะแนน<br>
-        ผู้ลงคะแนน - จะมีหน้าที่ในกาลงคะแนนโดยต้องได้รับการอณุมัติ<br>จากผู้สร้างโหวตก่อน
-      </p></a>
+  <div class="container">
+    <div class="row-12" style="">
+      <a href="index.php" class="btn btn-danger" style="margin-top:5px;">กลับ</a>
+    </div>
+    <div class="row-12" style="margin-top:10px;">
+      <center>
+        <div class="card" style="width:50%; margin:13% 0% 13%;">
+          <div class="card-header" style="background-image: linear-gradient(270deg, #fefffe 5%, #38d9a9 95%);">
+            ลงทะเบียน
+          </div>
+          <div class="card-body">
+            <a href="create.php" class="btn btn-success" style="">ผู้สร้างการเลือกตั้ง</a>
+             <a href="user.php" class="btn btn-success">ผู้ลงคะแนน</a>
+          </div>
+        </div>
+      </center>
+    </div>
+    <div class="row-12" >
+      <hr>
+      <h6 style="text-align: center;">© 2565 ระบบเลือกตั้งออนไลน์, มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ</h6>
+    </div>
     </div>
   </div>
-</div>
-
-
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
-$("#regis").mouseenter(function(){
-    $("#regis").animate({width: '530px',padding:'150px'},500);
-    $("#regis").val()
-    $("#im2").css({"transition": "all 1.0s", "transform": "rotate(0deg)"});
-    $("#im").css({"transition": "all 1.0s", "transform": "rotate(360deg)"});
-    $("#regis2").animate({width: '120px',padding:'5px'},500);
-    $("e").text("ผู้ลงคะแนน ");
-    $("#22").fadeIn(500)
-    $("#23").fadeOut(500)
-})
-
-// .............................
-$("#regis2").mouseenter(function(){
-    $("#regis2").animate({width: '530px',padding:'150px'},500);
-    $("#regis").animate({width: '120px',padding:'5px'},500);
-
-    $("#22").fadeOut(500)
-    $("#23").fadeIn(500)
-    $("#im").css({"transition": "all 1.0s", "transform": "rotate(0deg)"});
-    $("#im2").css({"transition": "all 1.0s", "transform": "rotate(360deg)"});
-})
-
-// ..............................
-
-  $( "#pas2" ).change(function() {
-    if ($( "#pas1" ).val() != $( "#pas2" ).val()) {
-      $("#pas1").css({"border-color" : "#f84858" , "border-width" : "2px"})
-      $("#pas2").css({"border-color" : "#f84858" , "border-width" : "2px"})
-      $( "#click" ).prop('disabled',true)
-
-    }
-
-  })
-  $( "#click" ).click(function() {
-    if ($( "#pas1" ).val() != $( "#pas2" ).val()) {
-    }
-  })
-$( "#pas2" ).change(function() {
-    if ($( "#pas1" ).val() == $( "#pas2" ).val()) {
-      $( "#click" ).prop('disabled',false)
-      $("#pas1").css({"border-color" : "#ced4da" , "border-width" : "1px"})
-      $("#pas2").css({"border-color" : "#ced4da" , "border-width" : "1px"})
-    }
-  })
-</script>
-<?php
-
- ?>
+</body>
