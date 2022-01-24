@@ -25,7 +25,7 @@ include "header.php"; ?>
   <a href="list.php?event_id=<?php echo $event_id?>&&user_id=<?php echo $user_id ?>" >
 
     <button type="button" style="
-          background-color:#06b172;
+          background-color:#FFD700;
           border-width: 0px;
           padding: 10px 10px;
           color: white;
@@ -38,7 +38,7 @@ include "header.php"; ?>
                 <a href="add_xcell.php?event_id=<?php echo $event_id?>&&user_id=<?php echo $user_id ?>" >
           
           <button type="button" style="
-                    background-color:#06b172;
+                    background-color:#191970;
                     border-width: 0px;
                     padding: 10px 10px;
                     color: white;
@@ -47,15 +47,28 @@ include "header.php"; ?>
                     margin-bottom:10px;
                     " >รายชื่อผู้มีสิทธิ์เลือกตั้ง</button>
           </a>
+          </a>
+          <a href="scores.php?event_id=<?php echo $event_id?>&&user_id=<?php echo $user_id ?>" >
+          
+          <button type="button" style="
+                    background-color:#B03060;
+                    border-width: 0px;
+                    padding: 10px 10px;
+                    color: white;
+                    width:18%;
+                    border-radius: 6px;
+                    margin-bottom:10px;
+                    " >ผลการเลือกตั้ง</button>
+</a>
           <hr>
     <i class=”fa fa-dashboard fa-2x”></i>
   <div class="row">
-    <h4 style="color:#373737;">โหลดฟอร์มXcell</h4>
+    <h4 style="color:#373737;">โหลดฟอร์ม Excel</h4>
     <a href="https://drive.google.com/file/d/1vQd_nQ34PeNn0PBxtbC2EQETLAOB92Z5/view?usp=sharingป" class="btn btn-success" style="width:15%;">Download</a>
 <br>
   </div>
       <form action="f_save.php" method="post" name="frmExcelImport" id="frmExcelImport" enctype="multipart/form-data">
-                  <label >เลือกไฟล์ Xcell ที่เพิ่มข้อมูลแล้ว</label>
+                  <label >เลือกไฟล์ Excel ที่เพิ่มข้อมูลแล้ว</label>
                       <input style="width:30%;"class="form-control" type="file" name="file"
                       id="file" accept=".xls,.xlsx">
                   <button style="margin-top:1%;"type="submit" id="submit" name="import"

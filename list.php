@@ -27,7 +27,7 @@ $_SESSION["event_id"] = $_GET["event_id"];
   <div class="container" id="body" style="position:absolute;width:85%;top:13%; left:13%; display:none;">
     <h4 style="color:#565656;">จัดการการเลือกตั้ง</h4>
     <button type="button" style="
-          background-color:#06b172;
+          background-color:#FFD700;
           border-width: 0px;
           padding: 10px 10px;
           color: white;
@@ -38,7 +38,7 @@ $_SESSION["event_id"] = $_GET["event_id"];
       <a href="add_xcell.php?user_id=<?php echo $user_id ?>&&event_id=<?php echo $event_id ?>" >
           
 <button type="button" style="
-          background-color:#06b172;
+          background-color:#191970;
           border-width: 0px;
           padding: 10px 10px;
           color: white;
@@ -47,11 +47,23 @@ $_SESSION["event_id"] = $_GET["event_id"];
           margin-bottom:10px;
           ">รายชื่อผู้มีสิทธิ์เลือกตั้ง</button>
 </a>
+
+<button type="button" style="
+          background-color:#B03060;
+          border-width: 0px;
+          padding: 10px 10px;
+          color: white;
+          width:18%;
+          border-radius: 6px;
+          margin-bottom:10px;
+          ">ผลการเลือกตั้ง</button>
+</a>
 <hr style="    margin-top: 1rem;
     margin-bottom: 1rem;
     border: 2px;
     border-top: 3px solid rgb(0 0 0);
 ">
+
 
     <!-- <a href="show.php" class="btn btn-danger" style="float:right;">ย้อนกลับ</a> -->
     <div class="modal fade" id="myModal" role="dialog">

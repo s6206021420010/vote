@@ -113,7 +113,7 @@ font-family:'Prompt', sans-serif;
       if ($result->num_rows > 0) {
           while($row = $result->fetch_assoc()) {
       ?>
-        <div class="card col-3" id="card" onmouseover="setblurCard(<?php echo $row["event_id"]; ?>);" onmouseout="removeblurCard(<?php echo $row["event_id"]; ?>)" style="border-radius:5px;background:#ffffff;height:220px; width:1067px;">
+        <div class="card col-3" id="card" onmouseover="setblurCard(<?php echo $row['event_id']; ?>);" onmouseout="removeblurCard(<?php echo $row['event_id']; ?>)" style="border-radius:5px;background:#ffffff;height:220px; width:1067px;">
           <label style="filter:blur(px);"><?php echo $row["event_name"]; ?></label>
           <hr style="margin: 1px;">
           <?php $sta = $row["status_event"];
@@ -136,8 +136,9 @@ font-family:'Prompt', sans-serif;
             <?php
             }
            ?>
-
-          <a style="position:absolute; left:35.5%; color:white; background:#28a745;" id="btn_vote_<?php echo $row["event_id"]; ?>" href="datavote.php?event_id=<?php echo $row["event_id"]; ?>&user_id=<?php echo $user_id; ?>&date=<?php echo $row['date_time']; ?>" class="btn btn_vote">ลงคะแนน</a>
+          <?php $date_now = date("Y-m-d"); ?>
+          <a style="position:absolute; left:35.5%; color:white; background:#28a745;" id="btn_vote_<?php echo $row["event_id"]; ?>" href="datavote.php?event_id=<?php echo $row["event_id"]; ?>&user_id=<?php echo $user_id; ?> &date=<?php echo $row['date_end']; ?>" class="btn btn_vote">ลงคะแนน</a> 
+          <!--  -->
 
         </div>
       <?php
