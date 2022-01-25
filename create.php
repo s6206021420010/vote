@@ -42,38 +42,53 @@ include "header.php";
               <div class="row">
                 <hr style="width:98%;">
                 <div class="col-6">
-                  <label for="">รหัสบัตรประชาชน</label><input type="text"  class="form-control form-control-sm"name="" value="">
-                  <label for="">เบอร์โทร</label><input type="text"  class="form-control form-control-sm"name="" value="">
-                  <label for="">บ้านเลขที่ / Current address</label><input type="text"  class="form-control form-control-sm"name="" value="">
+                  <form class="" action="add_user.php" method="post" enctype="multipart/form-data">
+                  <label for="">รหัสบัตรประชาชน</label><input type="text"  class="form-control form-control-sm"name="idcard" value="" maxlength="13" required>
+                  <label for="">เบอร์โทร</label><input type="text"  class="form-control form-control-sm"name="phone" value="" maxlength="10" required>
                 </div>
                 <div class="col-6">
-                  <label for="">ชื่อ - นามสกุล</label><input type="text"  class="form-control form-control-sm"name="" value="">
-                  <label for="">Email</label><input type="text"  class="form-control form-control-sm"name="" value="">
-                  <label for="">หมู่ที่ / Village number</label><input type="text"  class="form-control form-control-sm"name="" value="">
+                  <label for="">ชื่อ - นามสกุล</label><input type="text"  class="form-control form-control-sm"name="name" value="" required>
+                  <label for="">Email</label><input type="text"  class="form-control form-control-sm"name="email" value="" required>
                 </div>
               </div>
               <div class="row">
-                <div class="col-4">
-                  <label for="">จังหวัด/ Province</label><input type="text"  class="form-control form-control-sm"name="" value="">
+                <div class="col-3">
+                  <label for="">จังหวัด</label>
+                  <select class="form-control" name="provinces" id="provinces">
+                    <option value="" selected disabled>-กรุณาเลือกจังหวัด-</option>
+                <?php
+                $sql = "SELECT * FROM `provinces` WHERE 1";
+                $result = mysqli_query($conn,$sql);
+                if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {?>
+                  <option value="<?php echo $row["id"]; ?>"><?php echo $row["name_th"]; ?></option>
+                  <?php
+                  }
+                }
+                 ?>
+                  </select>
                 </div>
-                <div class="col-4">
-                  <label for="">อำเภอ/ District</label><input type="text"  class="form-control form-control-sm"name="" value="">
-                </div>
-                <div class="col-4">
-                  <label for="">ตำบล/ Sub-district</label><input type="text"  class="form-control form-control-sm"name="" value="">
-                </div>
+                  <div class="col-3">
+                    <label for="">อำเภอ</label>
+                    <select class="form-control" name="amphures" id="amphures">
+                </select>
+                  </div>
+                  <div class="col-3">
+                    <label for="">ตำบล</label>
+                    <select class="form-control" name="districts" id="districts">
+                    </select>
+                  </div>
+                  <div class="col-3">
+                    <label for="sel1">รหัสไปรษณีย์:</label>
+                    <input type="text" name="zip_code" id="zip_code" class="form-control">
+                  </div>
               </div>
               <div class="row">
                 <div class="col-4">
-                  <label for="">รหัสไปรษณีย์/ Zip code</label><input type="text"  class="form-control form-control-sm"name="" value="">
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-4">
-                    <label for="">Username</label><input type="text"  class="form-control form-control-sm"name="" value="">
+                    <label for="">Username</label><input type="text"  class="form-control form-control-sm"name="user_name" value="">
                 </div>
                 <div class="col-4">
-                    <label for="">Password</label><input type="text"  class="form-control form-control-sm"name="" value="">
+                    <label for="">Password</label><input type="text"  class="form-control form-control-sm"name="user_pass" value="">
                 </div>
                 <div class="col-4">
                     <label for="">ยืนยัน Password</label><input type="text"  class="form-control form-control-sm"name="" value="">
@@ -96,7 +111,7 @@ include "header.php";
                   <label for="">อัพโหลดรูปภาพ</label>
                 </div>
                 <div class="col-5">
-                  <input type="file" class="form-control" name="" value="" >
+                  <input type="file" class="form-control" name="image" value="" >
                 </div>
               </div>
               <div class="row" style="margin-top:10px;">
@@ -107,6 +122,7 @@ include "header.php";
                 </div>
                 <div class="col-3">
                      <input type="submit" class="btn btn-success" style="width:100%;" name="" value="ลงทะเบียน">
+                    </form>
                 </div>
                 <div class="col-3">
                 </div>
@@ -123,3 +139,50 @@ include "header.php";
     </div>
   </div>
 </body>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js">
+</script>
+<script type="text/javascript">
+$('#provinces').change(function() {
+  var id_province = $(this).val();
+
+    $.ajax({
+    type: "POST",
+    url: "ajax_regis.php",
+    data: {id:id_province,function:'provinces'},
+    success: function(data){
+        $('#amphures').html(data);
+        $('#districts').html(' ');
+        $('#districts').val(' ');
+        $('#zip_code').val(' ');
+    }
+  });
+});
+
+$('#amphures').change(function() {
+  var id_amphures = $(this).val();
+
+    $.ajax({
+    type: "POST",
+    url: "ajax_regis.php",
+    data: {id:id_amphures,function:'amphures'},
+    success: function(data){
+        $('#districts').html(data);
+    }
+  });
+});
+
+ $('#districts').change(function() {
+  var id_districts= $(this).val();
+
+    $.ajax({
+    type: "POST",
+    url: "ajax_regis.php",
+    data: {id:id_districts,function:'districts'},
+    success: function(data){
+        $('#zip_code').val(data)
+    }
+  });
+
+});
+</script>
