@@ -1,6 +1,12 @@
+
 <?php
 include "conn.php";
 include "header.php";
+if($_POST){
+ECHO $name_borisut = $_POST["name_borisut"];
+ECHO $panax_borisut = $_POST["panax_borisut"];
+ECHO $saka_borisut = $_POST["saka_borisut"];
+}
 ?>
 <style media="screen">
   .btn-danger{
@@ -42,38 +48,57 @@ include "header.php";
               <div class="row">
                 <hr style="width:98%;">
                 <div class="col-6">
-                  <label for="">รหัสบัตรประชาชน</label><input type="text"  class="form-control form-control-sm"name="" value="">
-                  <label for="">เบอร์โทร</label><input type="text"  class="form-control form-control-sm"name="" value="">
-                  <label for="">บ้านเลขที่ / Current address</label><input type="text"  class="form-control form-control-sm"name="" value="">
+                   <form class="" action="add_user.php" method="post" enctype="multipart/form-data">
+
+                  <label for="">รหัสบัตรประชาชน</label><input maxlength="13" type="text"  class="form-control form-control-sm"name="idcard" value="" maxlength="13" required>
+                  <label for="">เบอร์โทร</label><input type="text" maxlength="10" class="form-control form-control-sm"name="phone" value="">
                 </div>
                 <div class="col-6">
-                  <label for="">ชื่อ - นามสกุล</label><input type="text"  class="form-control form-control-sm"name="" value="">
-                  <label for="">Email</label><input type="text"  class="form-control form-control-sm"name="" value="">
-                  <label for="">หมู่ที่ / Village number</label><input type="text"  class="form-control form-control-sm"name="" value="">
+                  <label for="">ชื่อ - นามสกุล</label><input type="text"  class="form-control form-control-sm"name="name" value="">
+                  <label for="">Email</label><input type="email   "  class="form-control form-control-sm"name="email" value="">
+
                 </div>
+              </div>
+
+              <div class="row">
+          
+                <div class="col-3">
+                  <label for="">จังหวัด</label>
+                  <select class="form-control" name="provinces" id="provinces">
+                    <option value="" selected disabled>-กรุณาเลือกจังหวัด-</option>
+                <?php
+                $sql = "SELECT * FROM `provinces` WHERE 1";
+                $result = mysqli_query($conn,$sql);
+                if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {?>
+                  <option value="<?php echo $row["id"]; ?>"><?php echo $row["name_th"]; ?></option>
+                  <?php
+                  }
+                }
+                 ?>
+                  </select>
+                </div>
+                  <div class="col-3">
+                    <label for="">อำเภอ</label>
+                    <select class="form-control" name="amphures" id="amphures">
+                </select>
+                  </div>
+                  <div class="col-3">
+                    <label for="">ตำบล</label>
+                    <select class="form-control" name="districts" id="districts">
+                    </select>
+                  </div>
+                  <div class="col-3">
+                    <label for="sel1">รหัสไปรษณีย์:</label>
+                    <input type="text" name="zip_code" id="zip_code" class="form-control" >
+                  </div>
               </div>
               <div class="row">
                 <div class="col-4">
-                  <label for="">จังหวัด/ Province</label><input type="text"  class="form-control form-control-sm"name="" value="">
+                    <label for="">Username</label><input type="text"  class="form-control form-control-sm"name="user_name" value="">
                 </div>
                 <div class="col-4">
-                  <label for="">อำเภอ/ District</label><input type="text"  class="form-control form-control-sm"name="" value="">
-                </div>
-                <div class="col-4">
-                  <label for="">ตำบล/ Sub-district</label><input type="text"  class="form-control form-control-sm"name="" value="">
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-4">
-                  <label for="">รหัสไปรษณีย์/ Zip code</label><input type="text"  class="form-control form-control-sm"name="" value="">
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-4">
-                    <label for="">Username</label><input type="text"  class="form-control form-control-sm"name="" value="">
-                </div>
-                <div class="col-4">
-                    <label for="">Password</label><input type="text"  class="form-control form-control-sm"name="" value="">
+                    <label for="">Password</label><input type="text"  class="form-control form-control-sm"name="user_pass" value="">
                 </div>
                 <div class="col-4">
                     <label for="">ยืนยัน Password</label><input type="text"  class="form-control form-control-sm"name="" value="">
@@ -84,19 +109,25 @@ include "header.php";
                 <hr style="width:98%;">
                 <h6>ข้อมูลองค์กร</h6>
                 <div class="col">
-                  <a href="#" class="btn btn-success">บริษัท</a>
-                  <a href="#" class="btn btn-success">นักเรียน-นักศึกษา</a>
-                  <a href="#" class="btn btn-success">เลือกตั้งท้องถิ่น</a>
-                  <a href="#" class="btn btn-success">อื่น ๆ / บุคคนทั่วไป</a>
-
+                  <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">บริษัท</a>
+                  <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#studen">นักเรียน-นักศึกษา</a>
+                  <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#local">อื่น ๆ / บุคคนทั่วไป</a>
                 </div>
+              </div>
+              <div class="row">
+                <label for="">ชื่อบริษัท</label>
+                <input type="text" name="b1" id="" value="<?php if($_POST){echo $name_borisut ;} ?>" class="form-control form-control-sm" style="width: 45%;"  required>
+                <label for="">แผนก</label>
+                <input type="text " name="b2" id="" value="<?php if($_POST){echo $panax_borisut ;} ?>" class="form-control form-control-sm" style="width: 45%;"  required>
+                <label for="">สาขา</label>
+                <input type="text" name="b3" id="" value="<?php if($_POST){echo $saka_borisut ; ;} ?>" class="form-control form-control-sm" style="width: 45%;"  required>
               </div>
               <div class="row" style="margin-top:10px;">
                 <div class="col-2">
                   <label for="">อัพโหลดรูปภาพ</label>
                 </div>
                 <div class="col-5">
-                  <input type="file" class="form-control" name="" value="" >
+                  <input type="file" class="form-control" name="image" value="" >
                 </div>
               </div>
               <div class="row" style="margin-top:10px;">
@@ -107,6 +138,7 @@ include "header.php";
                 </div>
                 <div class="col-3">
                      <input type="submit" class="btn btn-success" style="width:100%;" name="" value="ลงทะเบียน">
+                    </form>
                 </div>
                 <div class="col-3">
                 </div>
@@ -114,7 +146,6 @@ include "header.php";
             </div>
           </div>
         </div>
-
     </div>
     <div class="row-12" >
     <br>
@@ -123,3 +154,121 @@ include "header.php";
     </div>
   </div>
 </body>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post">
+          <label for="">ชื่อบริษัท</label>
+          <input type="text" name="name_borisut" class="form-control">
+          <label for="">แผนก</label>
+          <input type="text" name="panax_borisut" class="form-control">
+          <label for="">สาขา</label>
+          <input type="text" name="saka_borisut" class="form-control">
+          <br>
+          <input type="submit" class="btn btn-success" value="เพิ่ม" style="float:right;">
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="studen" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form action="" method="post">
+          <label for="">ชื่อโรงเรียน</label>
+          <input type="text" name="name_borisut" class="form-control">
+          <label for="">แผนก</label>
+          <input type="text" name="panax_borisut" class="form-control">
+          <label for="">สาขา</label>
+          <input type="text" name="saka_borisut" class="form-control">
+          <br>
+          <input type="submit" class="btn btn-success" value="เพิ่ม" style="float:right;">
+        </form>
+      </div>
+    
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="local" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form action="" method="post">
+          <label for="">list 1</label>
+          <input type="text" name="name_borisut" class="form-control">
+          <label for="">list 2</label>
+          <input type="text" name="panax_borisut" class="form-control">
+          <label for="">list 3</label>
+          <input type="text" name="saka_borisut" class="form-control">
+          <br>
+          <input type="submit" class="btn btn-success" value="เพิ่ม" style="float:right;">
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js">
+</script>
+<script type="text/javascript">
+$('#provinces').change(function() {
+  var id_province = $(this).val();
+
+    $.ajax({
+    type: "POST",
+    url: "ajax_regis.php",
+    data: {id:id_province,function:'provinces'},
+    success: function(data){
+        $('#amphures').html(data);
+        $('#districts').html(' ');
+        $('#districts').val(' ');
+        $('#zip_code').val(' ');
+    }
+  });
+});
+
+$('#amphures').change(function() {
+  var id_amphures = $(this).val();
+
+    $.ajax({
+    type: "POST",
+    url: "ajax_regis.php",
+    data: {id:id_amphures,function:'amphures'},
+    success: function(data){
+        $('#districts').html(data);
+    }
+  });
+});
+
+ $('#districts').change(function() {
+  var id_districts= $(this).val();
+
+    $.ajax({
+    type: "POST",
+    url: "ajax_regis.php",
+    data: {id:id_districts,function:'districts'},
+    success: function(data){
+        $('#zip_code').val(data)
+    }
+  });
+
+});
+</script>

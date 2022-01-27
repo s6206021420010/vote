@@ -11,9 +11,12 @@ echo $user_pass = $_SESSION["user_pass"];
 echo $org = $_SESSION["school"];
 echo $dep = $_SESSION["list"];
 echo $dep2 = $_SESSION["room"];
-$image1 = $_POST["image"];
-$temp = explode(".", $_FILES["image"]["name"]);
-$image = round(microtime(true)) . '.' . end($temp);
+echo $org = $_SESSION["school"];
+echo $dep = $_SESSION["list"];
+echo $dep2 = $_SESSION["room"];
+
+ $temp = explode(".", $_FILES["image"]["name"]);
+ $image = round(microtime(true)) . '.' . end($temp);
 move_uploaded_file($_FILES["image"]["tmp_name"], "images/" . $image);
 
 
