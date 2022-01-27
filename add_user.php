@@ -2,18 +2,19 @@
 
 include("conn.php");
 
-echo $name = $_POST["name"];
-echo $id_card = $_POST["idcard"];
-echo $number = $_POST["phone"];
-echo $user_name = $_POST["user_name"];
-echo $user_pass = $_POST["user_pass"];
-echo $email = $_POST["email"];
-echo $provinces = $_POST["provinces"];
-echo $amphures = $_POST["amphures"];
-echo $districts = $_POST["districts"];
-echo $org = $_POST["b1"];
-echo $dep = $_POST["b2"];
-echo $dep2 = $_POST["b3"];
+ $name = $_POST["name"];
+ $id_card = $_POST["idcard"];
+ $number = $_POST["phone"];
+ $user_name = $_POST["user_name"];
+ $user_pass = $_POST["user_pass"];
+ $email = $_POST["email"];
+ $provinces = $_POST["provinces"];
+ $amphures = $_POST["amphures"];
+ $districts = $_POST["districts"];
+ $org = $_POST["organization_name"];
+ $dep = $_POST["department_name"];
+ $dep2 = $_POST["department2_name"];
+ $status = $_POST["status"];
 // echo $images = $_POST["image"];
 //
 // $temp = explode(".", $_FILES["image"]["name"]);
@@ -42,7 +43,7 @@ echo $dep2 = $_POST["b3"];
  $dep_m = $row2["department2_id"];
 
  echo $sql9 = "INSERT INTO user (name, id_card, `number`, image, user_name, user_pass, organization_id,	department_id,department2_id,status,email,`provinces`, `amphures`, `districts`)
-VALUES ('{$name}', '{$id_card}', '{$number}', '', '{$user_name}', '{$user_pass}', '$org_n', '$dep_n', '$dep_m','1','$email','$provinces','$amphures','$districts')";
+VALUES ('{$name}', '{$id_card}', '{$number}', '', '{$user_name}', '{$user_pass}', '$org_n', '$dep_n', '$dep_m','$status','$email','$provinces','$amphures','$districts')";
 
  if ($conn->query($sql9) == TRUE) {
     header("location: index.php");

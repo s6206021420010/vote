@@ -33,9 +33,9 @@ $_SESSION["event_id"] = $_GET["event_id"];
 
 
   $sql_user = "SELECT d1.department_name,d2.department2_name,org.organization_name FROM `user` u
-              INNER JOIN organization org ON u.organization_id = org.organization_id
-              INNER JOIN department d1 ON u.department_id = d1.department_id
-              INNER JOIN department2 d2 on u.department2_id = d2.department2_id 
+              left JOIN organization org ON u.organization_id = org.organization_id
+              left JOIN department d1 ON u.department_id = d1.department_id
+              left JOIN department2 d2 on u.department2_id = d2.department2_id 
               WHERE u.`user_id` = $user_id";
   $result_user = $conn->query($sql_user);
   $row_user = $result_user->fetch_assoc();
