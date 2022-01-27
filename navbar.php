@@ -33,8 +33,8 @@
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
     <form class="form-inline my-2 my-lg-0" method="get" action="">
-      <input  class="form-control mr-sm-2" type="text" name="txt_search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <input  class="form-control mr-sm-2" id="search" type="text" name="txt_search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" id="search2"  type="submit">Search</button>
     </form>
   </div>
   <a href="logout.php"class="btn btn-success" style="position:fixed; right:1%; width:10%; height:9%; background:#ffffff00; color:#49915a;padding:10px;">ออกจากระบบ</a>

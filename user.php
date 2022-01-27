@@ -24,6 +24,12 @@ if ($_POST) {
     color: white;
     font-size: 24px;
   }
+  .select_stu{
+    display: inherit;
+  }
+  #select_stu{
+   display: none;
+  }
 </style>
 
 <body>
@@ -113,6 +119,7 @@ if ($_POST) {
                 <br>
                 <hr style="width:98%;">
                 <h6>ข้อมูลองค์กร</h6>
+<<<<<<< HEAD
                 <!-- <div class="col">
                   <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">บริษัท</a>
                   <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#studen">นักเรียน-นักศึกษา</a>
@@ -142,6 +149,53 @@ if ($_POST) {
                 <input type="text " name="b2" id="" value="" class="form-control form-control-sm" style="width: 45%;" required>
                 <label for="">สาขา</label>
                 <input type="text" name="b3" id="" value="" class="form-control form-control-sm" style="width: 45%;" required>
+=======
+                <div class="col">
+                  <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" id="bor">บริษัท</a>
+                  <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#studen"id="stu" >นักเรียน-นักศึกษา</a>
+                  <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#local" id="any">อื่น ๆ / บุคคนทั่วไป</a>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3">
+                <label for="" >ระดับชั้น</label>
+                <select name="" id="select_stu" class="form-control">
+                  <option value="" disabled>กรุณาเลือกระดับชั้น</option>
+                  <option value="">โรงเรียน</option>
+                  <option value="">วิทยาลัย</option>
+                  <option value="">มหาวิทยาลัย</option>
+                </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3">
+                <label for="" id="n1">list 1</label>
+              <select class="form-control" name="provinces" id="organization" >
+                    <option value="" selected disabled>-องค์กรณ์-</option>
+                <?php
+                $sql = "SELECT * FROM `organization` WHERE 1";
+                $result = mysqli_query($conn,$sql);
+                if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {?>
+                  <option value="<?php echo $row["organization_id"]; ?>"><?php echo $row["organization_name"]; ?></option>
+                  <?php
+                  }
+                }
+                 ?>
+                  </select>
+                  </div>
+                  <div class="col-3">
+                    <label for="" id="n2">list 2</label>
+                    <select class="form-control" name="amphures" id="dep">
+                </select>
+                  </div>
+                  <div class="col-3">
+                    <label for="" id="n3">list 3</label>
+                    <select class="form-control" name="districts" id="dep2">
+                    </select>
+                  </div>
+                  </div>
+>>>>>>> e308324b53b55e97cc301d368989fbaf77eb26b4
               </div>
               <div class="row" style="margin-top:10px;">
                 <div class="col-2">
@@ -177,6 +231,7 @@ if ($_POST) {
   </div>
 </body>
 </div>
+<<<<<<< HEAD
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -291,6 +346,59 @@ if ($_POST) {
   $('#provinces').change(function() {
     var id_province = $(this).val();
 
+=======
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js">
+</script>
+<script type="text/javascript">
+  $('#bor').click(function(){
+    $('#n1').html("บริษัท")
+    $('#n2').html("แผนก")
+    $('#n3').html("สาขา")
+    $('#select_stu').css("display", "none");
+  })
+  $('#stu').click(function(){
+    $('#select_stu').css("display", "inherit");
+    $('#n1').html("โรงเรียน")
+    $('#n2').html("แผนก")
+    $('#n3').html("สาขา")
+  })
+  $('#any').click(function(){
+    $('#n1').html("รายการ 1")
+    $('#n2').html("รายการ 2")
+    $('#n3').html("รายการ 3")
+    $('#select_stu').css("display", "none");  
+  })
+  $('#organization').change(function(){
+    var organization = $(this).val();
+
+    $.ajax({
+      type:"POST",
+      url:"ajax3.php",
+      data:{org:organization},
+      success:function(org){
+
+        $('#dep').html(org)
+      }
+    })
+    })
+    $('#dep').change(function(){
+    var dep = $(this).val();
+
+    $.ajax({
+      type:"POST",
+      url:"ajax3.php",
+      data:{dep:dep},
+      success:function(dep){
+
+        $('#dep2').html(dep)
+      }
+    })
+    })
+$('#provinces').change(function() {
+  var id_province = $(this).val();
+  
+>>>>>>> e308324b53b55e97cc301d368989fbaf77eb26b4
     $.ajax({
       type: "POST",
       url: "ajax_regis.php",

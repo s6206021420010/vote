@@ -16,7 +16,14 @@ $img = $_SESSION['image'];
 
 </head>
 <body>
-
+<style>
+  #search{
+    display: none;
+  }
+  #search2{
+    display: none;
+  }
+</style>
 </body>
 
   <!DOCTYPE html>
