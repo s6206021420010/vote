@@ -19,7 +19,14 @@ LEFT JOIN organization ON user.organization_id = organization.organization_id
       <meta charset="utf-8">
       <title></title>
     </head>
-
+    <style>
+  #search{
+    display: none;
+  }
+  #search2{
+    display: none;
+  }
+</style>
       <body style="background-color: #ffffff;">
         <h3 style="color:#3d4c53; margin-top:10px;   top: 0px; left: 0px; ;" >รายการเลือกตั้งที่สร้าง</h3>
         <div class="container" id="body" style="position:fixed; left:12%; width:40%;">

@@ -23,6 +23,12 @@ ECHO $saka_borisut = $_POST["saka_borisut"];
     color: white;
     font-size: 24px;
   }
+  .select_stu{
+    display: inherit;
+  }
+  #select_stu{
+   display: none;
+  }
 </style>
 <body>
   <div class="" style="background-image: linear-gradient(45deg, #be4bdb 5%, #75cefa 95%); width:101%; height:8.5%;position:inherit; top:0px; left:0px;">
@@ -109,18 +115,50 @@ ECHO $saka_borisut = $_POST["saka_borisut"];
                 <hr style="width:98%;">
                 <h6>ข้อมูลองค์กร</h6>
                 <div class="col">
-                  <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">บริษัท</a>
-                  <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#studen">นักเรียน-นักศึกษา</a>
-                  <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#local">อื่น ๆ / บุคคนทั่วไป</a>
+                  <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" id="bor">บริษัท</a>
+                  <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#studen"id="stu" >นักเรียน-นักศึกษา</a>
+                  <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#local" id="any">อื่น ๆ / บุคคนทั่วไป</a>
                 </div>
               </div>
               <div class="row">
-                <label for="">ชื่อบริษัท</label>
-                <input type="text" name="b1" id="" value="<?php if($_POST){echo $name_borisut ;} ?>" class="form-control form-control-sm" style="width: 45%;"  required>
-                <label for="">แผนก</label>
-                <input type="text " name="b2" id="" value="<?php if($_POST){echo $panax_borisut ;} ?>" class="form-control form-control-sm" style="width: 45%;"  required>
-                <label for="">สาขา</label>
-                <input type="text" name="b3" id="" value="<?php if($_POST){echo $saka_borisut ; ;} ?>" class="form-control form-control-sm" style="width: 45%;"  required>
+                <div class="col-3">
+                <label for="" >ระดับชั้น</label>
+                <select name="" id="select_stu" class="form-control">
+                  <option value="" disabled>กรุณาเลือกระดับชั้น</option>
+                  <option value="">โรงเรียน</option>
+                  <option value="">วิทยาลัย</option>
+                  <option value="">มหาวิทยาลัย</option>
+                </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3">
+                <label for="" id="n1">list 1</label>
+              <select class="form-control" name="provinces" id="organization" >
+                    <option value="" selected disabled>-องค์กรณ์-</option>
+                <?php
+                $sql = "SELECT * FROM `organization` WHERE 1";
+                $result = mysqli_query($conn,$sql);
+                if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {?>
+                  <option value="<?php echo $row["organization_id"]; ?>"><?php echo $row["organization_name"]; ?></option>
+                  <?php
+                  }
+                }
+                 ?>
+                  </select>
+                  </div>
+                  <div class="col-3">
+                    <label for="" id="n2">list 2</label>
+                    <select class="form-control" name="amphures" id="dep">
+                </select>
+                  </div>
+                  <div class="col-3">
+                    <label for="" id="n3">list 3</label>
+                    <select class="form-control" name="districts" id="dep2">
+                    </select>
+                  </div>
+                  </div>
               </div>
               <div class="row" style="margin-top:10px;">
                 <div class="col-2">
@@ -155,83 +193,57 @@ ECHO $saka_borisut = $_POST["saka_borisut"];
   </div>
 </body>
 </div>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="" method="post">
-          <label for="">ชื่อบริษัท</label>
-          <input type="text" name="name_borisut" class="form-control">
-          <label for="">แผนก</label>
-          <input type="text" name="panax_borisut" class="form-control">
-          <label for="">สาขา</label>
-          <input type="text" name="saka_borisut" class="form-control">
-          <br>
-          <input type="submit" class="btn btn-success" value="เพิ่ม" style="float:right;">
-        </form>
-      </div>
 
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="studen" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <form action="" method="post">
-          <label for="">ชื่อโรงเรียน</label>
-          <input type="text" name="name_borisut" class="form-control">
-          <label for="">แผนก</label>
-          <input type="text" name="panax_borisut" class="form-control">
-          <label for="">สาขา</label>
-          <input type="text" name="saka_borisut" class="form-control">
-          <br>
-          <input type="submit" class="btn btn-success" value="เพิ่ม" style="float:right;">
-        </form>
-      </div>
-    
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="local" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <form action="" method="post">
-          <label for="">list 1</label>
-          <input type="text" name="name_borisut" class="form-control">
-          <label for="">list 2</label>
-          <input type="text" name="panax_borisut" class="form-control">
-          <label for="">list 3</label>
-          <input type="text" name="saka_borisut" class="form-control">
-          <br>
-          <input type="submit" class="btn btn-success" value="เพิ่ม" style="float:right;">
-        </form>
-      </div>
-
-    </div>
-  </div>
-</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js">
 </script>
 <script type="text/javascript">
+  $('#bor').click(function(){
+    $('#n1').html("บริษัท")
+    $('#n2').html("แผนก")
+    $('#n3').html("สาขา")
+    $('#select_stu').css("display", "none");
+  })
+  $('#stu').click(function(){
+    $('#select_stu').css("display", "inherit");
+    $('#n1').html("โรงเรียน")
+    $('#n2').html("แผนก")
+    $('#n3').html("สาขา")
+  })
+  $('#any').click(function(){
+    $('#n1').html("รายการ 1")
+    $('#n2').html("รายการ 2")
+    $('#n3').html("รายการ 3")
+    $('#select_stu').css("display", "none");  
+  })
+  $('#organization').change(function(){
+    var organization = $(this).val();
+
+    $.ajax({
+      type:"POST",
+      url:"ajax3.php",
+      data:{org:organization},
+      success:function(org){
+
+        $('#dep').html(org)
+      }
+    })
+    })
+    $('#dep').change(function(){
+    var dep = $(this).val();
+
+    $.ajax({
+      type:"POST",
+      url:"ajax3.php",
+      data:{dep:dep},
+      success:function(dep){
+
+        $('#dep2').html(dep)
+      }
+    })
+    })
 $('#provinces').change(function() {
   var id_province = $(this).val();
-
+  
     $.ajax({
     type: "POST",
     url: "ajax_regis.php",

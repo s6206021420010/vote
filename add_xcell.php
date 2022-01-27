@@ -19,7 +19,14 @@ include "header.php"; ?>
   $sql = "SELECT event_id, event_name, event_detail, date_start, date_end, image, status_event FROM event";
   $result = mysqli_query($conn, $sql);
   ?>
-
+<style>
+  #search{
+    display: none;
+  }
+  #search2{
+    display: none;
+  }
+</style>
   <div class="container" style="position:fixed;left:13%; top:13%;">
   <h4 style="color:#565656;">เพิ่มตัวเลือกการโหวต</h4>
   <a href="list.php?event_id=<?php echo $event_id?>&&user_id=<?php echo $user_id ?>" >

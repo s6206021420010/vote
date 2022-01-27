@@ -7,7 +7,14 @@ $user_id = $_SESSION['user_id'];
 $_SESSION["event_id"] = $_GET["event_id"];
 ?>
 <html lang="en" dir="ltr">
-
+<style>
+  #search{
+    display: none;
+  }
+  #search2{
+    display: none;
+  }
+</style>
 <head>
   <meta charset="utf-8">
   <title></title>
