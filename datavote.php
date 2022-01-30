@@ -96,13 +96,13 @@ $result = $db->select("*", "applicant", "event_id = '$event_id'");
                   </style>
                   <form class="form-group" action="update_event_detel.php" method="post" enctype="multipart/form-data">
                     <div class="w-100 d-flex justify-content-center">
-                    <img id="before" style="border-radius:3px;color:white; margin-top:10px;object-fit:cover;width:250px; height:150px;" src="<?php echo 'images/' . $row["applicant_image"]; ?>" class="img">
+                      <img id="before" style="border-radius:3px;color:white; margin-top:10px;object-fit:cover;width:250px; height:150px;" src="<?php echo 'images/' . $row["applicant_image"]; ?>" class="img">
                     </div>
-                    
+
                     <label for="">ชื่อผู้สมัคร</label>
                     <label name="list" class="form-control input-modal" placeholder="Your name.." required>สุนิสา</label>
                     <label for="">หมายเลข</label>
-                    <label name="number" class="form-control" placeholder="Your number.."  required>บีม</label>
+                    <label name="number" class="form-control" placeholder="Your number.." required>บีม</label>
                   </form>
                 </div>
               </div>

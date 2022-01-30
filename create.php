@@ -24,6 +24,7 @@ if ($_POST) {
     color: white;
     font-size: 24px;
   }
+ 
 </style>
 
 <body>
@@ -51,13 +52,13 @@ if ($_POST) {
               <hr style="width:98%;">
               <div class="col-6">
                 <form class="" action="add_user.php" method="post" enctype="multipart/form-data">
-                <input type="text" value="1" name="status" id="status" hidden>
-                  <label for="">รหัสบัตรประชาชน</label><input maxlength="13" type="text" class="form-control form-control-sm" name="idcard" value="" maxlength="13" required>
-                  <label for="">เบอร์โทร</label><input type="text" maxlength="10" class="form-control form-control-sm" name="phone" value="">
+                  <input type="text" value="1" name="status" id="status" hidden>
+                  <label  for="">รหัสบัตรประชาชน</label><input id="idcard" maxlength="13" type="text" class="form-control form-control-sm" name="idcard" value="" maxlength="13" >
+                  <label for="">เบอร์โทร</label><input id="phone" type="text" maxlength="10" class="form-control form-control-sm" name="phone" value="">
               </div>
               <div class="col-6">
                 <label for="">ชื่อ - นามสกุล</label><input type="text" class="form-control form-control-sm" name="name" value="">
-                <label for="">Email</label><input type="email   " class="form-control form-control-sm" name="email" value="">
+                <label for="">Email</label><input type="text" class="form-control form-control-sm" name="email" value="">
 
               </div>
             </div>
@@ -127,10 +128,6 @@ if ($_POST) {
                   <label class="custom-control-label" for="education">สถานการศึกษา</label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" id="local" name="department" value="3" class="custom-control-input changeDepartment">
-                  <label class="custom-control-label" for="local">ส่วนท้องถิ่น</label>
-                </div>
-                <div class="custom-control custom-radio custom-control-inline">
                   <input type="radio" id="normalpeople" name="department" value="4" class="custom-control-input changeDepartment">
                   <label class="custom-control-label" for="normalpeople">บุคคนทั่วไป</label>
                 </div>
@@ -138,11 +135,11 @@ if ($_POST) {
             </div>
             <div class="row col-12" id="form_data">
               <label for="">ชื่อบริษัท</label>
-              <input type="text" name="b1" id="" value="" class="form-control form-control-sm" style="width: 45%;" required>
+              <input type="text" name="b1" id="" value="" class="form-control form-control-sm" style="width: 45%;" >
               <label for="">แผนก</label>
-              <input type="text " name="b2" id="" value="" class="form-control form-control-sm" style="width: 45%;" required>
+              <input type="text " name="b2" id="" value="" class="form-control form-control-sm" style="width: 45%;" >
               <label for="">สาขา</label>
-              <input type="text" name="b3" id="" value="" class="form-control form-control-sm" style="width: 45%;" required>
+              <input type="text" name="b3" id="" value="" class="form-control form-control-sm" style="width: 45%;" >
             </div>
             <div class="row" style="margin-top:10px;">
               <div class="col-2">
@@ -159,7 +156,7 @@ if ($_POST) {
                 <a href="regis_head.php" class="btn btn-danger" style="width:100%;">ยกเลิก</a>
               </div>
               <div class="col-3">
-                <input type="submit" class="btn btn-success" style="width:100%;" name="" value="ลงทะเบียน">
+                <input type="submit" id="display_none" class="btn btn-success" style="width:100%;" name="" value="ลงทะเบียน">
                 </form>
               </div>
               <div class="col-3">
@@ -177,90 +174,21 @@ if ($_POST) {
   </div>
 </body>
 </div>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="" method="post">
-          <label for="">ชื่อบริษัท</label>
-          <input type="text" name="name_borisut" class="form-control">
-          <label for="">แผนก</label>
-          <input type="text" name="panax_borisut" class="form-control">
-          <label for="">สาขา</label>
-          <input type="text" name="saka_borisut" class="form-control">
-          <br>
-          <input type="submit" class="btn btn-success" value="เพิ่ม" style="float:right;">
-        </form>
-      </div>
 
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="studen" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="" method="post">
-          <label for="">ชื่อโรงเรียน</label>
-          <input type="text" name="name_borisut" class="form-control">
-          <label for="">แผนก</label>
-          <input type="text" name="panax_borisut" class="form-control">
-          <label for="">สาขา</label>
-          <input type="text" name="saka_borisut" class="form-control">
-          <br>
-          <input type="submit" class="btn btn-success" value="เพิ่ม" style="float:right;">
-        </form>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="local" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="" method="post">
-          <label for="">list 1</label>
-          <input type="text" name="name_borisut" class="form-control">
-          <label for="">list 2</label>
-          <input type="text" name="panax_borisut" class="form-control">
-          <label for="">list 3</label>
-          <input type="text" name="saka_borisut" class="form-control">
-          <br>
-          <input type="submit" class="btn btn-success" value="เพิ่ม" style="float:right;">
-        </form>
-      </div>
-
-    </div>
-  </div>
-</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js">
 </script>
 <script type="text/javascript">
+ 
   $('.changeDepartment').on('change', function() {
     let val = $(this).val();
     let html = '';
     if (val == 1) {
       html = `<label for="">ชื่อบริษัท</label>
-              <input type="text" name="b1" id="" value="" class="form-control form-control-sm" style="width: 45%;" required>
+              <input type="text" name="b1" id="" value="" class="form-control form-control-sm" style="width: 45%;" >
               <label for="">แผนก</label>
-              <input type="text " name="b2" id="" value="" class="form-control form-control-sm" style="width: 45%;" required>
+              <input type="text " name="b2" id="" value="" class="form-control form-control-sm" style="width: 45%;" >
               <label for="">สาขา</label>
-              <input type="text" name="b3" id="" value="" class="form-control form-control-sm" style="width: 45%;" required>`;
+              <input type="text" name="b3" id="" value="" class="form-control form-control-sm" style="width: 45%;" >`;
     } else if (val == 2) {
       html = `<label for="">ระดับการศึกษา</label>
                 <Select class="form-control" name="department" style="width:45%" requried>
@@ -271,11 +199,11 @@ if ($_POST) {
                 <option value="">อุดมศึกษา</option>
                 </Select>
               <label for="">โรงเรียน</label>
-              <input type="text " name="b2" id="" value="" class="form-control form-control-sm" style="width: 45%;" required>
+              <input type="text " name="b2" id="" value="" class="form-control form-control-sm" style="width: 45%;" >
               <label for="">ระดับชั้น</label>
-              <input type="text" name="b3" id="" value="" class="form-control form-control-sm" style="width: 45%;" required>
+              <input type="text" name="b3" id="" value="" class="form-control form-control-sm" style="width: 45%;" >
               <label for="">ห้อง</label>
-              <input type="text" name="b4" id="" value="" class="form-control form-control-sm" style="width: 45%;" required>
+              <input type="text" name="b4" id="" value="" class="form-control form-control-sm" style="width: 45%;" >
               `;
     } else if (val == 3) {
       html = `<label for="">จังหวัด</label>
@@ -303,15 +231,15 @@ if ($_POST) {
                 <option value="">อุดมศึกษา</option>
                 </Select>
                 <label for="">หมู่บ้าน</label>
-                <input type="text" name="b4" id="" value="" class="form-control form-control-sm" style="width: 45%;" required>
+                <input type="text" name="b4" id="" value="" class="form-control form-control-sm" style="width: 45%;" >
               `;
     } else {
       html = `<label for="">ข้อมูลเกี่ยวข้องที่ 1</label>
-              <input type="text" name="b1" id="" value="" class="form-control form-control-sm" style="width: 45%;" required>
+              <input type="text" name="b1" id="" value="" class="form-control form-control-sm" style="width: 45%;" >
               <label for="">ข้อมูลเกี่ยวข้องที่ 2</label>
-              <input type="text " name="b2" id="" value="" class="form-control form-control-sm" style="width: 45%;" required>
+              <input type="text " name="b2" id="" value="" class="form-control form-control-sm" style="width: 45%;" >
               <label for="">ข้อมูลเกี่ยวข้องที่ 3</label>
-              <input type="text" name="b3" id="" value="" class="form-control form-control-sm" style="width: 45%;" required>`;
+              <input type="text" name="b3" id="" value="" class="form-control form-control-sm" style="width: 45%;" >`;
     }
     $('#form_data').html(html);
   });

@@ -106,14 +106,14 @@ include "navbar0.php"; ?>
 include "function.php";
 // $sql = "SELECT * FROM event where ";
 // $result = mysqli_query($conn, $sql);
-// $db = new db();
+$db = new db();
 //echo $_GET['txt_search'];
 //print_r($_GET);
 //echo "asdjasidhjasoipdhois";
 //echo "<script>alert('".$_GET['txt_search']."')</script>";
-$sqll = "SELECT * FROM event WHERE event_name like '%" . $_GET['txt_search'] . "%' AND ( organization_id='$org' OR department_id='$dep' OR department2_id='$dep2') AND event_type='2'";
-echo $sqll;
-// $result = $db->select("*","event","event_name like '%".$_GET['txt_search']."%' AND (status_event='public' OR user_id='$user_id' OR organization_id='$org' OR department_id='$dep' OR department2_id='$dep2') AND event_type='2'");
+//$sqll = "SELECT * FROM event WHERE event_name like '%" . $_GET['txt_search'] . "%' AND ( organization_id='$org' OR department_id='$dep' OR department2_id='$dep2') AND event_type='2'";
+
+$result = $db->select("*", "event", "event_name like '%" . $_GET['txt_search'] . "%' AND (status_event='public' OR user_id='$user_id' OR organization_id='$org' OR department_id='$dep' OR department2_id='$dep2') AND event_type='2'");
 //  print_r($result);
 // echo  $db->select("*","event"," (status_event='public' OR user_id='$user_id' OR organization_id='$org' OR department_id='$dep' OR department2_id='$dep2') AND event_type='2'");
 ?>
@@ -149,7 +149,7 @@ echo $sqll;
             }
             ?>
             <?php $date_now = date("Y-m-d"); ?>
-            <a style="position:absolute; left:35.5%; color:white; background:#28a745;" id="btn_vote_<?php echo $row["event_id"]; ?>" href="datavote.php?event_id=<?php echo $row["event_id"]; ?>&user_id=<?php echo $user_id; ?> &date=<?php echo $row['date_end']; ?>" class="btn btn_vote">ลงคะแนน</a>
+            <a style="position:absolute; left:35.5%; color:white; background:#28a745;" id="btn_vote_<?php echo $row["event_id"]; ?>" href="datavote.php?event_id=<?php echo $row["event_id"]; ?>&user_id=<?php echo $user_id; ?>" class="btn btn_vote">ลงคะแนน</a>
             <!--  -->
 
           </div>
