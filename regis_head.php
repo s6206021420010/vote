@@ -1,6 +1,9 @@
 <?php
 include "conn.php";
 include "header.php";
+session_start();
+session_unset();
+
 ?>
 <style media="screen">
   .btn-danger{

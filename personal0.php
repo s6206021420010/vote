@@ -60,12 +60,14 @@ LEFT JOIN organization ON user.organization_id = organization.organization_id
                         <label for="">เบอร์โทร</label>
                         <input class="form-control" type="text" name="number" value="<?php echo $row['number']; ?>">
                         <label for="">รูป</label>
-                        <img class="form-control" style="width:20%; height:20%"src="images/<?php echo $row['image']; ?>" alt=""><br>
+                        <img class="form-control" id="img_head" style="width:20%; height:20%"src="images/<?php echo $row['image']; ?>" alt="">
+                        <input type="file" class="form-control form-control-sm" style="margin-top:10px;" id="img">
+                        <br>
                         <input id="btn"type="submit" name="" value="ยืนยัน" class="btn btn-success">
             </div>
 
                 </div>
-                <div class="container" id="body" style="position:fixed; right:9%;top:30.2%; width:40%;">
+                <div class="container" id="body" style="position:fixed; right:9%;top:26.0%; width:40%;">
                     <label for="">Username</label>
                     <input class="form-control" type="text" name="user_name" value="<?php echo $row['user_name']; ?>">
                     <label for="">Password</label>
@@ -84,6 +86,11 @@ LEFT JOIN organization ON user.organization_id = organization.organization_id
     <script src="https://code.jquery.com/jquery-3.6.0.min.js">
     </script>
     <script src="script.js">
+      $("#img").change(function(){
+        var img = $(this).val()
+        $("#img_head").prop("src","images/img")
+        
+      })
     $( "#Search" ).mouseenter(function(){
         alert("helllllllllllllllo")
     })

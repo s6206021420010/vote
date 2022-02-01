@@ -5,6 +5,8 @@ include "header.php";
 include "login.php";
 if (!isset($_SESSION)) {
   session_start();
+  session_unset();
+
 }
 ?>
 <html>

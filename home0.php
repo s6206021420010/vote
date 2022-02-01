@@ -104,8 +104,7 @@ include "navbar0.php"; ?>
 <?php
 
 include "function.php";
-// $sql = "SELECT * FROM event where ";
-// $result = mysqli_query($conn, $sql);
+
 $db = new db();
 //echo $_GET['txt_search'];
 //print_r($_GET);

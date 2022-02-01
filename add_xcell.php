@@ -114,13 +114,20 @@ if (mysqli_num_rows($result) > 0)
             <td><?php  echo $row['id_card']; ?></td>
             <td><?php  echo $row['number']; ?></td>
             <td><label class="switch" style="margin-left:30px;">
-              <input style=""  id="<?php  echo $row['user_id']; ?>" onclick="check(<?php  echo $row['user_id']; ?>)" type="checkbox" <?php if ($row['status'] == 4) {
+              <input style=""  id="<?php  echo $userid = $row['user_id']; ?>" 
+              onclick="check(<?php  echo $row['user_id']; ?>)" 
+              type="checkbox"
+              <?php
+              $sql9 = "SELECT * FROM `event_user` WHERE event_id = $event_id AND user_id = $userid";
+              $result9 = mysqli_query($conn,$sql9);
+              if($result9->num_rows>0){
                 echo "checked";
-              } ?> >
+              }
+              ?> >
               <span class="slider round"></span>
             </label></td>
             <td><a href="delete_xcell.php?user_id=<?php echo $row["user_id"]; ?>" style="color:#373737;">ลบ</a></td>
-
+              <input type="text" id="event_id" value="<?php echo $event_id; ?>" hidden>
         </tr>
 
 <?php
@@ -161,14 +168,15 @@ else{
  </script>
  <script type="text/javascript">
   function check(id){
-    // alert(id)
+    var event_id = $("#event_id").val()
+     //alert(event_id)
       $.ajax({
          type:"GET",
          url:"ajax_user.php",
-         data:{id:id},
+         data:{id:id,event_id:event_id},
          dataType:"html",
          success: function (html) {
-           // alert(html)
+            
          }
        })
 

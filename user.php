@@ -1,6 +1,8 @@
 <?php
 include "conn.php";
 include "header.php";
+session_start();
+
 if ($_POST) {
   echo $name_borisut = $_POST["name_borisut"];
   echo $panax_borisut = $_POST["panax_borisut"];
@@ -24,12 +26,7 @@ if ($_POST) {
     color: white;
     font-size: 24px;
   }
-  .select_stu{
-    display: inherit;
-  }
-  #select_stu{
-   display: none;
-  }
+ 
 </style>
 
 <body>
@@ -53,172 +50,120 @@ if ($_POST) {
                 <h6>กรอกข้อมูลการเลือกตั้ง</h6>
               </div>
             </div>
-            <form class="" action="add_user.php" method="post" enctype="multipart/form-data">
-              <input type="text" value="3" name="status" id="status" hidden>
-              <div class="row">
-                <hr style="width:98%;">
-
-                <div class="col-6">
-
-
-                  <label for="">รหัสบัตรประชาชน</label><input maxlength="13" type="text" class="form-control form-control-sm" name="idcard" value="" maxlength="13" required>
-                  <label for="">เบอร์โทร</label><input type="text" maxlength="10" class="form-control form-control-sm" name="phone" value="">
-                </div>
-                <div class="col-6">
-                  <label for="">ชื่อ - นามสกุล</label><input type="text" class="form-control form-control-sm" name="name" value="">
-                  <label for="">Email</label><input type="email   " class="form-control form-control-sm" name="email" value="">
-
-                </div>
+         
+            <div class="row">
+              <hr style="width:98%;">
+              <div class="col-6">
+            <form class="" action="add_user0.php" method="post" enctype="multipart/form-data">
+                  <input type="text" value="3" name="status" id="status" hidden>
+                  <label  for="">รหัสบัตรประชาชน</label><input id="idcard" maxlength="13" type="text" class="form-control form-control-sm" name="idcard" value="<?php if($_GET){ echo $_GET['id_card']; } ?>" required>
+                  <h6 style="color: #f45d5d;"> <?php if($_SESSION){if($_SESSION["stat"] == 1){echo "*รหัสบัตรประชาชนนี้ถูกใช้ไปแล้ว"; }} ?></h6>
+                  <label for="">เบอร์โทร</label><input id="phone" type="text" maxlength="10" class="form-control form-control-sm" name="phone" value="<?php if($_GET){ echo $_GET['number']; } ?>" maxlength="10"required>
+                  <h6 style="color: #f45d5d;"> <?php if($_SESSION){if($_SESSION["stat"] == 3){echo "*เบอร์โทรนี้ถูกใช้ไปแล้ว"; }}?></h6>
               </div>
+              <div class="col-6">
+                <label for="">ชื่อ - นามสกุล</label><input type="text" class="form-control form-control-sm" name="name" value="<?php if($_GET){ echo $_GET['name']; } ?>"required>
+                <label for="">Email</label><input type="text" class="form-control form-control-sm" name="email" value="<?php if($_GET){ echo $_GET['email']; } ?>"required>
+                <h6 style="color: #f45d5d;"> <?php if($_SESSION){if($_SESSION["stat"] == 2){echo "*อีเมลนี้ถูกใช้ไปแล้ว"; }}?></h6>
+              </div>
+            </div>
 
-              <div class="row">
+            <div class="row">
 
-                <div class="col-3">
-                  <label for="">จังหวัด</label>
-                  <select class="form-control" name="provinces" id="provinces">
-                    <option value="" selected disabled>-กรุณาเลือกจังหวัด-</option>
-                    <?php
-                    $sql = "SELECT * FROM `provinces` WHERE 1";
-                    $result = mysqli_query($conn, $sql);
-                    if ($result->num_rows > 0) {
-                      while ($row = $result->fetch_assoc()) { ?>
-                        <option value="<?php echo $row["id"]; ?>"><?php echo $row["name_th"]; ?></option>
-                    <?php
-                      }
+              <div class="col-3">
+                <label for="">จังหวัด</label>
+                <select class="form-control" name="provinces" id="provinces">
+                  <option value="" selected disabled>-กรุณาเลือกจังหวัด-</option>
+                  <?php
+                  $sql = "SELECT * FROM `provinces` WHERE 1";
+                  $result = mysqli_query($conn, $sql);
+                  if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) { ?>
+                      <option value="<?php echo $row["id"]; ?>"><?php echo $row["name_th"]; ?></option>
+                  <?php
                     }
-                    ?>
-                  </select>
-                </div>
-                <div class="col-3">
-                  <label for="">อำเภอ</label>
-                  <select class="form-control" name="amphures" id="amphures">
-                  </select>
-                </div>
-                <div class="col-3">
-                  <label for="">ตำบล</label>
-                  <select class="form-control" name="districts" id="districts">
-                  </select>
-                </div>
-                <div class="col-3">
-                  <label for="sel1">รหัสไปรษณีย์:</label>
-                  <input type="text" name="zip_code" id="zip_code" class="form-control">
-                </div>
+                  }
+                  ?>
+                </select>
               </div>
-              <div class="row">
-                <div class="col-4">
-                  <label for="">Username</label><input type="text" class="form-control form-control-sm" name="user_name" value="">
-                </div>
-                <div class="col-4">
-                  <label for="">Password</label><input type="text" class="form-control form-control-sm" name="user_pass" value="">
-                </div>
-                <div class="col-4">
-                  <label for="">ยืนยัน Password</label><input type="text" class="form-control form-control-sm" name="" value="">
-                </div>
+              <div class="col-3">
+                <label for="">อำเภอ</label>
+                <select class="form-control" name="amphures" id="amphures"required>
+                </select>
               </div>
-              <div class="row">
-                <br>
-                <hr style="width:98%;">
-                <h6>ข้อมูลองค์กร</h6>
-<<<<<<< HEAD
-                <!-- <div class="col">
+              <div class="col-3">
+                <label for="">ตำบล</label>
+                <select class="form-control" name="districts" id="districts"required>
+                </select>
+              </div>
+              <div class="col-3">
+                <label for="sel1">รหัสไปรษณีย์:</label> 
+                <input type="text" name="zip_code" id="zip_code" class="form-control"required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                <label for="">Username</label><input type="text" class="form-control form-control-sm" name="user_name" value="<?php if($_GET){ echo $_GET['user_name']; } ?>">
+                <h6 style="color: #f45d5d;"> <?php if($_SESSION){if($_SESSION["stat"] == 4){echo "*ยูสเซอร์เนมนี้ถูกใช้ไปแล้ว"; }}?></h6>
+              </div>
+              <div class="col-4">
+                <label for="">Password</label><input type="password" class="form-control form-control-sm" name="user_pass" value="<?php if($_SESSION){echo $_SESSION["pass"];}?>">
+              </div>
+              <div class="col-4">
+                <label for="">ยืนยัน Password</label><input type="password" class="form-control form-control-sm" name="" value="<?php if($_SESSION){echo $_SESSION["pass"];}?>">
+              </div>
+            </div>
+            <div class="row">
+              <br>
+              <hr style="width:98%;">
+              <h6>ข้อมูลองค์กร</h6>
+              <!-- <div class="col">
                   <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">บริษัท</a>
                   <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#studen">นักเรียน-นักศึกษา</a>
                   <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#local">อื่น ๆ / บุคคนทั่วไป</a>
                 </div> -->
+            </div>
+            <div class="row">
+          
+            </div>
+            <div class="row col-12" id="form_data">
+            <label id="m" for="sel1">องค์กรณ์  <h6 style="color: #f45d5d;">*เลือกบริษัท/มหาลัย/โรงเรียน/องกรณ์ทั่วไป (ตามที่ผู้สร้างโหวตได้สร้างไว้)</h6></label>
+        <select class="form-control" name="b1" id="org"required>
+              <option value="" selected disabled></option>
+              <?php $sql = "SELECT * FROM `organization` WHERE 1";
+              $result = mysqli_query($conn,$sql);
+              foreach ($result as $value) { ?>
+              <option  value="<?=$value['organization_id']?>"> <?=$value['organization_name']?></option>
+              <?php } ?>
+        </select>
+        <label id="k"for="sel1">รายการย่อยที่1</label>
+        <select class="form-control" name="b2" id="dep"required>
+        </select>
+        <label id="s"for="sel1" >รายการย่อยที่2</label>
+        <select style="margin-bottom:15px;"class="form-control" name="b3" id="dep2"required>
+        </select>
+            </div>
+            <div class="row" style="margin-top:10px;">
+              <div class="col-2">
+                <label for="">อัพโหลดรูปภาพ</label>
               </div>
-              <div class="row">
-                <div class="col-12">
-                  <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="company" name="department" value="1" checked class="custom-control-input changeDepartment">
-                    <label class="custom-control-label" for="company">บริษัท</label>
-                  </div>
-                  <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="education" name="department" value="2" class="custom-control-input changeDepartment">
-                    <label class="custom-control-label" for="education">สถานการศึกษา</label>
-                  </div>
-                  <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="normalpeople" name="department" value="4" class="custom-control-input changeDepartment">
-                    <label class="custom-control-label" for="normalpeople">บุคคนทั่วไป</label>
-                  </div>
-                </div>
+              <div class="col-5">
+                <input type="file" class="form-control" name="image" value="" required>
               </div>
-              <div class="row col-12" id="form_data">
-                <label for="">ชื่อบริษัท</label>
-                <input type="text" name="b1" id="" value="" class="form-control form-control-sm" style="width: 45%;" required>
-                <label for="">แผนก</label>
-                <input type="text " name="b2" id="" value="" class="form-control form-control-sm" style="width: 45%;" required>
-                <label for="">สาขา</label>
-                <input type="text" name="b3" id="" value="" class="form-control form-control-sm" style="width: 45%;" required>
-=======
-                <div class="col">
-                  <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" id="bor">บริษัท</a>
-                  <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#studen"id="stu" >นักเรียน-นักศึกษา</a>
-                  <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#local" id="any">อื่น ๆ / บุคคนทั่วไป</a>
-                </div>
+            </div>
+            <div class="row" style="margin-top:10px;">
+              <div class="col-3">
               </div>
-              <div class="row">
-                <div class="col-3">
-                <label for="" >ระดับชั้น</label>
-                <select name="" id="select_stu" class="form-control">
-                  <option value="" disabled>กรุณาเลือกระดับชั้น</option>
-                  <option value="">โรงเรียน</option>
-                  <option value="">วิทยาลัย</option>
-                  <option value="">มหาวิทยาลัย</option>
-                </select>
-                </div>
+              <div class="col-3">
+                <a href="regis_head.php" class="btn btn-danger" style="width:100%;">ยกเลิก</a>
               </div>
-              <div class="row">
-                <div class="col-3">
-                <label for="" id="n1">list 1</label>
-              <select class="form-control" name="provinces" id="organization" >
-                    <option value="" selected disabled>-องค์กรณ์-</option>
-                <?php
-                $sql = "SELECT * FROM `organization` WHERE 1";
-                $result = mysqli_query($conn,$sql);
-                if ($result->num_rows > 0) {
-                  while ($row = $result->fetch_assoc()) {?>
-                  <option value="<?php echo $row["organization_id"]; ?>"><?php echo $row["organization_name"]; ?></option>
-                  <?php
-                  }
-                }
-                 ?>
-                  </select>
-                  </div>
-                  <div class="col-3">
-                    <label for="" id="n2">list 2</label>
-                    <select class="form-control" name="amphures" id="dep">
-                </select>
-                  </div>
-                  <div class="col-3">
-                    <label for="" id="n3">list 3</label>
-                    <select class="form-control" name="districts" id="dep2">
-                    </select>
-                  </div>
-                  </div>
->>>>>>> e308324b53b55e97cc301d368989fbaf77eb26b4
+              <div class="col-3">
+                <input type="submit" id="display_none" class="btn btn-success" style="width:100%;" name="" value="ลงทะเบียน">
+                </form>
               </div>
-              <div class="row" style="margin-top:10px;">
-                <div class="col-2">
-                  <label for="">อัพโหลดรูปภาพ</label>
-                </div>
-                <div class="col-5">
-                  <input type="file" class="form-control" name="image" value="">
-                </div>
+              <div class="col-3">
               </div>
-              <div class="row" style="margin-top:10px;">
-                <div class="col-3">
-                </div>
-                <div class="col-3">
-                  <a href="regis_head.php" class="btn btn-danger" style="width:100%;">ยกเลิก</a>
-                </div>
-                <div class="col-3">
-                  <input type="submit" class="btn btn-success" style="width:100%;" name="" value="ลงทะเบียน">
-
-                </div>
-                <div class="col-3">
-                </div>
-              </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
@@ -231,94 +176,51 @@ if ($_POST) {
   </div>
 </body>
 </div>
-<<<<<<< HEAD
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="" method="post">
-          <label for="">ชื่อบริษัท</label>
-          <input type="text" name="name_borisut" class="form-control">
-          <label for="">แผนก</label>
-          <input type="text" name="panax_borisut" class="form-control">
-          <label for="">สาขา</label>
-          <input type="text" name="saka_borisut" class="form-control">
-          <br>
-          <input type="submit" class="btn btn-success" value="เพิ่ม" style="float:right;">
-        </form>
-      </div>
 
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="studen" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="" method="post">
-          <label for="">ชื่อโรงเรียน</label>
-          <input type="text" name="name_borisut" class="form-control">
-          <label for="">แผนก</label>
-          <input type="text" name="panax_borisut" class="form-control">
-          <label for="">สาขา</label>
-          <input type="text" name="saka_borisut" class="form-control">
-          <br>
-          <input type="submit" class="btn btn-success" value="เพิ่ม" style="float:right;">
-        </form>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="local" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="" method="post">
-          <label for="">list 1</label>
-          <input type="text" name="name_borisut" class="form-control">
-          <label for="">list 2</label>
-          <input type="text" name="panax_borisut" class="form-control">
-          <label for="">list 3</label>
-          <input type="text" name="saka_borisut" class="form-control">
-          <br>
-          <input type="submit" class="btn btn-success" value="เพิ่ม" style="float:right;">
-        </form>
-      </div>
-
-    </div>
-  </div>
-</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js">
 </script>
 <script type="text/javascript">
+  
+  $('#org').change(function() {
+    var org = $(this).val();
+ 
+    $.ajax({
+      type: "POST",
+      url: "ajax3.php",
+      data: {
+        org:org
+      },
+      success: function(data) {
+        $('#dep').html(data)
+      }
+    });
+  });
+  $('#dep').change(function() {
+    var dep = $(this).val();
+    $.ajax({
+      type: "POST",
+      url: "ajax3.php",
+      data: {
+        dep:dep
+      },
+      success: function(data) {
+        $('#dep2').html(data)
+      }
+    });
+  });
   $('.changeDepartment').on('change', function() {
     let val = $(this).val();
     let html = '';
     if (val == 1) {
       html = `<label for="">ชื่อบริษัท</label>
-              <input type="text" name="organization_name" id="" value="" class="form-control form-control-sm" style="width: 45%;" required>
+              <input type="text" name="b1" id="" value="" class="form-control form-control-sm" style="width: 45%;" >
               <label for="">แผนก</label>
-              <input type="text " name="department_name" id="" value="" class="form-control form-control-sm" style="width: 45%;" required>
+              <input type="text " name="b2" id="" value="" class="form-control form-control-sm" style="width: 45%;" >
               <label for="">สาขา</label>
-              <input type="text" name="department2_name" id="" value="" class="form-control form-control-sm" style="width: 45%;" required>`;
+              <input type="text" name="b3" id="" value="" class="form-control form-control-sm" style="width: 45%;" >`;
     } else if (val == 2) {
       html = `<label for="">ระดับการศึกษา</label>
-                <Select class="form-control" name="organization_name" style="width:45%" requried>
+                <Select class="form-control" name="department" style="width:45%" requried>
                 <option value="" selected disabled>กรุณาเลือกระดับชั้น</option>
                 <option value="">อนุบาลศึกษา</option>
                 <option value="">ประถมศึกษา</option>
@@ -326,19 +228,47 @@ if ($_POST) {
                 <option value="">อุดมศึกษา</option>
                 </Select>
               <label for="">โรงเรียน</label>
-              <input type="text " name="department_name" id="" value="" class="form-control form-control-sm" style="width: 45%;" required>
+              <input type="text " name="b2" id="" value="" class="form-control form-control-sm" style="width: 45%;" >
               <label for="">ระดับชั้น</label>
-              <input type="text" name="department2_name" id="" value="" class="form-control form-control-sm" style="width: 45%;" required>
+              <input type="text" name="b3" id="" value="" class="form-control form-control-sm" style="width: 45%;" >
               <label for="">ห้อง</label>
-              <input type="text" name="department3_name" id="" value="" class="form-control form-control-sm" style="width: 45%;" required>
+              <input type="text" name="b4" id="" value="" class="form-control form-control-sm" style="width: 45%;" >
+              `;
+    } else if (val == 3) {
+      html = `<label for="">จังหวัด</label>
+                <Select class="form-control" name="department" style="width:45%" requried>
+                <option value="" selected disabled>กรุณาเลือกระดับชั้น</option>
+                <option value="">อนุบาลศึกษา</option>
+                <option value="">ประถมศึกษา</option>
+                <option value="">มัธยมศึกษา</option>
+                <option value="">อุดมศึกษา</option>
+                </Select>
+              <label for="">อำเภอ</label>
+              <Select class="form-control" name="department" style="width:45%" requried>
+                <option value="" selected disabled>กรุณาเลือกระดับชั้น</option>
+                <option value="">อนุบาลศึกษา</option>
+                <option value="">ประถมศึกษา</option>
+                <option value="">มัธยมศึกษา</option>
+                <option value="">อุดมศึกษา</option>
+                </Select>            
+                <label for="">ตำบล</label>
+                <Select class="form-control" name="department" style="width:45%" requried>
+                <option value="" selected disabled>กรุณาเลือกระดับชั้น</option>
+                <option value="">อนุบาลศึกษา</option>
+                <option value="">ประถมศึกษา</option>
+                <option value="">มัธยมศึกษา</option>
+                <option value="">อุดมศึกษา</option>
+                </Select>
+                <label for="">หมู่บ้าน</label>
+                <input type="text" name="b4" id="" value="" class="form-control form-control-sm" style="width: 45%;" >
               `;
     } else {
       html = `<label for="">ข้อมูลเกี่ยวข้องที่ 1</label>
-              <input type="text" name="organization_name" id="" value="" class="form-control form-control-sm" style="width: 45%;" required>
+              <input type="text" name="b1" id="" value="" class="form-control form-control-sm" style="width: 45%;" >
               <label for="">ข้อมูลเกี่ยวข้องที่ 2</label>
-              <input type="text " name="department2_name" id="" value="" class="form-control form-control-sm" style="width: 45%;" required>
+              <input type="text " name="b2" id="" value="" class="form-control form-control-sm" style="width: 45%;" >
               <label for="">ข้อมูลเกี่ยวข้องที่ 3</label>
-              <input type="text" name="department3_name" id="" value="" class="form-control form-control-sm" style="width: 45%;" required>`;
+              <input type="text" name="b3" id="" value="" class="form-control form-control-sm" style="width: 45%;" >`;
     }
     $('#form_data').html(html);
   });
@@ -346,59 +276,6 @@ if ($_POST) {
   $('#provinces').change(function() {
     var id_province = $(this).val();
 
-=======
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js">
-</script>
-<script type="text/javascript">
-  $('#bor').click(function(){
-    $('#n1').html("บริษัท")
-    $('#n2').html("แผนก")
-    $('#n3').html("สาขา")
-    $('#select_stu').css("display", "none");
-  })
-  $('#stu').click(function(){
-    $('#select_stu').css("display", "inherit");
-    $('#n1').html("โรงเรียน")
-    $('#n2').html("แผนก")
-    $('#n3').html("สาขา")
-  })
-  $('#any').click(function(){
-    $('#n1').html("รายการ 1")
-    $('#n2').html("รายการ 2")
-    $('#n3').html("รายการ 3")
-    $('#select_stu').css("display", "none");  
-  })
-  $('#organization').change(function(){
-    var organization = $(this).val();
-
-    $.ajax({
-      type:"POST",
-      url:"ajax3.php",
-      data:{org:organization},
-      success:function(org){
-
-        $('#dep').html(org)
-      }
-    })
-    })
-    $('#dep').change(function(){
-    var dep = $(this).val();
-
-    $.ajax({
-      type:"POST",
-      url:"ajax3.php",
-      data:{dep:dep},
-      success:function(dep){
-
-        $('#dep2').html(dep)
-      }
-    })
-    })
-$('#provinces').change(function() {
-  var id_province = $(this).val();
-  
->>>>>>> e308324b53b55e97cc301d368989fbaf77eb26b4
     $.ajax({
       type: "POST",
       url: "ajax_regis.php",
@@ -447,4 +324,4 @@ $('#provinces').change(function() {
     });
 
   });
-</script>
+</script> 

@@ -66,7 +66,7 @@
             <div class="col-md-12 mb-4">
               <label for="cars">ประเภทการเลือกตั้ง</label>
               <select class="form-select form-control" name="cars" id="cars">
-                <option value="Public">Public</option>
+                <option value="Public" selected>Public</option>
                 <option value="Private">Private</option>
               </select>
             </div>

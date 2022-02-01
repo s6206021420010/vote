@@ -62,7 +62,7 @@
   <a class="nav-link" href="add_xcell.php?user_id=<?php echo $user_id; ?>" style="left:0px; font-size: 1.1em; color:#525252;" ><i class="fas fa-user-plus"></i> เพิ่มสมาชิก</a>
 </li> -->
     <li class="nav-item">
-      <a class="nav-link"id="ad" href="#" style="left:0px;color:#525252;" ><i class="fas fa-poll"></i> ผลการโหวต</a>
+      <a class="nav-link"id="ad" href="vote_value.php" style="left:0px;color:#525252;" ><i class="fas fa-poll"></i> ผลการโหวต</a>
     </li>
 </ul>
   </body>
