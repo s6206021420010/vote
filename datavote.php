@@ -5,7 +5,7 @@ $img = $_SESSION['image'];
 $user_id = $_GET['user_id'];
 include "header.php";
 include "function.php";
-include "navbar.php";
+include "navbar0.php";
 $event_id = $_GET['event_id'];
 $date = $_GET['date'];
 $db = new db();
