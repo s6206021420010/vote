@@ -14,7 +14,8 @@
   $sql = "SELECT * FROM user";
   $result = mysqli_query($conn, $sql);
   $row = $result->fetch_assoc();
-  $user_id = $_GET['user_id'];
+  $user_id = $_SESSION['user_id'];
+
   include "navbar.php";
 
   ?>

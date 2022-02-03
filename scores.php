@@ -92,3 +92,4 @@ include "header.php"; ?>
  chart_val.draw(data_val, options_val);
  }
  </script>
+ 
