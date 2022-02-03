@@ -46,7 +46,9 @@ LEFT JOIN organization ON user.organization_id = organization.organization_id
                   <label for="">เบอร์โทร</label>
                   <input class="form-control" type="text" name="number" value="<?php echo $row['number']; ?>">
                   <label for="">รูป</label>
-                  <img class="form-control" style="width:20%; height:20%"src="images/<?php echo $row['image']; ?>" alt=""><br>
+                  <img class="form-control" style="width:20%; height:20%"src="images/<?php echo $row['image']; ?>" alt="">
+                  <input type="file" class="form-control form-control-sm">
+                  <br>
                   <input id="btn"type="submit" name="" value="ยืนยัน" class="btn btn-success">
 
                 </div>

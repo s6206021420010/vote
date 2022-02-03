@@ -104,24 +104,43 @@ include "navbar0.php"; ?>
 <?php
 
 include "function.php";
+$sql = "SELECT *
+FROM event_user
+LEFT JOIN event
+ON event_user.event_id = event.event_id
+WHERE event_user.user_id = '1099'";
+$result = mysqli_query($conn,$sql);
+$row = $result->fetch_assoc();
 
-$db = new db();
+$sql1 = "SELECT * FROM `event` WHERE `status_event`='Public'";
+$result1 = mysqli_query($conn,$sql1);
+$row1 = $result1->fetch_assoc();
+//$db = new db();
 //echo $_GET['txt_search'];
 //print_r($_GET);
 //echo "asdjasidhjasoipdhois";
 //echo "<script>alert('".$_GET['txt_search']."')</script>";
 //$sqll = "SELECT * FROM event WHERE event_name like '%" . $_GET['txt_search'] . "%' AND ( organization_id='$org' OR department_id='$dep' OR department2_id='$dep2') AND event_type='2'";
 
-$result = $db->select("*", "event", "event_name like '%" . $_GET['txt_search'] . "%' AND (status_event='public' OR user_id='$user_id' OR organization_id='$org' OR department_id='$dep' OR department2_id='$dep2') AND event_type='2'");
+//$result = $db->select("*", "event", "event_name like '%" . $_GET['txt_search'] . "%' AND (status_event='public' OR user_id='$user_id' OR organization_id='$org' OR department_id='$dep' OR department2_id='$dep2') AND event_type='2'");
 //  print_r($result);
 // echo  $db->select("*","event"," (status_event='public' OR user_id='$user_id' OR organization_id='$org' OR department_id='$dep' OR department2_id='$dep2') AND event_type='2'");
 ?>
 <div class="body" style="position:absolute; top:15%; left:13%;display: none" id="body">
 
-  <div class="container" id="body">
-    <h3 style="color:#3d4c53;">รายการเลือกตั้ง</h3>
-
+  <div class="container" id="body" >
     <div class="row">
+      <div class="col-2">
+      <h4 style="color:#3d4c53;">รายการเลือกตั้ง</h4>
+      </div>
+      <div class="col">
+      <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" onchange="check()" role="switch" value="1" id="flexSwitchCheckDefault">
+      <label class="form-check-label" for="flexSwitchCheckDefault">เลือกรายการที่เกี่ยวข้อง</label>
+      </div>
+      </div>
+    </div>
+    <div class="row" id="pri" style="display: none;">
       <?php
       if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
@@ -161,6 +180,48 @@ $result = $db->select("*", "event", "event_name like '%" . $_GET['txt_search'] .
     </div>
   </div>
 
+
+
+  <div class="container" id="body" >
+    <div class="row" id="pub">
+      <?php
+      if ($result1->num_rows > 0) {
+        while ($row1 = $result1->fetch_assoc()) {
+      ?>
+          <div class="card col-3" id="card" onmouseover="setblurCard(<?php echo $row1['event_id']; ?>);" onmouseout="removeblurCard(<?php echo $row1['event_id']; ?>)" style="border-radius:5px;background:#ffffff;height:220px; width:1067px;">
+            <label style="filter:blur(px);"><?php echo $row1["event_name"]; ?></label>
+            <hr style="margin: 1px;">
+            <?php $sta = $row1["status_event"];
+            if ($sta == "Public") {
+              $sta = "#49915a";
+            } else {
+              $sta = "#da4d5a";
+            } ?>
+            <label style="background:<?php echo $sta; ?>; border-radius:3px; color:white; padding:0px 7px; position:absolute; right:10px; top:10px;" for=""><?php echo $row1["status_event"]; ?></label>
+            <?php
+            $img = $row1["image"];
+            if ($img == "") { ?>
+              <img id="img_bg_vote_<?php echo $row1["event_id"]; ?>" class="img_bg_vote" style="filter: blur(5px);border-radius:2px;position:absolute; left:5px; top:66px;width:272px; height:150px;object-fit:cover;" src="images/vote.png; ?>" alt="">
+
+            <?php
+            } else { ?>
+              <img id="img_bg_vote_<?php echo $row1["event_id"]; ?>" class="img_bg_vote" style="filter: blur(0.7px);border-radius:2px;position:absolute; left:5px; top:66px;width:272px; height:150px;object-fit:cover;" src="images/<?php echo $row1["image"]; ?>" alt="">
+            <?php
+            }
+            ?>
+            <?php $date_now = date("Y-m-d"); ?>
+            <a style="position:absolute; left:35.5%; color:white; background:#28a745;" id="btn_vote_<?php echo $row1["event_id"]; ?>" href="datavote.php?event_id=<?php echo $row1["event_id"]; ?>&user_id=<?php echo $user_id; ?>" class="btn btn_vote">ลงคะแนน</a>
+            <!--  -->
+
+          </div>
+      <?php
+        }
+      } else {
+        echo "<h4>ไม่พบข้อมูล</h4>";
+      }
+      ?>
+    </div>
+  </div>
 </div>
 
 <div id="myModal" class="modal fade" role="dialog">
@@ -193,6 +254,20 @@ $result = $db->select("*", "event", "event_name like '%" . $_GET['txt_search'] .
   </div>
 </div>
 <script type="text/javascript">
+  function check(){
+    
+    if($("#flexSwitchCheckDefault").val() == 1){
+      $("#pub").fadeOut()
+      $("#pri").fadeIn()
+      $("#flexSwitchCheckDefault").val("0")
+    }
+    else{
+      $("#pub").fadeIn()
+      $("#pri").fadeOut()
+      $("#flexSwitchCheckDefault").val("1")
+    }
+    
+  }
   var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
   var yValues = [1, 2, 3, 4, 12];
   var barColors = ["#264653", "#2a9d8f", "#e9c46a", "#f4a261", "#e76f51"];

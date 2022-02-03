@@ -61,6 +61,45 @@ include "header.php"; ?>
                     width:18%;
                     border-radius: 6px;
                     margin-bottom:10px;
+<<<<<<< HEAD
+                    " >ผลการเลือกตั้ง</button>
+          </a>
+        <body>
+            
+            <div id="barchart_values" style="width: 900px; height: 300px;"></div>
+        </body>
+</html>
+
+ <script type="text/javascript">
+ google.load("visualization", "1", {packages:["corechart"]});
+ google.setOnLoadCallback(drawChart);
+ function drawChart() {
+ var data_val = google.visualization.arrayToDataTable([
+
+ ['Date', 'จำนวนโหวต'],
+ <?php 
+        $sql = "SELECT v.*, COUNT(v.applicant_id) as vote,  a.applicant_name as aname FROM `vote` v 
+                            LEFT JOIN applicant a ON v.applicant_id = a.applicant_id
+                            WHERE v.event_id = '$event_id'
+                            GROUP BY v.applicant_id"; 
+                $result1 = mysqli_query($conn,$sql);
+        while ($row = mysqli_fetch_array($result1)){
+           
+            echo "['".$row['aname']."',".$row['vote']."],";
+        }
+         ?>
+ 
+ ]);
+
+ var options_val = {
+ title: 'ผลโหวต'
+ };
+ var chart_val = new google.visualization.ColumnChart(document.getElementById("barchart_values"));
+ chart_val.draw(data_val, options_val);
+ }
+ </script>
+ 
+=======
                     ">ผลการเลือกตั้ง</button>
     </a>
 
@@ -156,3 +195,4 @@ include "header.php"; ?>
 </body>
 
 </html>
+>>>>>>> ac2a0a77e1129cd390505c2264f0155f2b8dd150

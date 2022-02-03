@@ -27,7 +27,7 @@ include "header.php"; ?>
     display: none;
   }
 </style>
-  <div class="container" style="position:fixed;left:13%; top:13%;">
+  <div class="container" style="position:inherit;left:13%; top:13%;">
   <h4 style="color:#565656;">เพิ่มตัวเลือกการโหวต</h4>
   <a href="list.php?event_id=<?php echo $event_id?>&&user_id=<?php echo $user_id ?>" >
 
@@ -89,7 +89,7 @@ include "header.php"; ?>
 
 <?php
 $conn = mysqli_connect("localhost","root","","db_product");
-   $sqlSelect = "SELECT * FROM user WHERE organization_id=$org and department_id=$dep and department2_id=$dep2 and status=3 or status=4
+   $sqlSelect = "SELECT * FROM user WHERE organization_id=79 and department_id=351 and department2_id=3051 and (status=3 or status=4)
 ";
     $result = mysqli_query($conn, $sqlSelect);
 
@@ -104,6 +104,7 @@ if (mysqli_num_rows($result) > 0)
                 <th>เบอร์โทร</th>
                 <th>เพิ่ม</th>
                 <th>ลบ</th>
+                
             </tr>
 
 <?php
@@ -128,6 +129,7 @@ if (mysqli_num_rows($result) > 0)
             </label></td>
             <td><a href="delete_xcell.php?user_id=<?php echo $row["user_id"]; ?>" style="color:#373737;">ลบ</a></td>
               <input type="text" id="event_id" value="<?php echo $event_id; ?>" hidden>
+              
         </tr>
 
 <?php
