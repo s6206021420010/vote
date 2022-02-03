@@ -49,7 +49,7 @@ $result = $db->select("*", "applicant", "event_id = '$event_id'");
             $result1 = mysqli_query($conn, $sql);
 
             $date_now = date("Y-m-d");
-            if ($date > $date_now) {
+            if ($date < $date_now) {
               if ($result1->num_rows > 0) {
                 $row1 = $result1->fetch_assoc()
             ?>
