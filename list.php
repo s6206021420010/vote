@@ -11,13 +11,15 @@ $_SESSION["event_id"] = $_GET["event_id"];
 ?>
 <html lang="en" dir="ltr">
 <style>
-  #search{
+  #search {
     display: none;
   }
-  #search2{
+
+  #search2 {
     display: none;
   }
 </style>
+
 <head>
   <meta charset="utf-8">
   <title></title>
@@ -58,7 +60,7 @@ $_SESSION["event_id"] = $_GET["event_id"];
             <h3>รหัสเลือกตั้ง : <?php echo $row_event['event_id']; ?> </h3>
           </div>
           <div class="col-6 text-end">
-              <button type="button" class="btn btn-warning col-3" value="<?php echo $row_event['event_id']; ?>">แก้ไข</button>
+            <button type="button" class="btn btn-warning col-3" value="<?php echo $row_event['event_id']; ?>">แก้ไข</button>
           </div>
         </div>
         <div class="row">
@@ -114,7 +116,7 @@ $_SESSION["event_id"] = $_GET["event_id"];
           margin-bottom:10px;
           ">รายชื่อผู้มีสิทธิ์เลือกตั้ง</button>
     </a>
-
+    <a href="scores.php?user_id=<?php echo $user_id ?>&&event_id=<?php echo $event_id ?>">
     <button type="button" style="
           background-color:#B03060;
           border-width: 0px;
@@ -207,7 +209,7 @@ $_SESSION["event_id"] = $_GET["event_id"];
               </td>
               <td style="width: 60; color:#3d4c53;"><?php echo $row["applicant_name"]; ?></td>
               <td style="width: 60; color:#3d4c53;">
-                <img style="border-radius:3px;color:white; margin-top:10px;object-fit:cover;width:250px; height:150px;" src="<?php echo 'images/' . $row["applicant_image"]; ?>" class="img">
+                <img style="border-radius:3px;color:white; margin-top:10px;object-fit:cover;width:250px; height:80px; width:100px;" src="<?php echo 'images/' . $row["applicant_image"]; ?>" class="img">
               </td>
               <td style="width: 20%;">
                 <a class="btn btn-primary" data-target="#myModal-edit-<?php echo $row["applicant_id"] ?>" data-toggle="modal"> แก้ไข</a>
@@ -215,8 +217,6 @@ $_SESSION["event_id"] = $_GET["event_id"];
               <td style="width: 20%;"><a href="list_del.php?applicant_id=<?php echo $row["applicant_id"]; ?>&&event_id=<?php echo $event_id ?>&&user_id=<?php echo $user_id ?>" class="btn btn-danger" type="button" name="">ลบ</a></td>
             </tr>
           </tbody>
-
-
           <div class="modal fade" id="myModal-edit-<?php echo $row["applicant_id"] ?>" role="dialog">
             <div class="modal-dialog">
 
@@ -247,8 +247,7 @@ $_SESSION["event_id"] = $_GET["event_id"];
                       <input type="file" name="fileToUpload" id="fileToUpload" onchange="readURL(this);" class="form-control" value="">
                       <input type="submit" value="เพิ่ม" class="btn btn-success" style="width: 95%; align-items:center; margin-top: 5px; ">
 
-                      <img id="before" style="border-radius:3px;color:white; margin-top:10px;object-fit:cover;width:250px; height:150px;" src="<?php echo 'images/' . $row["applicant_image"]; ?>" class="img">
-                      <img id="blah" style="border-radius:3px;color:white; margin-top:10px;object-fit:cover;width:250px; height:150px;" src="#" class="img">
+                      <img id="" style="border-radius:3px;color:white; margin-top:10px;object-fit:cover;width:250px; height:150px;" src="<?php echo 'images/' . $row["applicant_image"]; ?>" class="img">
                     </form>
                   </div>
                 </div>

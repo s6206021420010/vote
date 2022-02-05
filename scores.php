@@ -3,9 +3,18 @@ session_start();
 $fn = $_SESSION['fn'];
 $img = $_SESSION['image'];
 $user_id = $_SESSION['user_id'];
+$sr = 1;
 include "navbar.php";
 include "header.php"; ?>
+<style>
+  #search {
+    display: none;
+  }
 
+  #search2 {
+    display: none;
+  }
+</style>
 
 <html>
 

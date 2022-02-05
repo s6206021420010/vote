@@ -73,9 +73,8 @@
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
 
-      <form id="Search" class="form-inline my-2 my-lg-0" method="get" action="" <?php if ($sr == "1") {
-                                                                                  echo "hidden";
-                                                                                } ?>>
+      <form id="Search" class="form-inline my-2 my-lg-0" method="get" action="" <?php if ($sr == "1") {echo "hidden";} ?>  
+      <input type="text">                                                                          
         <input class="form-control mr-sm-2" type="text" name="txt_search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" style="
       background: #ffffff00;

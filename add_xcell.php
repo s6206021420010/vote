@@ -27,7 +27,10 @@ include "header.php"; ?>
     display: none;
   }
 </style>
-  <div class="container" style="position:inherit;left:13%; top:13%;">
+  <div class="container" style="position:inherit; margin-left: 180px;">
+  <div class="row" style="margin-top: 30px;">
+
+  </div>
   <h4 style="color:#565656;">เพิ่มตัวเลือกการโหวต</h4>
   <a href="list.php?event_id=<?php echo $event_id?>&&user_id=<?php echo $user_id ?>" >
 
@@ -78,6 +81,7 @@ include "header.php"; ?>
                   <label >เลือกไฟล์ Excel ที่เพิ่มข้อมูลแล้ว</label>
                       <input style="width:30%;"class="form-control" type="file" name="file"
                       id="file" accept=".xls,.xlsx">
+                   
                   <button style="margin-top:1%;"type="submit" id="submit" name="import"
                       class="btn btn-primary">Import</button>
                   </center>
@@ -96,7 +100,7 @@ $conn = mysqli_connect("localhost","root","","db_product");
 if (mysqli_num_rows($result) > 0)
 {
 ?>
-   <center>
+  <div class="col">
     <table class="table table-striped" style="position:absolute; margin-top:1%;width:90%;">
             <tr style="border-radius:5px;">
                 <th>ชื่อ-นามสกุล</th>
@@ -136,7 +140,8 @@ if (mysqli_num_rows($result) > 0)
     }
 ?>
 
-    </table></center>
+    </table>
+  </div>
 <?php
 }
 else{
