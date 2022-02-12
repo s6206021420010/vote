@@ -53,9 +53,12 @@
     </div>
     </div>
    <div class="row">
-      <div class="col-10">
+      <div class="col-6">
       <input type="submit" class="btn" style="margin-top: 10px;" value="เข้าสู่ระบบ">
       </div>
+      <div class="col-6">
+      <a class="btn" href="logout.php" style="margin-top: 10px;">logout</a>
+    </div>
     </div>
    </form>
  </div>
