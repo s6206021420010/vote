@@ -114,7 +114,7 @@ WHERE event_user.user_id = '1099' AND `event_name` LIKE '$txt_search%'";
 $result = mysqli_query($conn,$sql);
 $row = $result->fetch_assoc();
 
-$sql1 = "SELECT * FROM `event` WHERE `status_event`='Public' AND `event_name` LIKE '$txt_search%';";
+$sql1 = "SELECT * FROM `event` WHERE `status_event`='Public' AND `event_name` LIKE '$txt_search%'";
 $result1 = mysqli_query($conn,$sql1);
 $row1 = $result1->fetch_assoc();
 //$db = new db();
@@ -132,8 +132,8 @@ $row1 = $result1->fetch_assoc();
 
   <div class="container" id="body" >
     <div class="row">
-      <div class="col-2">
-      <h4 style="color:#3d4c53;">รายการเลือกตั้ง</h4>
+      <div class="col-9">
+      <h4 style="color:#3d4c53; width:100%;">รายการเลือกตั้ง</h4>
       </div>
       <div class="col">
       <div class="form-check form-switch">
@@ -215,9 +215,8 @@ $row1 = $result1->fetch_assoc();
             }
             ?>
             <?php $date_now = date("Y-m-d"); ?>
-            <a style="position:absolute; left:35.5%; color:white; background:#28a745;" id="btn_vote_<?php echo $row1["event_id"]; ?>" href="datavote.php?event_id=<?php echo $row1["event_id"]; ?>&user_id=<?php echo $user_id; ?>&date=<?php echo $row1["date_end"]; ?>" class="btn btn_vote">ลงคะแนน</a>
+            <a style="position:absolute; left:35.5%; color:white; background:#28a745;" id="btn_vote_<?php echo $row1["event_id"]; ?>" href="datavote.php?event_id=<?php echo $row1["event_id"]; ?>&user_id=<?php echo $user_id; ?>&date=<?php echo $row1["date_end"]?>" class="btn btn_vote">ลงคะแนน</a>
             <!--  -->
-
           </div>
       <?php
         }
