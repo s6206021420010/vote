@@ -18,7 +18,9 @@ $org = $_SESSION['org'];
 $dep = $_SESSION['dep'];
 $dep2 = $_SESSION['dep2'];
 
-include "navbar0.php"; ?>
+include "navbar0.php"; 
+$txt_search = $_GET["txt_search"];
+?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <style>
   body {
@@ -71,7 +73,7 @@ include "navbar0.php"; ?>
   th {
     border: 9px;
     text-align: left;
-    padding: ;
+ 
   }
 
 
@@ -108,11 +110,11 @@ $sql = "SELECT *
 FROM event_user
 LEFT JOIN event
 ON event_user.event_id = event.event_id
-WHERE event_user.user_id = '1099'";
+WHERE event_user.user_id = '1099' AND `event_name` LIKE '$txt_search%'";
 $result = mysqli_query($conn,$sql);
 $row = $result->fetch_assoc();
 
-$sql1 = "SELECT * FROM `event` WHERE `status_event`='Public'";
+$sql1 = "SELECT * FROM `event` WHERE `status_event`='Public' AND `event_name` LIKE '$txt_search%'";
 $result1 = mysqli_query($conn,$sql1);
 $row1 = $result1->fetch_assoc();
 //$db = new db();
@@ -130,8 +132,8 @@ $row1 = $result1->fetch_assoc();
 
   <div class="container" id="body" >
     <div class="row">
-      <div class="col-2">
-      <h4 style="color:#3d4c53;">รายการเลือกตั้ง</h4>
+      <div class="col-9">
+      <h4 style="color:#3d4c53; width:100%;">รายการเลือกตั้ง</h4>
       </div>
       <div class="col">
       <div class="form-check form-switch">
@@ -139,6 +141,9 @@ $row1 = $result1->fetch_assoc();
       <label class="form-check-label" for="flexSwitchCheckDefault">เลือกรายการที่เกี่ยวข้อง</label>
       </div>
       </div>
+    </div>
+    <div class="row">
+
     </div>
     <div class="row" id="pri" style="display: none;">
       <?php
@@ -167,7 +172,7 @@ $row1 = $result1->fetch_assoc();
             }
             ?>
             <?php $date_now = date("Y-m-d"); ?>
-            <a style="position:absolute; left:35.5%; color:white; background:#28a745;" id="btn_vote_<?php echo $row["event_id"]; ?>" href="datavote.php?event_id=<?php echo $row["event_id"]; ?>&user_id=<?php echo $user_id; ?>" class="btn btn_vote">ลงคะแนน</a>
+            <a style="position:absolute; left:35.5%; color:white; background:#28a745;" id="btn_vote_<?php echo $row["event_id"]; ?>" href="datavote.php?event_id=<?php echo $row["event_id"]; ?>&user_id=<?php echo $user_id; ?>&date=<?php echo $row["date_end"]; ?>" class="btn btn_vote">ลงคะแนน</a>
             <!--  -->
 
           </div>
@@ -210,9 +215,8 @@ $row1 = $result1->fetch_assoc();
             }
             ?>
             <?php $date_now = date("Y-m-d"); ?>
-            <a style="position:absolute; left:35.5%; color:white; background:#28a745;" id="btn_vote_<?php echo $row1["event_id"]; ?>" href="datavote.php?event_id=<?php echo $row1["event_id"]; ?>&user_id=<?php echo $user_id; ?>" class="btn btn_vote">ลงคะแนน</a>
+            <a style="position:absolute; left:35.5%; color:white; background:#28a745;" id="btn_vote_<?php echo $row1["event_id"]; ?>" href="datavote.php?event_id=<?php echo $row1["event_id"]; ?>&user_id=<?php echo $user_id; ?>&date=<?php echo $row1["date_end"]?>" class="btn btn_vote">ลงคะแนน</a>
             <!--  -->
-
           </div>
       <?php
         }

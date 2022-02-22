@@ -5,7 +5,7 @@
 session_start();
 $fn = $_SESSION['fn'];
 $img = $_SESSION['image'];
- $user_id = $_SESSION['user_id'];
+$user_id = $_SESSION['user_id'];
  include "header.php"; include "conn.php";  include "function.php"; include "navbar.php";
 
  if ($_SESSION['login_user'] == "") {
@@ -22,6 +22,7 @@ $img = $_SESSION['image'];
   }
   #search2{
     display: none;
+  
   }
 </style>
 </body>
@@ -33,7 +34,7 @@ $img = $_SESSION['image'];
 
 <?php
 ?>
-  <div class="body" id="body" style="position:absolute; top:13%; left:13%;display: none">
+  <d  iv class="body" id="body" style="position:absolute; top:13%; left:13%;display: none">
     <div class="container">
       <div class="row">
 

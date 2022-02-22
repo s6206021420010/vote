@@ -28,7 +28,7 @@ if (isset($_POST["import"]))
                 if(isset($Row[0])) {
                     $name = mysqli_real_escape_string($conn,$Row[0]);
                 }//ฟิว 1
-
+ 
                 $description = "";//ฟิว 2
                 if(isset($Row[1])) {
                     $description = mysqli_real_escape_string($conn,$Row[1]);
@@ -46,46 +46,14 @@ if (isset($_POST["import"]))
                 if (!empty($name) ||
                     !empty($description) ||
                     !empty($other)) {
-
-                    $query = "insert into user
-                              (name,id_card,number)
-                              values('".$name."',
-                                     '".$description."',
-                                     '".$other."')";
-                    $result = mysqli_query($conn, $query);
-
-
-
-                    if (! empty($result)) {
-                      $type = "success";
-                      $message = "Excel Data Imported into the Database";
-                      echo "<script>";
-                      echo"alert('success Excel Data Imported into the Database');";
-                      echo"window.location ='add_xcell.php';";
-                      echo "</script>";
-
-
-                    } else {
-                        $type = "error";
-                        $message = "Problem in Importing Excel Data";
-                        echo "<script>";
-                        echo"alert('error Problem in Importing Excel Data');";
-                        echo"window.location ='add_xcell.php';";
-                        echo "</script>";
+                    echo $name ; 
+                   ?><br><?php
+                    //echo $query = "UPDATE `user` SET `status`='4' WHERE `id_card`=$name";
+                    //$result = mysqli_query($conn, $query);
                     }
                 }
-             }
-
-         }
-  }
-  else
-  {
-        $type = "error";
-        $message = "Invalid File Type. Upload Excel File.";
-        echo "<script>";
-        echo"alert('error Invalid File Type. Upload Excel File.');";
-        echo"window.location ='add_xcell.php';";
-        echo "</script>";
+}
   }
 }
+
 ?>

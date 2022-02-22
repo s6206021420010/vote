@@ -1,5 +1,6 @@
 <?php
 session_start();
+$sr = 1;
 $fn = $_SESSION['fn'];
 $img = $_SESSION['image'];
 $user_id = $_GET['user_id'];
@@ -8,11 +9,14 @@ include "function.php";
 include "navbar0.php";
 $event_id = $_GET['event_id'];
 $date = $_GET['date'];
+
 $db = new db();
 $result = $db->select("*", "applicant", "event_id = '$event_id'");
 ?>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="container" id="body" style="position:absolute; top:10%; left:12%;display:none;">
-  <h3 style="margin:10px;">ลงคะแนน</h3>
+  <h3 style="margin:10px;">ลงคะแนน</h3> <a href="home0.php" type="button" class="btn btn-danger" style="border-radius: 35px;"><i class="material-icons" style="font-size:10px">navigate_before</i>กลับ </a>
 
   <table class="table " style="width:100%;">
     <tr>
@@ -28,12 +32,20 @@ $result = $db->select("*", "applicant", "event_id = '$event_id'");
       <th scope="col" style="text-align: center;">
         ดูข้อมูล
       </th>
+
       <th scope="col" style="text-align: center;">
-        ลงคะแนน
+        time now
       </th>
+
 
     </tr>
     <?php
+    $sql2 = "SELECT * FROM `event` WHERE `event_id`= $event_id";
+    $result2 = mysqli_query($conn,$sql2);
+    $row2 = $result2->fetch_assoc();
+    date_default_timezone_set('asia/bangkok');
+    $date_now = date("Y-m-d");
+    $time = date("H:i:s");
     if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) { ?>
         <tr>
@@ -42,14 +54,15 @@ $result = $db->select("*", "applicant", "event_id = '$event_id'");
           </td>
           <td style="text-align: center;"><?php echo $row['applicant_name']; ?></td>
           <td style="text-align: center;"><?php echo $row['applicant_number']; ?></td>
-          <td style="text-align: center;"><a style="margin:5px; border-radius:5px;" data-target="#myModal-detail-" <?php echo $row["applicant_id"] ?> data-toggle="modal" class="btn btn-success">ข้อมูล</a></td>
+          <td style="text-align: center;"><a style="margin:5px; border-radius:5px;" data-target="#myModal-detail-<?php echo $row["applicant_id"] ?>" data-toggle="modal" class="btn btn-success">ข้อมูล</a></td>
+       
           <td style="text-align: center;">
             <?php
             $sql = "SELECT * FROM `vote` WHERE user_id='$user_id' and event_id='$event_id'";
             $result1 = mysqli_query($conn, $sql);
 
-            $date_now = date("Y-m-d");
-            if ($date < $date_now) {
+            
+            if ($date >= $date_now && $time <= $row2['time_end']) {
               if ($result1->num_rows > 0) {
                 $row1 = $result1->fetch_assoc()
             ?>
@@ -64,7 +77,7 @@ $result = $db->select("*", "applicant", "event_id = '$event_id'");
             <?php }
             ?>
           </td>
-
+       
           <td style="text-align: center;">
             <!-- <?php
 
@@ -77,13 +90,13 @@ $result = $db->select("*", "applicant", "event_id = '$event_id'");
                   ?> -->
           </td>
         </tr>
-        <div class="modal fade" id="myModal-detail-<?php  ?>" role="dialog">
+        <div class="modal fade" id="myModal-detail-<?php echo $row["applicant_id"] ?>" role="dialog">
           <div class="modal-dialog">
 
             <!-- Modal content-->
             <div class="modal-content" style="color:black;">
               <div class="modal-header">
-                <h4 class="modal-title">เพิ่มข้อมูลผู้สมัคร</h4>
+                <h4 class="modal-title">ข้อมูลผู้สมัคร</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
 
               </div>
@@ -100,9 +113,9 @@ $result = $db->select("*", "applicant", "event_id = '$event_id'");
                     </div>
 
                     <label for="">ชื่อผู้สมัคร</label>
-                    <label name="list" class="form-control input-modal" placeholder="Your name.." required>สุนิสา</label>
+                    <label name="list" class="form-control input-modal" placeholder="Your name.." required><?php echo $row['applicant_name']; ?></label>
                     <label for="">หมายเลข</label>
-                    <label name="number" class="form-control" placeholder="Your number.." required>บีม</label>
+                    <label name="number" class="form-control" placeholder="Your number.." required><?php echo $row['applicant_number']; ?></label>
                   </form>
                 </div>
               </div>

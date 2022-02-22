@@ -55,7 +55,7 @@ if ($_POST) {
               <hr style="width:98%;">
               <div class="col-6">
             <form class="" action="add_user0.php" method="post" enctype="multipart/form-data">
-                  <input type="text" value="3" name="status" id="status" hidden>
+                  <input type="text" value="4" name="status" id="status" hidden>
                   <label  for="">รหัสบัตรประชาชน</label><input id="idcard" maxlength="13" type="text" class="form-control form-control-sm" name="idcard" value="<?php if($_GET){ echo $_GET['id_card']; } ?>" required>
                   <h6 style="color: #f45d5d;"> <?php if($_SESSION){if($_SESSION["stat"] == 1){echo "*รหัสบัตรประชาชนนี้ถูกใช้ไปแล้ว"; }} ?></h6>
                   <label for="">เบอร์โทร</label><input id="phone" type="text" maxlength="10" class="form-control form-control-sm" name="phone" value="<?php if($_GET){ echo $_GET['number']; } ?>" maxlength="10"required>
