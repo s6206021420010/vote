@@ -27,7 +27,7 @@ include "header.php"; ?>
     display: none;
   }
 </style>
-  <div class="container" style="position:inherit;left:13%; top:13%;">
+  <div class="container" style="position:inherit;left:13%; top:13%;padding-top: 70px;">
   <h4 style="color:#565656;">เพิ่มตัวเลือกการโหวต</h4>
   <a href="list.php?event_id=<?php echo $event_id?>&&user_id=<?php echo $user_id ?>" >
 
