@@ -9,11 +9,14 @@ include "function.php";
 include "navbar0.php";
 $event_id = $_GET['event_id'];
 $date = $_GET['date'];
+
 $db = new db();
 $result = $db->select("*", "applicant", "event_id = '$event_id'");
 ?>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="container" id="body" style="position:absolute; top:10%; left:12%;display:none;">
-  <h3 style="margin:10px;">ลงคะแนน</h3>
+  <h3 style="margin:10px;">ลงคะแนน</h3> <a href="home0.php" type="button" class="btn btn-danger" style="border-radius: 35px;"><i class="material-icons" style="font-size:10px">navigate_before</i>กลับ </a>
 
   <table class="table " style="width:100%;">
     <tr>
@@ -29,16 +32,20 @@ $result = $db->select("*", "applicant", "event_id = '$event_id'");
       <th scope="col" style="text-align: center;">
         ดูข้อมูล
       </th>
+
       <th scope="col" style="text-align: center;">
-        วันสิ้นสุดลงคะแนน
+        time now
       </th>
-      <th scope="col" style="text-align: center;">
-        ลงคะแนน
-      </th>
+
 
     </tr>
     <?php
+    $sql2 = "SELECT * FROM `event` WHERE `event_id`= $event_id";
+    $result2 = mysqli_query($conn,$sql2);
+    $row2 = $result2->fetch_assoc();
+    date_default_timezone_set('asia/bangkok');
     $date_now = date("Y-m-d");
+    $time = date("H:i:s");
     if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) { ?>
         <tr>
@@ -48,14 +55,15 @@ $result = $db->select("*", "applicant", "event_id = '$event_id'");
           <td style="text-align: center;"><?php echo $row['applicant_name']; ?></td>
           <td style="text-align: center;"><?php echo $row['applicant_number']; ?></td>
           <td style="text-align: center;"><a style="margin:5px; border-radius:5px;" data-target="#myModal-detail-<?php echo $row["applicant_id"] ?>" data-toggle="modal" class="btn btn-success">ข้อมูล</a></td>
-          <td><?php echo $_GET['date'];?> </td>
+       
           <td style="text-align: center;">
             <?php
             $sql = "SELECT * FROM `vote` WHERE user_id='$user_id' and event_id='$event_id'";
             $result1 = mysqli_query($conn, $sql);
 
             
-            if ($date > $date_now) {
+            if ($date >= $date_now) {
+              if( $time <= $row2['time_end']){
               if ($result1->num_rows > 0) {
                 $row1 = $result1->fetch_assoc()
             ?>
@@ -65,12 +73,17 @@ $result = $db->select("*", "applicant", "event_id = '$event_id'");
                 <a style="margin:5px;" href="result.php?user_id=<?php echo $user_id; ?>&event_id=<?php echo $event_id; ?>&applicant_id=<?php echo $row['applicant_id']; ?>&date=<?php echo $date ?>" class="btn btn-success">ลงคะแนน</a>
               <?php
               }
+            }else{?>
+          <a style="margin:5px; border-radius:5px;" class="btn btn-danger">หมดเวลาโหวต</a>
+            <?php
+            }
+            
             } else { ?>
               <a style="margin:5px; border-radius:5px;" class="btn btn-danger">หมดเวลาโหวต</a>
             <?php }
             ?>
           </td>
-
+       
           <td style="text-align: center;">
             <!-- <?php
 

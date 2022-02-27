@@ -18,7 +18,7 @@ $org = $_SESSION['org'];
 $dep = $_SESSION['dep'];
 $dep2 = $_SESSION['dep2'];
 
-include "navbar0.php"; 
+include "navbar0.php";
 $txt_search = $_GET["txt_search"];
 ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
@@ -73,7 +73,7 @@ $txt_search = $_GET["txt_search"];
   th {
     border: 9px;
     text-align: left;
- 
+
   }
 
 
@@ -106,38 +106,25 @@ $txt_search = $_GET["txt_search"];
 <?php
 
 include "function.php";
-$sql = "SELECT *
+ $sql = "SELECT *
 FROM event_user
 LEFT JOIN event
 ON event_user.event_id = event.event_id
-WHERE event_user.user_id = '1099' AND `event_name` LIKE '$txt_search%'";
+WHERE event_user.user_id = $user_id AND `event_name` LIKE '$txt_search%'";
 $result = mysqli_query($conn,$sql);
-$row = $result->fetch_assoc();
-
-$sql1 = "SELECT * FROM `event` WHERE `status_event`='Public' AND `event_name` LIKE '$txt_search%';";
-$result1 = mysqli_query($conn,$sql1);
-$row1 = $result1->fetch_assoc();
-//$db = new db();
-//echo $_GET['txt_search'];
-//print_r($_GET);
-//echo "asdjasidhjasoipdhois";
-//echo "<script>alert('".$_GET['txt_search']."')</script>";
-//$sqll = "SELECT * FROM event WHERE event_name like '%" . $_GET['txt_search'] . "%' AND ( organization_id='$org' OR department_id='$dep' OR department2_id='$dep2') AND event_type='2'";
-
-//$result = $db->select("*", "event", "event_name like '%" . $_GET['txt_search'] . "%' AND (status_event='public' OR user_id='$user_id' OR organization_id='$org' OR department_id='$dep' OR department2_id='$dep2') AND event_type='2'");
-//  print_r($result);
-// echo  $db->select("*","event"," (status_event='public' OR user_id='$user_id' OR organization_id='$org' OR department_id='$dep' OR department2_id='$dep2') AND event_type='2'");
-?>
-<div class="body" style="position:absolute; top:15%; left:13%;display: none" id="body">
+$sql1 = "SELECT * FROM `event` WHERE `status_event`='Public' AND `event_name` LIKE '$txt_search%'";
+  $result1 = mysqli_query($conn,$sql1);
+  ?>
+<div class="body" style="position:absolute; top:15%; left:13%;" id="body">
 
   <div class="container" id="body" >
     <div class="row">
-      <div class="col-2">
-      <h4 style="color:#3d4c53;">รายการเลือกตั้ง</h4>
+      <div class="col-9">
+      <h4 style="color:#3d4c53; width:100%;">รายการเลือกตั้ง</h4>
       </div>
       <div class="col">
       <div class="form-check form-switch">
-      <input class="form-check-input" type="checkbox" onchange="check()" role="switch" value="1" id="flexSwitchCheckDefault">
+      <input class="form-check-input" type="checkbox" onchange="check()" role="switch" value="1" id="flexSwitchCheckDefault">in
       <label class="form-check-label" for="flexSwitchCheckDefault">เลือกรายการที่เกี่ยวข้อง</label>
       </div>
       </div>
@@ -145,9 +132,10 @@ $row1 = $result1->fetch_assoc();
     <div class="row">
 
     </div>
-    <div class="row" id="pri" style="display: none;">
+    <div class="row" id="pri" style="">
       <?php
       if ($result->num_rows > 0) {
+
         while ($row = $result->fetch_assoc()) {
       ?>
           <div class="card col-3" id="card" onmouseover="setblurCard(<?php echo $row['event_id']; ?>);" onmouseout="removeblurCard(<?php echo $row['event_id']; ?>)" style="border-radius:5px;background:#ffffff;height:220px; width:1067px;">
@@ -179,7 +167,7 @@ $row1 = $result1->fetch_assoc();
       <?php
         }
       } else {
-        echo "<h4>ไม่พบข้อมูล</h4>";
+        // echo "<h4>ไม่พบข้อมูล</h4>";
       }
       ?>
     </div>
@@ -190,6 +178,7 @@ $row1 = $result1->fetch_assoc();
   <div class="container" id="body" >
     <div class="row" id="pub">
       <?php
+
       if ($result1->num_rows > 0) {
         while ($row1 = $result1->fetch_assoc()) {
       ?>
@@ -215,17 +204,16 @@ $row1 = $result1->fetch_assoc();
             }
             ?>
             <?php $date_now = date("Y-m-d"); ?>
-            <a style="position:absolute; left:35.5%; color:white; background:#28a745;" id="btn_vote_<?php echo $row1["event_id"]; ?>" href="datavote.php?event_id=<?php echo $row1["event_id"]; ?>&user_id=<?php echo $user_id; ?>&date=<?php echo $row1["date_end"]; ?>" class="btn btn_vote">ลงคะแนน</a>
+            <a style="position:absolute; left:35.5%; color:white; background:#28a745;" id="btn_vote_<?php echo $row1["event_id"]; ?>" href="datavote.php?event_id=<?php echo $row1["event_id"]; ?>&user_id=<?php echo $user_id; ?>&date=<?php echo $row1["date_end"]?>" class="btn btn_vote">ลงคะแนน</a>
             <!--  -->
-
           </div>
       <?php
         }
       } else {
-        echo "<h4>ไม่พบข้อมูล</h4>";
+        // echo "<h4>ไม่พบข้อมูล</h4>";
       }
       ?>
-    </div>
+    </div> 
   </div>
 </div>
 
@@ -260,25 +248,24 @@ $row1 = $result1->fetch_assoc();
 </div>
 <script type="text/javascript">
   function check(){
-    
     if($("#flexSwitchCheckDefault").val() == 1){
-      $("#pub").fadeOut()
+      $("#pub").fadeOut(19)
       $("#pri").fadeIn()
       $("#flexSwitchCheckDefault").val("0")
     }
     else{
       $("#pub").fadeIn()
-      $("#pri").fadeOut()
+      $("#pri").fadeOut(10)
       $("#flexSwitchCheckDefault").val("1")
     }
-    
   }
   var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
   var yValues = [1, 2, 3, 4, 12];
   var barColors = ["#264653", "#2a9d8f", "#e9c46a", "#f4a261", "#e76f51"];
 
-  new Chart("myChart", {
-    type: "doughnut",
+  new Chart("myChar
+  t", {
+    ype: "doughnut",
     data: {
       labels: xValues,
       datasets: [{

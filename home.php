@@ -79,7 +79,7 @@ include "navbar.php"; ?>
   }
 
   tr:nth-child(even) {
-   
+
   }
 
   .img {

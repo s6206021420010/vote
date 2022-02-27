@@ -20,9 +20,19 @@ session_unset();
     color: white;
     font-size: 24px;
   }
+  .btn-success{
+    color: #8378f7;
+    background: white;
+    border: solid 1px #8378f7;
+  }
+  .btn-success:hover{
+    color: #fff;
+    background: #8378f7;
+    border: solid 1px #8378f7;
+  }
 </style>
 <body>
-  <div class="" style="background-image: linear-gradient(45deg, #be4bdb 5%, #75cefa 95%); width:101%; height:8.5%;position:inherit; top:0px; left:0px;">
+  <div class="" style="background:#8378f7; width:101%; height:8.5%;position:inherit; top:0px; left:0px;">
     <h7>ระบบเลือกตั้งออนไลน์</h7>
   </div>
   <div class="container">
@@ -32,7 +42,7 @@ session_unset();
     <div class="row-12" style="margin-top:10px;">
       <center>
         <div class="card" style="width:50%; margin:13% 0% 13%;">
-          <div class="card-header" style="background-image: linear-gradient(270deg, #fefffe 5%, #38d9a9 95%);">
+          <div class="card-header" style="background:#8378f7; color:white;">
             ลงทะเบียน
           </div>
           <div class="card-body">

@@ -44,7 +44,7 @@ $_SESSION["event_id"] = $_GET["event_id"];
   $sql_user = "SELECT d1.department_name,d2.department2_name,org.organization_name FROM `user` u
               left JOIN organization org ON u.organization_id = org.organization_id
               left JOIN department d1 ON u.department_id = d1.department_id
-              left JOIN department2 d2 on u.department2_id = d2.department2_id 
+              left JOIN department2 d2 on u.department2_id = d2.department2_id
               WHERE u.`user_id` = $user_id";
   $result_user = $conn->query($sql_user);
   $row_user = $result_user->fetch_assoc();
@@ -60,7 +60,7 @@ $_SESSION["event_id"] = $_GET["event_id"];
             <h3>รหัสเลือกตั้ง : <?php echo $row_event['event_id']; ?> </h3>
           </div>
           <div class="col-6 text-end">
-            <button type="button" class="btn btn-warning col-3" value="<?php echo $row_event['event_id']; ?>">แก้ไข</button>
+            <button type="button" class="btn btn-warning col-3" style="background:#E3BF40 ; color:#fff;" value="<?php echo $row_event['event_id']; ?>">แก้ไข</button>
           </div>
         </div>
         <div class="row">
@@ -96,7 +96,7 @@ $_SESSION["event_id"] = $_GET["event_id"];
     </div>
     <h4 style="color:#565656;">จัดการการเลือกตั้ง</h4>
     <button type="button" style="
-          background-color:#FFD700;
+          background-color: #8378f7;
           border-width: 0px;
           padding: 10px 10px;
           color: white;
@@ -107,7 +107,7 @@ $_SESSION["event_id"] = $_GET["event_id"];
     <a href="add_xcell.php?user_id=<?php echo $user_id ?>&&event_id=<?php echo $event_id ?>">
 
       <button type="button" style="
-          background-color:#191970;
+          background-color: #8378f7;
           border-width: 0px;
           padding: 10px 10px;
           color: white;
@@ -118,7 +118,7 @@ $_SESSION["event_id"] = $_GET["event_id"];
     </a>
     <a href="scores.php?user_id=<?php echo $user_id ?>&&event_id=<?php echo $event_id ?>">
     <button type="button" style="
-          background-color:#B03060;
+          background-color: #8378f7;
           border-width: 0px;
           padding: 10px 10px;
           color: white;
@@ -177,7 +177,7 @@ $_SESSION["event_id"] = $_GET["event_id"];
 
     <div class="col-md-12 text-right">
       <button type="button" style="
-          background-color:#06b172;
+          background-color:#C5A7E3;
           border-width: 0px;
           padding: 10px 10px;
           color: white;
@@ -189,11 +189,11 @@ $_SESSION["event_id"] = $_GET["event_id"];
     <table class="table" style="border-radius:5px; color:white;">
       <thead>
         <tr>
-          <th scope="col" style="color:#E6772E;">หมายเลข</th>
-          <th scope="col" style="color:#E6772E;">ชื่อรายการโหวต</th>
-          <th scope="col" style="color:#E6772E;">รูปภาพ</th>
-          <th scope="col" style="color:#E6772E;">แก้ไข</th>
-          <th scope="col" style="color:#E6772E;">ลบ</th>
+          <th scope="col" style="color:#C1B61D;">หมายเลข</th>
+          <th scope="col" style="color:#C1B61D;">ชื่อรายการโหวต</th>
+          <th scope="col" style="color:#C1B61D;">รูปภาพ</th>
+          <th scope="col" style="color:#C1B61D;">แก้ไข</th>
+          <th scope="col" style="color:#C1B61D;">ลบ</th>
         </tr>
       </thead>
       <?php
