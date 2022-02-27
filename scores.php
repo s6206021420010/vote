@@ -108,8 +108,7 @@ include "header.php"; ?>
  }
  </script>
  
-=======
-                    ">ผลการเลือกตั้ง</button>
+                    ผลการเลือกตั้ง</button>
     </a>
 
     <div id="barchart_values" style="width: 900px; height: 300px;"></div>

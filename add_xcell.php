@@ -27,14 +27,10 @@ include "header.php"; ?>
     display: none;
   }
 </style>
-<<<<<<< HEAD
-  <div class="container" style="position:inherit;left:13%; top:13%;padding-top: 70px;">
-=======
   <div class="container" style="position:inherit; margin-left: 180px;">
   <div class="row" style="margin-top: 30px;">
 
   </div>
->>>>>>> 46e4e6fa5941e5cc0a25754b80eadbcc55cf82f4
   <h4 style="color:#565656;">เพิ่มตัวเลือกการโหวต</h4>
   <a href="list.php?event_id=<?php echo $event_id?>&&user_id=<?php echo $user_id ?>" >
 
@@ -50,7 +46,7 @@ include "header.php"; ?>
           </a>
 
                 <a href="add_xcell.php?event_id=<?php echo $event_id?>&&user_id=<?php echo $user_id ?>" >
-          
+
           <button type="button" style="
                     background-color:#191970;
                     border-width: 0px;
@@ -63,7 +59,7 @@ include "header.php"; ?>
           </a>
           </a>
           <a href="scores.php?event_id=<?php echo $event_id?>&&user_id=<?php echo $user_id ?>" >
-          
+
           <button type="button" style="
                     background-color:#B03060;
                     border-width: 0px;
@@ -85,7 +81,7 @@ include "header.php"; ?>
                   <label >เลือกไฟล์ Excel ที่เพิ่มข้อมูลแล้ว</label>
                       <input style="width:30%;"class="form-control" type="file" name="file"
                       id="file" accept=".xls,.xlsx">
-                   
+
                   <button style="margin-top:1%;"type="submit" id="submit" name="import"
                       class="btn btn-primary">Import</button>
                   </center>
@@ -97,7 +93,7 @@ include "header.php"; ?>
 
 <?php
 $conn = mysqli_connect("localhost","root","","db_product");
-   $sqlSelect = "SELECT * FROM user WHERE organization_id=79 and department_id=351 and department2_id=3051 and (status=3 or status=4)
+   $sqlSelect = "SELECT * FROM user WHERE organization_id=$org and department_id=$dep and department2_id=$dep2 and (status=3 or status=4)
 ";
     $result = mysqli_query($conn, $sqlSelect);
 
@@ -112,7 +108,7 @@ if (mysqli_num_rows($result) > 0)
                 <th>เบอร์โทร</th>
                 <th>เพิ่ม</th>
                 <th>ลบ</th>
-                
+
             </tr>
 
 <?php
@@ -123,8 +119,8 @@ if (mysqli_num_rows($result) > 0)
             <td><?php  echo $row['id_card']; ?></td>
             <td><?php  echo $row['number']; ?></td>
             <td><label class="switch" style="margin-left:30px;">
-              <input style=""  id="<?php  echo $userid = $row['user_id']; ?>" 
-              onclick="check(<?php  echo $row['user_id']; ?>)" 
+              <input style=""  id="<?php  echo $userid = $row['user_id']; ?>"
+              onclick="check(<?php  echo $row['user_id']; ?>)"
               type="checkbox"
               <?php
               $sql9 = "SELECT * FROM `event_user` WHERE event_id = $event_id AND user_id = $userid";
@@ -137,7 +133,7 @@ if (mysqli_num_rows($result) > 0)
             </label></td>
             <td><a href="delete_xcell.php?user_id=<?php echo $row["user_id"]; ?>" style="color:#373737;">ลบ</a></td>
               <input type="text" id="event_id" value="<?php echo $event_id; ?>" hidden>
-              
+
         </tr>
 
 <?php
@@ -187,7 +183,7 @@ else{
          data:{id:id,event_id:event_id},
          dataType:"html",
          success: function (html) {
-            
+
          }
        })
 
