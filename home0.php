@@ -213,7 +213,7 @@ $sql1 = "SELECT * FROM `event` WHERE `status_event`='Public' AND `event_name` LI
         // echo "<h4>ไม่พบข้อมูล</h4>";
       }
       ?>
-    </div> 
+    </div>
   </div>
 </div>
 

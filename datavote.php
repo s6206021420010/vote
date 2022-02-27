@@ -55,7 +55,7 @@ $result = $db->select("*", "applicant", "event_id = '$event_id'");
           <td style="text-align: center;"><?php echo $row['applicant_name']; ?></td>
           <td style="text-align: center;"><?php echo $row['applicant_number']; ?></td>
           <td style="text-align: center;"><a style="margin:5px; border-radius:5px;" data-target="#myModal-detail-<?php echo $row["applicant_id"] ?>" data-toggle="modal" class="btn btn-success">ข้อมูล</a></td>
-       
+
           <td style="text-align: center;">
             <?php
             $sql = "SELECT * FROM `vote` WHERE user_id='$user_id' and event_id='$event_id'";
@@ -77,13 +77,13 @@ $result = $db->select("*", "applicant", "event_id = '$event_id'");
           <a style="margin:5px; border-radius:5px;" class="btn btn-danger">หมดเวลาโหวต</a>
             <?php
             }
-            
+
             } else { ?>
               <a style="margin:5px; border-radius:5px;" class="btn btn-danger">หมดเวลาโหวต</a>
             <?php }
             ?>
           </td>
-       
+
           <td style="text-align: center;">
             <!-- <?php
 

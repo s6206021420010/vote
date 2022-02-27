@@ -30,10 +30,14 @@ include "header.php"; ?>
     background-color: #8378f7;
 }
 </style>
+<<<<<<< HEAD
+  <div class="container" style="position:inherit;left:13%; top:13%;padding-top: 70px;">
+=======
   <div class="container" style="position:inherit; margin-left: 180px;">
   <div class="row" style="margin-top: 30px;">
 
   </div>
+>>>>>>> 46e4e6fa5941e5cc0a25754b80eadbcc55cf82f4
   <h4 style="color:#565656;">เพิ่มตัวเลือกการโหวต</h4>
   <a href="list.php?event_id=<?php echo $event_id?>&&user_id=<?php echo $user_id ?>" >
 
