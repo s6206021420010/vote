@@ -64,17 +64,17 @@
 
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-light " style="position:fixed; z-index:2; width:100%; top:0px; background-image: linear-gradient(180deg, #e64980 5%, #ff8787 95%);">
+  <nav class="navbar navbar-expand-lg navbar-light " style="position:fixed; z-index:2; width:100%; top:0px; background:#8378f7;">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <a style="margin-left:50px; color: #ffffff;" class="navbar-brand" href="home0.php?user_id=<?php echo $user_id; ?>"><img style="width:3%; position:fixed; left:15px;" src="images/vote.png" alt="">รายการเลือกตั้ง</a>
+    <a style="margin-left:50px; color: #ffffff;" class="navbar-brand" href="home0.php?user_id=<?php echo $user_id; ?>"><img style="width:3%; position:fixed; left:15px;" src="images/v.png" alt="">รายการเลือกตั้ง</a>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
 
-      <form id="Search" class="form-inline my-2 my-lg-0" method="get" action="" <?php if ($sr == "1") {echo "hidden";} ?>  
-      <input type="text">                                                                          
+      <form id="Search" class="form-inline my-2 my-lg-0" method="get" action="" <?php if ($sr == "1") {echo "hidden";} ?>
+      <input type="text">
         <input class="form-control mr-sm-2" type="text" name="txt_search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" style="
       background: #ffffff00;

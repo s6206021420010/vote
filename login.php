@@ -4,7 +4,6 @@
    session_start();
    if($_SERVER["REQUEST_METHOD"] == "POST") {
       // username and password sent from form
-
       $username = $_POST['username'];
       $password = $conn->real_escape_string($_POST['password']);
 

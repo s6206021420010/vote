@@ -40,41 +40,42 @@ include "header.php"; ?>
     <a href="list.php?event_id=<?php echo $event_id ?>&&user_id=<?php echo $user_id ?>">
 
       <button type="button" style="
-          background-color:#06b172;
+            background-color: #8378f7;
+            border-width: 0px;
+            padding: 10px 10px;
+            color: white;
+            width:18%;
+            border-radius: 6px;
+            margin-bottom:10px;
+            "
+          >รายชื่อผู้สมัคร</button>
+    </a>
+
+    <a href="add_xcell.php?event_id=<?php echo $event_id ?>&&user_id=<?php echo $user_id ?>">
+
+      <button type="button" style="
+            background-color: #8378f7;
+            border-width: 0px;
+            padding: 10px 10px;
+            color: white;
+            width:18%;
+            border-radius: 6px;
+            margin-bottom:10px;
+            "
+                  >รายชื่อผู้มีสิทธิ์เลือกตั้ง</button>
+    </a>
+    <button type="button" style="
+          background-color: #8378f7;
           border-width: 0px;
           padding: 10px 10px;
           color: white;
           width:18%;
           border-radius: 6px;
           margin-bottom:10px;
-          ">รายชื่อผู้สมัคร</button>
-    </a>
-
-    <a href="add_xcell.php?event_id=<?php echo $event_id ?>&&user_id=<?php echo $user_id ?>">
-
-      <button type="button" style="
-                    background-color:#FFD700;
-                    border-width: 0px;
-                    padding: 10px 10px;
-                    color: white;
-                    width:18%;
-                    border-radius: 6px;
-                    margin-bottom:10px;
-                    ">รายชื่อผู้มีสิทธิ์เลือกตั้ง</button>
-    </a>
-    <button type="button" style="
-                    background-color:#191970;
-                    border-width: 0px;
-                    padding: 10px 10px;
-                    color: white;
-                    width:18%;
-                    border-radius: 6px;
-                    margin-bottom:10px;
-<<<<<<< HEAD
-                    " >ผลการเลือกตั้ง</button>
+          " >ผลการเลือกตั้ง</button>
           </a>
         <body>
-            
+
             <div id="barchart_values" style="width: 900px; height: 300px;"></div>
         </body>
 </html>
@@ -86,18 +87,18 @@ include "header.php"; ?>
  var data_val = google.visualization.arrayToDataTable([
 
  ['Date', 'จำนวนโหวต'],
- <?php 
-        $sql = "SELECT v.*, COUNT(v.applicant_id) as vote,  a.applicant_name as aname FROM `vote` v 
+ <?php
+        $sql = "SELECT v.*, COUNT(v.applicant_id) as vote,  a.applicant_name as aname FROM `vote` v
                             LEFT JOIN applicant a ON v.applicant_id = a.applicant_id
                             WHERE v.event_id = '$event_id'
-                            GROUP BY v.applicant_id"; 
+                            GROUP BY v.applicant_id";
                 $result1 = mysqli_query($conn,$sql);
         while ($row = mysqli_fetch_array($result1)){
-           
+
             echo "['".$row['aname']."',".$row['vote']."],";
         }
          ?>
- 
+
  ]);
 
  var options_val = {
@@ -113,7 +114,7 @@ include "header.php"; ?>
 
     <div id="barchart_values" style="width: 900px; height: 300px;"></div>
     <?php
-    $sql = "SELECT v.*, COUNT(v.applicant_id) as vote, a.applicant_name as aname, a.applicant_number as anumber FROM `vote` v 
+    $sql = "SELECT v.*, COUNT(v.applicant_id) as vote, a.applicant_name as aname, a.applicant_number as anumber FROM `vote` v
     LEFT JOIN applicant a ON v.applicant_id = a.applicant_id
     WHERE v.event_id = '$event_id'
     GROUP BY v.applicant_id;";
@@ -141,7 +142,7 @@ include "header.php"; ?>
         var data = google.visualization.arrayToDataTable([
           ['Data', 'จำนวนโหวต'],
           <?php
-          $sql = "SELECT v.*, COUNT(v.applicant_id) as vote, a.applicant_name as aname, a.applicant_number as anumber FROM `vote` v 
+          $sql = "SELECT v.*, COUNT(v.applicant_id) as vote, a.applicant_name as aname, a.applicant_number as anumber FROM `vote` v
         LEFT JOIN applicant a ON v.applicant_id = a.applicant_id
         WHERE v.event_id = '$event_id'
         GROUP BY v.applicant_id;";
@@ -177,7 +178,7 @@ include "header.php"; ?>
 
           ['Date', 'จำนวนโหวต'],
           <?php
-          $sql = "SELECT v.*, COUNT(v.applicant_id) as vote,  a.applicant_name as aname FROM `vote` v 
+          $sql = "SELECT v.*, COUNT(v.applicant_id) as vote,  a.applicant_name as aname FROM `vote` v
                       LEFT JOIN applicant a ON v.applicant_id = a.applicant_id
                       WHERE v.event_id = '$event_id'
                       GROUP BY v.applicant_id";
@@ -194,7 +195,7 @@ include "header.php"; ?>
           chart: {
             title: 'ผลโหวต',
           },
-          bars: 'horizontal' 
+          bars: 'horizontal'
         };
         var chart_val = new google.visualization.ColumnChart(document.getElementById("barchart_values"));
         chart_val.draw(data_val, options_val);

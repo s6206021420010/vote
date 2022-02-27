@@ -23,7 +23,7 @@ LEFT JOIN organization ON user.organization_id = organization.organization_id
       <body style="background-color: #ffffff;">
         <div class="container" id="body" style="position:fixed; left:12%; width:40%; margin-top:4%;">
             <div style="height:40px;"class="row">
-              
+
             </div>
             <div class="row">
               <?php
@@ -42,7 +42,7 @@ LEFT JOIN organization ON user.organization_id = organization.organization_id
                         <img class="form-control" id="img_head" style="width:20%; height:20%"src="images/<?php echo $row['image']; ?>" alt="">
                         <input type="file" class="form-control form-control-sm" name="image" style="margin-top:10px;" value="<?php echo $row['image']; ?>" id="img" >
                         <br>
-                        <input id="btn"type="submit" name="" value="ยืนยัน" class="btn btn-success" >
+                        <input id="btn"type="submit" name="" style="background:#8378f7; border:#8378f7;" value="ยืนยัน" class="btn btn-success" >
             </div>
 
                 </div>
@@ -52,15 +52,15 @@ LEFT JOIN organization ON user.organization_id = organization.organization_id
                     <label for="">Username</label>
                     <input class="form-control" type="text" name="user_name" value="<?php echo $row['user_name']; ?>">
                     <label for="">Password</label> <h6 style="color: red;">*กรอกรหัสผ่านให้ถูกต้องเพื่อแก้ไขข้อมูลส่วนตัว</h6>
-                    <input class="form-control " type="password" name="user_pass" id="pas1" value="">
+                        <input class="form-control " type="password" name="user_pass" id="pas1" value="">
                     <label for="">confirm Password</label>
                     <input class="form-control" type="password" name="" id="pas2" value="" >
-                    <input class="form-control" type="password" name="stat" id="" value="0" hidden>
+                    <input class="form-control" type="password" namyye="stat" id="" value="0" hidden>
                     <input class="form-control" type="password" name="" id="pas3" value="<?php echo $row['user_pass']; ?>"  hidden>
                 </form>
-                
+
                 <?php include('script.php');?>
-                    
+
         <?php  }
           }
           if (isset($_GET["alert"])) {
@@ -70,7 +70,7 @@ LEFT JOIN organization ON user.organization_id = organization.organization_id
               'Successful',
               'success'
                 )</script>";
-               
+
             }
           }
          ?>
@@ -91,9 +91,9 @@ LEFT JOIN organization ON user.organization_id = organization.organization_id
         $("#btn").css("pointer-events","none")
       }
       })
-     
-      
-      
+
+
+
     </script>
     </html>
   </html>

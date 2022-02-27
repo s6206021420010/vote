@@ -17,12 +17,30 @@ $user_id = $_SESSION['user_id'];
 </head>
 <body>
 <style>
+.btn-for{
+  background: #8378f7 ;
+  color: white;
+}
+.btn-far{
+  background: #D6D2FE ;
+  color: white;
+}
+
+.btn-for:hover{
+  background:  white ;
+  color: #8378f7;
+}
+.btn-far:hover{
+  background:white;
+  color:  #D6D2FE ;
+}
+
   #search{
     display: none;
   }
   #search2{
     display: none;
-  
+
   }
 </style>
 </body>
@@ -88,8 +106,8 @@ $user_id = $_SESSION['user_id'];
           <tr>
             <td>
               <textarea class="form-control"style="width:100%; height:50px; margin-top:5px;" name="name" rows="8" cols="80" disabled><?php echo $row["event_detail"]; ?></textarea>
-                <a href="list.php?event_id=<?php echo $row["event_id"]; ?>&user_id=<?php echo $row["user_id"]; ?>" class="btn btn-success" style="width: 49%; height:35px;margin-top:10px;">จัดการ</a>
-                <a href="delete.php?event_id=<?php echo $row["event_id"]; ?>" class="btn btn-danger "style="border-radius: 5px; height:35px; width: 48%;  margin-top: 10px;">ลบ</a><br>
+                <a href="list.php?event_id=<?php echo $row["event_id"]; ?>&user_id=<?php echo $row["user_id"]; ?>" class="btn btn-for" style="width: 49%; height:35px;margin-top:10px;">จัดการ</a>
+                <a href="delete.php?event_id=<?php echo $row["event_id"]; ?>" class="btn btn-far "style="border-radius: 5px; height:35px; width: 48%;  margin-top: 10px;">ลบ</a><br>
                 <!-- <a href="show_evet.php?event_id=<?php echo $row["event_id"]; ?>" class="btn btn-primary "style="border-radius: 5px; height:35px; width: 100%;  margin-top: 10px;">ดูรายละเอียด</a><br> -->
             </td>
           </tr>

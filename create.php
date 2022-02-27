@@ -1,4 +1,4 @@
-<?php
+  <?php
 include "conn.php";
 include "header.php";
 session_start();
@@ -26,11 +26,14 @@ if ($_POST) {
     color: white;
     font-size: 24px;
   }
- 
+  h6{
+    display: none;
+  }
+
 </style>
 
 <body>
-  <div class="" style="background-image: linear-gradient(45deg, #be4bdb 5%, #75cefa 95%); width:101%; height:8.5%;position:inherit; top:0px; left:0px;">
+  <div class="" style="background:#8378f7; width:101%; height:8.5%;position:inherit; top:0px; left:0px;">
     <h7>ระบบเลือกตั้งออนไลน์</h7>
   </div>
   <div class="container">
@@ -40,7 +43,7 @@ if ($_POST) {
     <div class="row-12" style="margin-top:10px;">
 
       <div class="card" style="width:100%; ">
-        <div class="card-header" style="background-image: linear-gradient(270deg, #fefffe 5%, #38d9a9 95%);">
+        <div class="card-header" style="background:#8378f7; color:white; ">
           ลงทะเบียนผู้จัดการการเลือกตั้ง
         </div>
         <div class="card-body">
@@ -50,26 +53,24 @@ if ($_POST) {
                 <h6>กรอกข้อมูลการเลือกตั้ง</h6>
               </div>
             </div>
-         
+
             <div class="row">
               <hr style="width:98%;">
               <div class="col-6">
-            <form class="" action="add_user.php" method="post" enctype="multipart/form-data">
+            <form id="fome"class="" action="" enctype="multipart/form-data">
                   <input type="text" value="1" name="status" id="status" hidden>
-                  <label  for="">รหัสบัตรประชาชน</label><input id="idcard" maxlength="13" type="text" class="form-control form-control-sm" name="idcard" value="<?php if($_GET){ echo $_GET['id_card']; } ?>" required>
-                  <h6 style="color: #f45d5d;"> <?php if($_SESSION){if($_SESSION["stat"] == 1){echo "*รหัสบัตรประชาชนนี้ถูกใช้ไปแล้ว"; }} ?></h6>
-                  <label for="">เบอร์โทร</label><input id="phone" type="text" maxlength="10" class="form-control form-control-sm" name="phone" value="<?php if($_GET){ echo $_GET['number']; } ?>" maxlength="10"required>
-                  <h6 style="color: #f45d5d;"> <?php if($_SESSION){if($_SESSION["stat"] == 3){echo "*เบอร์โทรนี้ถูกใช้ไปแล้ว"; }}?></h6>
+                  <label  for="">รหัสบัตรประชาชน</label><input placeholder="รหัสบัตรประชาชน"  id="idcard" maxlength="13" type="text" class="form-control form-control-sm" name="idcard" value="<?php if($_GET){ echo $_POST['id_card']; } ?>" required>
+                  <h6 style="color: #f45d5d;" id="err_idc"> *รหัสบัตรประชาชนนี้ถูกใช้ไปแล้ว</h6>
+                  <label for="">เบอร์โทร</label><input placeholder="เบอร์โทร" id="phone" type="text" maxlength="10" class="form-control form-control-sm" name="phone" value="<?php if($_GET){ echo $_GET['number']; } ?>" maxlength="10"required>
+                  <h6 style="color: #f45d5d;" id="err_num">*เบอร์โทรนี้ถูกใช้ไปแล้ว</h6>
               </div>
               <div class="col-6">
-                <label for="">ชื่อ - นามสกุล</label><input type="text" class="form-control form-control-sm" name="name" value="<?php if($_GET){ echo $_GET['name']; } ?>"required>
-                <label for="">Email</label><input type="text" class="form-control form-control-sm" name="email" value="<?php if($_GET){ echo $_GET['email']; } ?>"required>
-                <h6 style="color: #f45d5d;"> <?php if($_SESSION){if($_SESSION["stat"] == 2){echo "*อีเมลนี้ถูกใช้ไปแล้ว"; }}?></h6>
+                <label for="">ชื่อ - นามสกุล</label><input placeholder="ชื่อ - นามสกุล" type="text" class="form-control form-control-sm" name="name" value="<?php if($_GET){ echo $_GET['name']; } ?>"required>
+                <label for="">Email</label><input placeholder="Email" type="text" class="form-control form-control-sm" name="email" value="<?php if($_GET){ echo $_GET['email']; } ?>"required>
+                <h6 style="color: #f45d5d;" id="err_em">*อีเมลนี้ถูกใช้ไปแล้ว"</h6>
               </div>
             </div>
-
             <div class="row">
-
               <div class="col-3">
                 <label for="">จังหวัด</label>
                 <select class="form-control" name="provinces" id="provinces">
@@ -89,39 +90,37 @@ if ($_POST) {
               <div class="col-3">
                 <label for="">อำเภอ</label>
                 <select class="form-control" name="amphures" id="amphures"required>
+                  <option value="" hidden>-กรุณาเลือกอำเภอ-</option>
                 </select>
               </div>
               <div class="col-3">
                 <label for="">ตำบล</label>
                 <select class="form-control" name="districts" id="districts"required>
+                  <option value="" hidden>-กรุณาเลือกตำบล-</option>
                 </select>
               </div>
               <div class="col-3">
-                <label for="sel1">รหัสไปรษณีย์:</label> 
-                <input type="text" name="zip_code" id="zip_code" class="form-control"required>
+                <label for="sel1">รหัสไปรษณีย์:</label>
+                <input placeholder="รหัสไปรษณีย์" type="text" name="zip_code" id="zip_code" class="form-control"required>
               </div>
             </div>
             <div class="row">
               <div class="col-4">
-                <label for="">Username</label><input type="text" class="form-control form-control-sm" name="user_name" value="<?php if($_GET){ echo $_GET['user_name']; } ?>">
-                <h6 style="color: #f45d5d;"> <?php if($_SESSION){if($_SESSION["stat"] == 4){echo "*ยูสเซอร์เนมนี้ถูกใช้ไปแล้ว"; }}?></h6>
+                <label for="">Username</label><input placeholder="Username" type="text" class="form-control form-control-sm" name="user_name" value="<?php if($_GET){ echo $_GET['user_name']; } ?>">
+                <h6 style="color: #f45d5d;" id="err_use">*ยูสเซอร์เนมนี้ถูกใช้ไปแล้ว</h6>
               </div>
               <div class="col-4">
-                <label for="">Password</label><input type="password" class="form-control form-control-sm" name="user_pass" value="<?php if($_SESSION){echo $_SESSION["pass"];}?>">
+                <label for="">Password</label><input placeholder="Password" type="password" class="form-control form-control-sm" name="user_pass" value="<?php if($_SESSION){echo $_SESSION["pass"];}?>">
               </div>
               <div class="col-4">
-                <label for="">ยืนยัน Password</label><input type="password" class="form-control form-control-sm" name="" value="<?php if($_SESSION){echo $_SESSION["pass"];}?>">
+                <label for="">ยืนยัน Password</label><input placeholder="ยืนยัน Password" type="password" class="form-control form-control-sm" name="" value="<?php if($_SESSION){echo $_SESSION["pass"];}?>">
               </div>
             </div>
             <div class="row">
               <br>
               <hr style="width:98%;">
               <h6>ข้อมูลองค์กร</h6>
-              <!-- <div class="col">
-                  <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">บริษัท</a>
-                  <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#studen">นักเรียน-นักศึกษา</a>
-                  <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#local">อื่น ๆ / บุคคนทั่วไป</a>
-                </div> -->
+
             </div>
             <div class="row">
               <div class="col-12">
@@ -141,21 +140,15 @@ if ($_POST) {
             </div>
             <div class="row col-12" id="form_data">
               <label for="">ชื่อบริษัท</label>
-              <input type="text" name="b1" id="" value="<?php if($_GET){ echo $_GET['org']; }?>" class="form-control form-control-sm" style="width: 45%;" >
-              <h6 style="color: #f45d5d;"><?php if($_SESSION){if($_SESSION["stat"] == 5){echo " *ชื่อนี้ถูกใช้ไปแล้ว"; }}?></h6>
+              <input placeholder="ชื่อบริษัท" type="text" name="b1" id="" value="<?php if($_GET){ echo $_GET['org']; }?>" class="form-control form-control-sm" style="width: 45%;" >
+              <h6 style="color: #f45d5d;" id="err_org">*ชื่อนี้ถูกใช้ไปแล้ว</h6>
               <label for="">แผนก</label>
-              <input type="text " name="b2" id="" value="<?php if($_GET){ echo $_GET['dep']; } ?>" class="form-control form-control-sm" style="width: 45%;" >
+              <input placeholder="แผนก" type="text " name="b2" id="" value="<?php if($_GET){ echo $_GET['dep']; } ?>" class="form-control form-control-sm" style="width: 45%;" >
               <label for="">สาขา</label>
-              <input type="text" name="b3" id="" value="<?php if($_GET){ echo $_GET['dep2']; } ?>" class="form-control form-control-sm" style="width: 45%;" >
+              <input placeholder="สาขา" type="text" name="b3" id="" value="<?php if($_GET){ echo $_GET['dep2']; } ?>" class="form-control form-control-sm" style="width: 45%;" >
             </div>
             <div class="row" style="margin-top:10px;">
-              <div class="col-2">
-                <label for="">อัพโหลดรูปภาพ</label>
-              </div>
-              <div class="col-5">
-                <input type="file" class="form-control" name="image" value="" required>
-              </div>
-            </div>
+
             <div class="row" style="margin-top:10px;">
               <div class="col-3">
               </div>
@@ -163,7 +156,8 @@ if ($_POST) {
                 <a href="regis_head.php" class="btn btn-danger" style="width:100%;">ยกเลิก</a>
               </div>
               <div class="col-3">
-                <input type="submit" id="display_none" class="btn btn-success" style="width:100%;" name="" value="ลงทะเบียน">
+              <!-- <input type="submit" id="display_none" class="btn btn-success" style="width:100%;" name="" value="ลงทะเบียน"> -->
+                <button type="button" id="display_none" name="button">btn</button>
                 </form>
               </div>
               <div class="col-3">
@@ -182,9 +176,48 @@ if ($_POST) {
 </body>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js">
 </script>
 <script type="text/javascript">
+$("#display_none").click(function(){
+
+  $.ajax({
+    type : 'POST',
+    url : 'add_user.php',
+    dataType:"json",
+    data : $('#fome').serialize(),
+    success : function(res){
+      if (res == "success") {
+        alert("ลงทะเบียนสำเร็จ")
+        window.location="index.php";
+      }
+      $("#err_idc").hide()
+      $("#err_em").hide()
+      $("#err_num").hide()
+      $("#err_use").hide()
+      $("#err_org").hide()
+      res_len = res.length
+      for(i=0;i<res_len;i++){
+        if(res[i] == "idc"){
+          $("#err_idc").show()
+
+        }
+        if(res[i] == "em"){
+          $("#err_em").show()
+        }
+        if(res[i] == "num"){
+          $("#err_num").show()
+        }
+        if(res[i] == "use"){
+          $("#err_use").show()
+        }
+        if(res[i] == "org"){
+          $("#err_org").show()
+        }
+      }
+    }
+  })
+})
+
   $('.changeDepartment').on('change', function() {
     let val = $(this).val();
     let html = '';
@@ -197,7 +230,7 @@ if ($_POST) {
               <input type="text" name="b3" id="" value="" class="form-control form-control-sm" style="width: 45%;" >`;
     } else if (val == 2) {
       html = `
-              
+
               <label for="">โรงเรียน</label> <h6 style="color:#4b9258;" >* กรอกสถานศึกษา(มหาลัย/มัธยม/ประถม ฯลฯ)</h6>
               <input type="text " name="b2" id="" value="" class="form-control form-control-sm" style="width: 45%;" >
               <label for="">ระดับชั้น</label>
@@ -221,7 +254,7 @@ if ($_POST) {
                 <option value="">ประถมศึกษา</option>
                 <option value="">มัธยมศึกษา</option>
                 <option value="">อุดมศึกษา</option>
-                </Select>            
+                </Select>
                 <label for="">ตำบล</label>
                 <Select class="form-control" name="department" style="width:45%" requried>
                 <option value="" selected disabled>กรุณาเลือกระดับชั้น</option>

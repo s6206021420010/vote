@@ -28,7 +28,7 @@ if (isset($_POST["import"]))
                 if(isset($Row[0])) {
                     $name = mysqli_real_escape_string($conn,$Row[0]);
                 }//ฟิว 1
- 
+
                 $description = "";//ฟิว 2
                 if(isset($Row[1])) {
                     $description = mysqli_real_escape_string($conn,$Row[1]);
@@ -46,10 +46,10 @@ if (isset($_POST["import"]))
                 if (!empty($name) ||
                     !empty($description) ||
                     !empty($other)) {
-                    echo $name ; 
-                   ?><br><?php
-                    //echo $query = "UPDATE `user` SET `status`='4' WHERE `id_card`=$name";
-                    //$result = mysqli_query($conn, $query);
+                    echo $name ;
+                    ?>
+                    <br>
+                    <?php
                     }
                 }
 }

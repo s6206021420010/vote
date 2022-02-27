@@ -1,163 +1,272 @@
 <!DOCTYPE html>
-<?php
-error_reporting(0);
-include "header.php";
-include "login.php";
-if (!isset($_SESSION)) {
-  session_start();
-  session_unset();
+<?php include "header.php"; ?>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;1,100;1,200&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <meta charset="utf-8">
+    <title></title>
 
-}
-?>
-<html>
-
-<head>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;1,100;1,200&display=swap" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+  </head>
   <style>
-    body {
-      font-family: 'Prompt', sans-serif;
-    }
-
-    form {
-      border: 0px solid #f1f1f1;
-    }
-
-    input[type=text],
-    input[type=password] {
-      width: 50%;
-      padding: 12px 20px;
-      margin: 8px 0;
-      display: inline-block;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
-    }
-
-    h1 {
-      font-family: 'Prompt', sans-serif;
-      color: #3D4C53;
-    }
-
-    button:hover {
-      opacity: 0.8;
-    }
-
-    .cancelbtn {
-      width: auto;
-      padding: 10px 18px;
-      background-color: #f44336;
-      margin-left: 10px;
-    }
-
-    .imgcontainer {
-      text-align: center;
-      margin: 24px 0 12px 0;
-    }
-
-    img.avatar {
-      width: 10%;
-      border-radius: 80%;
-    }
-
-    .container {
-      padding: 1px;
-      background-image: url(beach.jpg);
-      border-radius: 8px;
-    }
-
-    .containe-end {
-      padding: 16px;
-
-    }
-
-    @media screen and (max-width: 300px) {
-      span.psw {
-        display: block;
-        float: none;
+  body {
+    font-family: 'Prompt', sans-serif;
+  }
+      * {
+        box-sizing: border-box
       }
-
-      .cancelbtn {
+      h6{
+        color: #fff;
+      }
+      .mySlides {
+        display: none
+      }
+      img {
+        vertical-align: middle;
+        display: inherit;
+      }
+      .slideshow-container {
+        max-width: 1000px;
+        position: relative;
+        margin: auto;
+      }
+      /* Next & previous buttons */
+      .prev,
+      .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        width: auto;
+        padding: 16px;
+        margin-top: -22px;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+      }
+      /* Position the "next button" to the right */
+      .next {
+        right: 0;
+        border-radius: 3px 0 0 3px;
+      }
+      /* On hover, add a black background color with a little bit see-through */
+      .prev:hover,
+      .next:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+      /* Caption text */
+      .text {
+        color: #ffffff;
+        font-size: 15px;
+        padding: 8px 12px;
+        position: absolute;
+        bottom: 8px;
         width: 100%;
+        text-align: center;
       }
+      /* Number text (1/3 etc) */
+      .numbertext {
+        color: #ffffff;
+        font-size: 12px;
+        padding: 8px 12px;
+        position: absolute;
+        top: 0;
+      }
+      /* The dots/bullets/indicators */
+      .dot {
+        cursor: pointer;
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #999999;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+      }
+      .active,
+      .dot:hover {
+        background-color: #111111;
+      }
+      /* Fading animation */
+      .fade {
+        -webkit-animation-name: fade;
+        -webkit-animation-duration: 1.5s;
+        animation-name: fade;
+        animation-duration: 1.5s;
+      }
+      @-webkit-keyframes fade {
+        from {
+          opacity: .4
+        }
+        to {
+          opacity: 1
+        }
+      }
+      @keyframes fade {
+        from {
+          opacity: .4
+        }
+        to {
+          opacity: 1
+        }
+      }
+      /* On smaller screens, decrease text size */
+      @media only screen and (max-width: 300px) {
+        .prev,
+        .next,
+        .text {
+          font-size: 11px
+        }
+      }
+      h1{
+        background: #8378f7;
+        border-radius: 40px;
+        padding: 3px;
+        color: white;
+        text-align: center;
+      }
+      .logo{
+        width: 10%;
+        border: #fff;
+        border-width: 8px;
+        padding: 3px;
+        background-color: white;
+        border-radius: 5px;
+      }
+      .link{
+        color:#fff;
+        text-decoration:none;
+        font-size:13px;
+      }
+    </style>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-200"  style="height:90px;  background:#8378f7;">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="images/v.png" class="logo" alt=""></a>
+            <div class="" >
+              <form class="" action="login.php" method="post">
+                <div class="row"style="">
+                  <div class="col">
+                    <input type="text"  class="form-control form-control-sm"  value="" name="username" placeholder="username">
+                  </div>
+                  <div class="col">
+                    <input type="text"  class="form-control form-control-sm"  value="" name="password" placeholder="password">
+                  </div>
+                  <div class="col">
+                    <input type="submit" name="" class="btn"  value="Login" style="color:white; border: solid 1px white;">
+                  </div>
+                </div>
+                <div class="row" style="">
+                  <div class="col-4">
+                    <a href="regis_head.php" class="link">Register</a>
+                  </div>
+                  <div class="col">
+                    <a href="#" class="link">forget password</a>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container" style="margin-top:15px;">
+      <div class="row">
+        <div class="col-5">
+          <h1>ระบบเลือกตั้งออนไลน์</h1>
+        </div>
+      </div>
 
-      /* faloat:right ชิดขวา****************/
+      <div class="row">
+        <div class="col">
+          <div class="slideshow-container">
+      <div class="mySlides fade">
+        <div class="numbertext">1 / 3</div>
+        <img src="images/survey-1594962_1920.jpg" style="width:100%; height:400px; object-fit: cover;">
+        <div class="text">ลงคะแนนแบบOnlineโดยมีความปลอดภัย</div>
+      </div>
+      <div class="mySlides fade">
+        <div class="numbertext">2 / 3</div>
+        <img src="images/elections-gae2545548_1920.jpg" style="width:100%; height:400px; object-fit: cover;">
+        <div class="text">ตรวจสอบผลคะแนนแบบออนไลน์</div>
+      </div>
+      <div class="mySlides fade">
+        <div class="numbertext">3 / 3</div>
+        <img src="images/pexels-negative-space-160107.jpg" style="width:100%; height:400px; object-fit: cover;">
+        <div class="text">ระบบการทำงานที่จะไม่มีความซ้ำซ้อนในระบบ </div>
+      </div>
+      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+    <br>
+    <div style="text-align:center">
+      <span class="dot" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+      <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+  <?php
+  if (isset($_POST['sweet'])) {
+    if ($_POST['sweet'] == 1) {
+      echo "<script>Swal.fire(
+    'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง',
+    'Invalid username or password',
+    'error'
+    )</script>";
+      clearstatcache();
+    } else if ($_POST['sweet'] == 0) {
+      echo "<script>Swal.fire(
+  'ยังไม่ได้รับการยืนยัน',
+  'not confirmed',
+  'error'
+  )</script>";
+      $_POST['sweet'] = 2;
     }
-  </style>
-</head>
+  }
 
-<body>
-  <video style="width:100%; position:absolute;top:0px; z-index:-1;filter: blur(0px);object-fit:cover;height:100%;" autoplay muted loop>
-    <source src="images/Computer - 47158.mp4" type="video/mp4">
-  </video>
-  <div class="container" style="background:white;margin-top:4%;width:65%; height:420px;">
-    <div class="row">
-      <div class="col-6">
-        <img src="images/kmutnb.png" style="width: 65%;margin: 17% 3% 10% 19%" alt="">
-      </div>
-      <div class="col-6 sm-1 lg-1">
-        <h1 style="color:#252727; margin-top:23.5%;">เลือกตั้งออนไลน์</h1>
-        <form action="login.php" method="post">
-          <input style="width:90% ;margin-top:1%;" class="form-control" type="text" placeholder="Enter Username" name="username" required>
-          <input style="width:90%;" class="form-control" type="password" placeholder="Enter Password" name="password" required>
-          <button style="width:20%; margin:3% 0% 3% 0%;" type="submit" class="btn btn-primary">Login</button>
-          <br>
-          <span class="psw" style="color:#252727;">Forgot <a href="#" style="color:#252727;">password?</a></span><a style="width:50%; margin-left:40%;" href="regis_head.php">Register</a><br>
-        </form>
-
-      </div>
-      <?php
-
-      if (isset($_GET['sweet'])) {
-        if ($_GET['sweet'] == 1) {
-          echo "<script>Swal.fire(
-        'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง',
-        'Invalid username or password',
-        'error'
+  if (isset($_SESSION)) {
+    if ($_SESSION["regis"] == 1) {
+      echo "<script>Swal.fire(
+      'ลงทะเบียนสำเร็จ',
+      'Successful',
+      'success'
         )</script>";
-          clearstatcache();
-        } else if ($_GET['sweet'] == 0) {
-          echo "<script>Swal.fire(
-      'ยังไม่ได้รับการยืนยัน',
-      'not confirmed',
-      'error'
-      )</script>";
-          $_GET['sweet'] = 2;
+    }
+    if ($_SESSION["regis"] == "") {
+      echo "<script>Swal.fire(
+    'ว่าง,
+    'Successful',
+    'success'
+    )</script>";
+    }
+  }
+  ?>
+        var slideIndex = 0;
+        showSlides();
+        function showSlides() {
+          var i;
+          var slides = document.getElementsByClassName("mySlides");
+          for(i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+          }
+          slideIndex++;
+          if(slideIndex > slides.length) {
+            slideIndex = 1
+          }
+          slides[slideIndex - 1].style.display = "block";
+          setTimeout(showSlides, 2000); // Change image every 2 seconds
         }
-      }
-
-      if (isset($_SESSION)) {
-        if ($_SESSION["regis"] == 1) {
-          echo "<script>Swal.fire(
-          'ลงทะเบียนสำเร็จ',
-          'Successful',
-          'success'
-            )</script>";
-        }
-        if ($_SESSION["regis"] == "") {
-          echo "<script>Swal.fire(
-        'ว่าง,
-        'Successful',
-        'success'
-        )</script>";
-        }
-      }
-      ?>
-
-    </div>
-    <div class="row">
-      <br>
-      <h6 style="text-align: center;">© 2565 ระบบเลือกตั้งออนไลน์, มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ</h6>
-    </div>
-  </div>
-</body>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="script.js"></script>
-
+      </script>
 </html>
