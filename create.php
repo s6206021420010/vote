@@ -10,7 +10,7 @@ if ($_POST) {
 }
 ?>
 <style media="screen">
-  .btn-danger {
+  .btn-dangerer {
     background: #ff5757;
     border-radius: 30px;
   }
@@ -56,22 +56,23 @@ if ($_POST) {
 
             <div class="row">
               <hr style="width:98%;">
-              <div class="col-6">
-            <form id="fome"class="" action="" enctype="multipart/form-data">
+              <div class="col-12 col-sm-6">
+                <form id="fome"class="" action="" enctype="multipart/form-data">
                   <input type="text" value="1" name="status" id="status" hidden>
                   <label  for="">รหัสบัตรประชาชน</label><input placeholder="รหัสบัตรประชาชน"  id="idcard" maxlength="13" type="text" class="form-control form-control-sm" name="idcard" value="<?php if($_GET){ echo $_POST['id_card']; } ?>" required>
                   <h6 style="color: #f45d5d;" id="err_idc"> *รหัสบัตรประชาชนนี้ถูกใช้ไปแล้ว</h6>
                   <label for="">เบอร์โทร</label><input placeholder="เบอร์โทร" id="phone" type="text" maxlength="10" class="form-control form-control-sm" name="phone" value="<?php if($_GET){ echo $_GET['number']; } ?>" maxlength="10"required>
                   <h6 style="color: #f45d5d;" id="err_num">*เบอร์โทรนี้ถูกใช้ไปแล้ว</h6>
               </div>
-              <div class="col-6">
+              <div class="col-12 col-sm-6">
                 <label for="">ชื่อ - นามสกุล</label><input placeholder="ชื่อ - นามสกุล" type="text" class="form-control form-control-sm" name="name" value="<?php if($_GET){ echo $_GET['name']; } ?>"required>
                 <label for="">Email</label><input placeholder="Email" type="text" class="form-control form-control-sm" name="email" value="<?php if($_GET){ echo $_GET['email']; } ?>"required>
                 <h6 style="color: #f45d5d;" id="err_em">*อีเมลนี้ถูกใช้ไปแล้ว"</h6>
               </div>
             </div>
+            
             <div class="row">
-              <div class="col-3">
+              <div class="col-6 ">
                 <label for="">จังหวัด</label>
                 <select class="form-control" name="provinces" id="provinces">
                   <option value="" selected disabled>-กรุณาเลือกจังหวัด-</option>
@@ -87,35 +88,37 @@ if ($_POST) {
                   ?>
                 </select>
               </div>
-              <div class="col-3">
+              <div class="col-6 ">
                 <label for="">อำเภอ</label>
                 <select class="form-control" name="amphures" id="amphures"required>
                   <option value="" hidden>-กรุณาเลือกอำเภอ-</option>
                 </select>
               </div>
-              <div class="col-3">
+              <div class="col-6 ">
                 <label for="">ตำบล</label>
                 <select class="form-control" name="districts" id="districts"required>
                   <option value="" hidden>-กรุณาเลือกตำบล-</option>
                 </select>
               </div>
-              <div class="col-3">
+              <div class="col-6 ">
                 <label for="sel1">รหัสไปรษณีย์:</label>
                 <input placeholder="รหัสไปรษณีย์" type="text" name="zip_code" id="zip_code" class="form-control"required>
               </div>
             </div>
-            <div class="row">
-              <div class="col-4">
+
+            <div class="row border-top mt-4 pt-3">
+              <div class="col-6 col-sm-6">
                 <label for="">Username</label><input placeholder="Username" type="text" class="form-control form-control-sm" name="user_name" value="<?php if($_GET){ echo $_GET['user_name']; } ?>">
                 <h6 style="color: #f45d5d;" id="err_use">*ยูสเซอร์เนมนี้ถูกใช้ไปแล้ว</h6>
               </div>
-              <div class="col-4">
+              <div class="col-6 col-sm-6">
                 <label for="">Password</label><input placeholder="Password" type="password" class="form-control form-control-sm" name="user_pass" value="<?php if($_SESSION){echo $_SESSION["pass"];}?>">
               </div>
-              <div class="col-4">
+              <div class="col-12 col-sm-12">
                 <label for="">ยืนยัน Password</label><input placeholder="ยืนยัน Password" type="password" class="form-control form-control-sm" name="" value="<?php if($_SESSION){echo $_SESSION["pass"];}?>">
               </div>
             </div>
+
             <div class="row">
               <br>
               <hr style="width:98%;">
@@ -138,32 +141,27 @@ if ($_POST) {
                 </div>
               </div>
             </div>
-            <div class="row col-12" id="form_data">
+
+            <div class="row" id="form_data">
               <label for="">ชื่อบริษัท</label>
-              <input placeholder="ชื่อบริษัท" type="text" name="b1" id="" value="<?php if($_GET){ echo $_GET['org']; }?>" class="form-control form-control-sm" style="width: 45%;" >
+              <input placeholder="ชื่อบริษัท" type="text" name="b1" id="" value="<?php if($_GET){ echo $_GET['org']; }?>" class="form-control form-control-sm">
               <h6 style="color: #f45d5d;" id="err_org">*ชื่อนี้ถูกใช้ไปแล้ว</h6>
               <label for="">แผนก</label>
-              <input placeholder="แผนก" type="text " name="b2" id="" value="<?php if($_GET){ echo $_GET['dep']; } ?>" class="form-control form-control-sm" style="width: 45%;" >
+              <input placeholder="แผนก" type="text " name="b2" id="" value="<?php if($_GET){ echo $_GET['dep']; } ?>" class="form-control form-control-sm">
               <label for="">สาขา</label>
-              <input placeholder="สาขา" type="text" name="b3" id="" value="<?php if($_GET){ echo $_GET['dep2']; } ?>" class="form-control form-control-sm" style="width: 45%;" >
+              <input placeholder="สาขา" type="text" name="b3" id="" value="<?php if($_GET){ echo $_GET['dep2']; } ?>" class="form-control form-control-sm">
             </div>
-            <div class="row" style="margin-top:10px;">
 
-            <div class="row" style="margin-top:10px;">
-              <div class="col-3">
+            <div class="row mt-3">
+              <div class="col-12 col-sm-6  ">
+                <a href="regis_head.php" class="btn btn-danger w-100 rounded-pill"  >ยกเลิก</a>
               </div>
-              <div class="col-3">
-                <a href="regis_head.php" class="btn btn-danger" style="width:100%;">ยกเลิก</a>
-              </div>
-              <div class="col-3">
-              <!-- <input type="submit" id="display_none" class="btn btn-success" style="width:100%;" name="" value="ลงทะเบียน"> -->
+              <div class="col-12 mt-2 mt-sm-0 col-sm-6 ">
                 <button type="button" id="display_none" class="btn btn-success rounded-pill w-100 " name="button">btn</button>
                 </form>
               </div>
-              <div class="col-3">
-              </div>
             </div>
-          </div>
+
         </div>
       </div>
     </div>

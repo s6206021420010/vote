@@ -10,7 +10,7 @@ session_unset();
     background:#ff5757;
     border-radius:30px;
   }
-  .btn-success{
+  .btn-successi{
     background:#38d9a9;
     border:#38d9a9 ;
     border-radius:30px;
@@ -36,18 +36,22 @@ session_unset();
     <h7>ระบบเลือกตั้งออนไลน์</h7>
   </div>
   <div class="container">
-    <div class="row-12" style="">
+    <div class="" style="">
       <a href="index.php" class="btn btn-danger" style="margin-top:5px;">กลับ</a>
     </div>
-    <div class="row-12" style="margin-top:10px;">
+    <div class="row" style="margin-top:10px;">
       <center>
         <div class="card" style="width:50%; margin:13% 0% 13%;">
           <div class="card-header" style="background:#8378f7; color:white;">
             ลงทะเบียน
           </div>
-          <div class="card-body">
-            <a href="create.php" class="btn btn-success" style="">ผู้สร้างการเลือกตั้ง</a>
-             <a href="user.php" class="btn btn-success">ผู้ลงคะแนน</a>
+          <div class="row card-body">
+            <div class="col-12 col-lg-6">
+              <a href="create.php" class="btn btn-success w-100 rounded-pill" style="">ผู้สร้างการเลือกตั้ง</a>
+            </div>
+            <div class="col-12 mt-2 mt-lg-0 col-lg-6 ">
+              <a href="user.php" class="btn btn-success w-100 rounded-pill" >ผู้ลงคะแนน</a>  
+            </div>
           </div>
         </div>
       </center>

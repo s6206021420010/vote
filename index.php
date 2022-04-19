@@ -148,20 +148,20 @@
       }
     </style>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-200"  style="height:90px;  background:#8378f7;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-200 h-25"  style=" background:#8378f7;">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="images/v.png" class="logo" alt=""></a>
-            <div class="" >
+        <a class="navbar-brand d-none" href="#"><img src="images/v.png" class="logo" alt=""></a>
+                
               <form class="" action="login.php" method="post">
-                <div class="row"style="">
-                  <div class="col">
+                <div class="row "style="">
+                  <div class="col-12 mb-2 mb-sm-0 col-sm-4">
                     <input type="text"  class="form-control form-control-sm"  value="" name="username" placeholder="username">
                   </div>
-                  <div class="col">
+                  <div class="col-12 mb-2 mb-sm-0 col-sm-4">
                     <input type="text"  class="form-control form-control-sm"  value="" name="password" placeholder="password">
                   </div>
-                  <div class="col">
-                    <input type="submit" name="" class="btn"  value="Login" style="color:white; border: solid 1px white;">
+                  <div class="col-12 col-sm-4">
+                    <input type="submit" name="" class="btn w-100 w-sm-"  value="Login" style="color:white; border: solid 1px white;">
                   </div>
                 </div>
                 <div class="row" style="">
@@ -173,45 +173,47 @@
                   </div>
                 </div>
               </form>
-            </div>
+            
           </ul>
         </div>
       </div>
     </nav>
     <div class="container" style="margin-top:15px;">
+
       <div class="row">
-        <div class="col-5">
-          <h1>ระบบเลือกตั้งออนไลน์</h1>
+        <div class="col-12 col-sm-5 d-lg-none">
+          <h1 class="">ระบบเลือกตั้งออนไลน์</h1>
         </div>
       </div>
 
       <div class="row">
-        <div class="col">
+        <div class="col-12">
           <div class="slideshow-container">
-      <div class="mySlides fade">
-        <div class="numbertext">1 / 3</div>
-        <img src="images/survey-1594962_1920.jpg" style="width:100%; height:400px; object-fit: cover;">
-        <div class="text">ลงคะแนนแบบOnlineโดยมีความปลอดภัย</div>
-      </div>
-      <div class="mySlides fade">
-        <div class="numbertext">2 / 3</div>
-        <img src="images/elections-gae2545548_1920.jpg" style="width:100%; height:400px; object-fit: cover;">
-        <div class="text">ตรวจสอบผลคะแนนแบบออนไลน์</div>
-      </div>
-      <div class="mySlides fade">
-        <div class="numbertext">3 / 3</div>
-        <img src="images/pexels-negative-space-160107.jpg" style="width:100%; height:400px; object-fit: cover;">
-        <div class="text">ระบบการทำงานที่จะไม่มีความซ้ำซ้อนในระบบ </div>
-      </div>
-      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-      <a class="next" onclick="plusSlides(1)">&#10095;</a>
-    </div>
-    <br>
-    <div style="text-align:center">
-      <span class="dot" onclick="currentSlide(1)"></span>
-      <span class="dot" onclick="currentSlide(2)"></span>
-      <span class="dot" onclick="currentSlide(3)"></span>
-    </div>
+            <div class="mySlides fade">
+              <div class="numbertext">1 / 3</div>
+              <img src="images/survey-1594962_1920.jpg" style="width:100%; height:400px; object-fit: cover;">
+              <div class="text">ลงคะแนนแบบOnlineโดยมีความปลอดภัย</div>
+            </div>
+            <div class="mySlides fade">
+              <div class="numbertext">2 / 3</div>
+              <img src="images/elections-gae2545548_1920.jpg" style="width:100%; height:400px; object-fit: cover;">
+              <div class="text">ตรวจสอบผลคะแนนแบบออนไลน์</div>
+            </div>
+            <div class="mySlides fade">
+              <div class="numbertext">3 / 3</div>
+              <img src="images/pexels-negative-space-160107.jpg" style="width:100%; height:400px; object-fit: cover;">
+              <div class="text">ระบบการทำงานที่จะไม่มีความซ้ำซ้อนในระบบ </div>
+            </div>
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+          </div>
+
+          <br>
+          <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+          </div>
         </div>
       </div>
     </div>
