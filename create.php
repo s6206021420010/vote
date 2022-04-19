@@ -4,7 +4,7 @@ include "header.php";
 session_start();
 
 if ($_POST) {
-  echo $name_borisut = $_POST["name_borisut"];
+  echo $name_borisut = $_POST["bvbvbvbvb"];
   echo $panax_borisut = $_POST["panax_borisut"];
   echo $saka_borisut = $_POST["saka_borisut"];
 }
@@ -15,7 +15,7 @@ if ($_POST) {
     border-radius: 30px;
   }
 
-  .btn-success {
+  .btn-successi {
     background: #38d9a9;
     border: #38d9a9;
     border-radius: 30px;
@@ -157,7 +157,7 @@ if ($_POST) {
               </div>
               <div class="col-3">
               <!-- <input type="submit" id="display_none" class="btn btn-success" style="width:100%;" name="" value="ลงทะเบียน"> -->
-                <button type="button" id="display_none" name="button">btn</button>
+                <button type="button" id="display_none" class="btn btn-success rounded-pill w-100 " name="button">btn</button>
                 </form>
               </div>
               <div class="col-3">
