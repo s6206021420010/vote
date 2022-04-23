@@ -150,8 +150,7 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-200 h-25"  style=" background:#8378f7;">
       <div class="container-fluid">
-        <a class="navbar-brand d-none" href="#"><img src="images/v.png" class="logo" alt=""></a>
-                
+        <a class="navbar-brand d-none d-lg-inline" href="#"><img src="images/v.png" class="logo" alt=""></a>  
               <form class="" action="login.php" method="post">
                 <div class="row "style="">
                   <div class="col-12 mb-2 mb-sm-0 col-sm-4">
@@ -164,7 +163,7 @@
                     <input type="submit" name="" class="btn w-100 w-sm-"  value="Login" style="color:white; border: solid 1px white;">
                   </div>
                 </div>
-                <div class="row" style="">
+                <div class="row">
                   <div class="col-4">
                     <a href="regis_head.php" class="link">Register</a>
                   </div>

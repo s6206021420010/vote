@@ -33,7 +33,7 @@ if ($_POST) {
 </style>
 
 <body>
-  <div class="" style="background-image: linear-gradient(45deg, #be4bdb 5%, #75cefa 95%); width:101%; height:8.5%;position:inherit; top:0px; left:0px;">
+  <div class="" style="background:#8378f7; width:101%; height:8.5%;position:inherit; top:0px; left:0px;">
     <h7>ระบบเลือกตั้งออนไลน์</h7>
   </div>
   <div class="container">
@@ -43,7 +43,7 @@ if ($_POST) {
     <div class="row-12" style="margin-top:10px;">
 
       <div class="card" style="width:100%; ">
-        <div class="card-header" style="background-image: linear-gradient(270deg, #fefffe 5%, #38d9a9 95%);">
+        <div class="card-header text-light" style="background:#8378f7;">
           ลงทะเบียนผู้จัดการการเลือกตั้ง
         </div>
         <div class="card-body">

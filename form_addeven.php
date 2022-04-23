@@ -20,7 +20,14 @@
 
   ?>
 </head>
-
+<style>
+  #search{
+    display: none;
+  }
+  #search2{
+    display: none;
+  }
+</style>
 <body>
   <div class="container" id="body" style="position:absolute; top:13%; left:12%; display:none;">
 

@@ -10,6 +10,14 @@ include "header.php";
 $sql = "SELECT * FROM `event` WHERE status_event = 'Public' OR user_id =  $user_id";
 $result = mysqli_query($conn,$sql);
 ?>
+<style>
+  #search{
+    display: none;
+  }
+  #search2{
+    display: none;
+  }
+</style>
 <div class="container">
     <div class="row" style="height: 56px; background:red;">
 

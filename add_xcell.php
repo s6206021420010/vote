@@ -61,18 +61,7 @@ include "header.php"; ?>
                 " >รายชื่อผู้มีสิทธิ์เลือกตั้ง</button>
           </a>
           </a>
-          <a href="scores.php?event_id=<?php echo $event_id?>&&user_id=<?php echo $user_id ?>" >
-
-          <button type="button" style="
-                background-color: #8378f7;
-                border-width: 0px;
-                padding: 10px 10px;
-                color: white;
-                width:18%;
-                border-radius: 6px;
-                margin-bottom:10px;
-                ">ผลการเลือกตั้ง</button>
-</a>
+          
           <hr>
     <i class=”fa fa-dashboard fa-2x”></i>
   <div class="row">

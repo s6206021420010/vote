@@ -29,7 +29,10 @@ if ($_POST) {
   h6{
     display: none;
   }
-
+  #display_none{
+    pointer-events: none;
+    
+  }
 </style>
 
 <body>
@@ -61,12 +64,44 @@ if ($_POST) {
                   <input type="text" value="1" name="status" id="status" hidden>
                   <label  for="">รหัสบัตรประชาชน</label><input placeholder="รหัสบัตรประชาชน"  id="idcard" maxlength="13" type="text" class="form-control form-control-sm" name="idcard" value="<?php if($_GET){ echo $_POST['id_card']; } ?>" required>
                   <h6 style="color: #f45d5d;" id="err_idc"> *รหัสบัตรประชาชนนี้ถูกใช้ไปแล้ว</h6>
-                  <label for="">เบอร์โทร</label><input placeholder="เบอร์โทร" id="phone" type="text" maxlength="10" class="form-control form-control-sm" name="phone" value="<?php if($_GET){ echo $_GET['number']; } ?>" maxlength="10"required>
+                  <!-- otp -->
+                  <label for="">เบอร์โทร</label>
+                  <div class="input-group mb-3">
+                    <input type="text" placeholder="เบอร์โทร" id="phone"  name="phone" value="<?php if($_GET){ echo $_GET['number']; } ?>" maxlength="10"required class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <button class="btn btn-outline-secondary" id="s_otp" data-toggle="modal" data-target="#setotp" type="button" id="button-addon2">ส่ง OTP</button>
+                  </div>
                   <h6 style="color: #f45d5d;" id="err_num">*เบอร์โทรนี้ถูกใช้ไปแล้ว</h6>
+                  <!-- Modal -->
+                  <div class="modal fade" id="setotp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">ยืนยันตัวตนด้วย OTP</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          ยืนยันตัวตน
+                          <div class="input-group mb-3">
+                            <input type="text" id="otp_stay" > 
+                            <input type="text" class="form-control" value="" id="phone_mod" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2" hidden>
+                            <input type="text" class="form-control" value="" id="phone_mod_otp" placeholder="รหัส otp" aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <button class="btn btn-outline-secondary" id="s_otp_mod" type="button" >รับ OTP</button>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" id="sub" class="btn btn-primary">ยืนยัน</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- otp -->
               </div>
               <div class="col-12 col-sm-6">
                 <label for="">ชื่อ - นามสกุล</label><input placeholder="ชื่อ - นามสกุล" type="text" class="form-control form-control-sm" name="name" value="<?php if($_GET){ echo $_GET['name']; } ?>"required>
-                <label for="">Email</label><input placeholder="Email" type="text" class="form-control form-control-sm" name="email" value="<?php if($_GET){ echo $_GET['email']; } ?>"required>
+                <label for="">Email</label><input  placeholder="Email" type="text" class="form-control form-control-sm" name="email" value="<?php if($_GET){ echo $_GET['email']; } ?>"required>
                 <h6 style="color: #f45d5d;" id="err_em">*อีเมลนี้ถูกใช้ไปแล้ว"</h6>
               </div>
             </div>
@@ -74,7 +109,7 @@ if ($_POST) {
             <div class="row">
               <div class="col-6 ">
                 <label for="">จังหวัด</label>
-                <select class="form-control" name="provinces" id="provinces">
+                <select class="form-control" name="provinces" id="provinces" require>
                   <option value="" selected disabled>-กรุณาเลือกจังหวัด-</option>
                   <?php
                   $sql = "SELECT * FROM `provinces` WHERE 1";
@@ -108,14 +143,14 @@ if ($_POST) {
 
             <div class="row border-top mt-4 pt-3">
               <div class="col-6 col-sm-6">
-                <label for="">Username</label><input placeholder="Username" type="text" class="form-control form-control-sm" name="user_name" value="<?php if($_GET){ echo $_GET['user_name']; } ?>">
+                <label for="">Username</label><input require placeholder="Username" type="text" class="form-control form-control-sm" name="user_name" value="<?php if($_GET){ echo $_GET['user_name']; } ?>">
                 <h6 style="color: #f45d5d;" id="err_use">*ยูสเซอร์เนมนี้ถูกใช้ไปแล้ว</h6>
               </div>
               <div class="col-6 col-sm-6">
-                <label for="">Password</label><input placeholder="Password" type="password" class="form-control form-control-sm" name="user_pass" value="<?php if($_SESSION){echo $_SESSION["pass"];}?>">
+                <label for="">Password</label><input  require placeholder="Password" type="password" class="form-control form-control-sm" name="user_pass" value="<?php if($_SESSION){echo $_SESSION["pass"];}?>">
               </div>
               <div class="col-12 col-sm-12">
-                <label for="">ยืนยัน Password</label><input placeholder="ยืนยัน Password" type="password" class="form-control form-control-sm" name="" value="<?php if($_SESSION){echo $_SESSION["pass"];}?>">
+                <label for="">ยืนยัน Password</label><input require placeholder="ยืนยัน Password" type="password" class="form-control form-control-sm" name="" value="<?php if($_SESSION){echo $_SESSION["pass"];}?>">
               </div>
             </div>
 
@@ -144,12 +179,12 @@ if ($_POST) {
 
             <div class="row" id="form_data">
               <label for="">ชื่อบริษัท</label>
-              <input placeholder="ชื่อบริษัท" type="text" name="b1" id="" value="<?php if($_GET){ echo $_GET['org']; }?>" class="form-control form-control-sm">
+              <input placeholder="ชื่อบริษัท" type="text" name="b1" id="" value="<?php if($_GET){ echo $_GET['org']; }?>" class="form-control form-control-sm" require>
               <h6 style="color: #f45d5d;" id="err_org">*ชื่อนี้ถูกใช้ไปแล้ว</h6>
               <label for="">แผนก</label>
-              <input placeholder="แผนก" type="text " name="b2" id="" value="<?php if($_GET){ echo $_GET['dep']; } ?>" class="form-control form-control-sm">
+              <input placeholder="แผนก" type="text " name="b2" id="" value="<?php if($_GET){ echo $_GET['dep']; } ?>" class="form-control form-control-sm" require>
               <label for="">สาขา</label>
-              <input placeholder="สาขา" type="text" name="b3" id="" value="<?php if($_GET){ echo $_GET['dep2']; } ?>" class="form-control form-control-sm">
+              <input placeholder="สาขา" type="text" name="b3" id="" value="<?php if($_GET){ echo $_GET['dep2']; } ?>" class="form-control form-control-sm" require>
             </div>
 
             <div class="row mt-3">
@@ -157,7 +192,7 @@ if ($_POST) {
                 <a href="regis_head.php" class="btn btn-danger w-100 rounded-pill"  >ยกเลิก</a>
               </div>
               <div class="col-12 mt-2 mt-sm-0 col-sm-6 ">
-                <button type="button" id="display_none" class="btn btn-success rounded-pill w-100 " name="button">btn</button>
+                <a type="button" id="display_none" class="btn btn-success rounded-pill w-100 " name="button">ลงทะเบียน</a>
                 </form>
               </div>
             </div>
@@ -176,6 +211,57 @@ if ($_POST) {
 
 </script>
 <script type="text/javascript">
+  // num
+  $("#idcard").on("keypress" , function (e) {
+        var code = e.keyCode ? e.keyCode : e.which;
+        if(code > 57){
+            return false;
+        }else if(code < 48 && code != 8){
+            return false;
+        }
+    });
+  
+  $("#phone").on("keypress" , function (e) {
+        var code = e.keyCode ? e.keyCode : e.which;
+        if(code > 57){
+            return false;
+        }else if(code < 48 && code != 8){
+            return false;
+        }
+    });
+  // num
+  // otp
+  $("#sub").click(function(){
+    var otp1 = $("#phone_mod_otp").val()
+    var otp2 = $("#otp_stay").val()
+    if (otp1==otp2) {
+      $("#display_none").css("pointer-events","auto")
+      $('#setotp').modal('toggle')
+    }
+  })
+  $("#s_otp").click(function(){
+    var phone = $("#phone").val()
+    $("#phone_mod").val(phone)
+    
+  })
+  
+  $("#s_otp_mod").click(function(){
+    var phone_mod = $("#phone_mod").val()
+    
+    $.ajax({
+      type: "POST",
+      url: "sms.php",
+      data: {
+        phone: phone_mod
+      },
+      success: function(data) {
+        $("#otp_stay").val(data)
+       
+      }
+    })
+  })
+  // otp
+
 $("#display_none").click(function(){
 
   $.ajax({

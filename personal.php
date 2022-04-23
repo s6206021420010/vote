@@ -13,6 +13,14 @@ LEFT JOIN organization ON user.organization_id = organization.organization_id
 ","user_id = '$user_id'ORDER BY user.organization_id");
 
 ?>
+<style>
+  #search{
+    display: none;
+  }
+  #search2{
+    display: none;
+  }
+</style>
   <!DOCTYPE html>
   <html lang="en" dir="ltr">
     <head>
@@ -21,44 +29,46 @@ LEFT JOIN organization ON user.organization_id = organization.organization_id
     </head>
 
       <body style="background-color: #ffffff;">
-        <div class="container" id="body" style="position:fixed; left:12%; width:40%; margin-top:4%;">
-            <div style="height:40px;"class="row">
-
-            </div>
+        <div class="container w-75" id="body" style="position:fixed; left:170px;  margin-top:70px;">
             <div class="row">
               <?php
               if ($result->num_rows > 0) {
                   while($row = $result->fetch_assoc()) {?>
-                      <h3 style="margin">ข้อมูลส่วนตัว</h3>
-                      <hr style="padding: 0px;  width: 98%;">
+                      <h3>ข้อมูลส่วนตัว</h3>
+                      <hr>
+                <div class="col">
                       <form class="" action="per_insert.php" method="post" enctype="multipart/form-data">
                         <label for="" >ชื่อ</label>
                         <input class="form-control" type="text" name="name" value="<?php echo $row['name']; ?>" required>
                         <label for="">บัตรประชาชน</label>
-                        <input class="form-control" type="text" name="id_card" value="<?php echo $row['id_card']; ?>" maxlength="13" required>
+                        <input class="form-control" type="text" name="id_card" value="<?php echo $row['id_card']; ?>" maxlength="13" required >
                         <label for="">เบอร์โทร</label>
-                        <input class="form-control" type="text" name="number" value="<?php echo $row['number']; ?>" maxlength="10" required>
+                        <input class="form-control" type="text" name="number" value="<?php echo $row['number']; ?>" maxlength="10" required  >
                         <label for="">รูป</label>
                         <img class="form-control" id="img_head" style="width:20%; height:20%"src="images/<?php echo $row['image']; ?>" alt="">
                         <input type="file" class="form-control form-control-sm" name="image" style="margin-top:10px;" value="<?php echo $row['image']; ?>" id="img" >
                         <br>
-                        <input id="btn"type="submit" name="" style="background:#8378f7; border:#8378f7;" value="ยืนยัน" class="btn btn-success" >
-            </div>
-
+                        
                 </div>
-                <div class="container" id="body" style="position:fixed; right:9%;top:26.0%; width:40%;">
+                <div class="col" id="body">
                     <label for="">email</label>
-                    <input class="form-control" type="text" name="email" value="<?php echo $row['email']; ?>">
-                    <label for="">Username</label>
-                    <input class="form-control" type="text" name="user_name" value="<?php echo $row['user_name']; ?>">
-                    <label for="">Password</label> <h6 style="color: red;">*กรอกรหัสผ่านให้ถูกต้องเพื่อแก้ไขข้อมูลส่วนตัว</h6>
-                        <input class="form-control " type="password" name="user_pass" id="pas1" value="">
-                    <label for="">confirm Password</label>
-                    <input class="form-control" type="password" name="" id="pas2" value="" >
-                    <input class="form-control" type="password" namyye="stat" id="" value="0" hidden>
-                    <input class="form-control" type="password" name="" id="pas3" value="<?php echo $row['user_pass']; ?>"  hidden>
-                </form>
+                    <input class="form-control" type="text" name="email" value="<?php echo $row['email']; ?>" >
 
+                    <label for="">Username</label>
+                    <input class="form-control" type="text" name="user_name" value="<?php echo $row['user_name']; ?>" >
+                    <div class="mt-2 rounded  p-2" style="background:#ffc107;">
+                      <label for="">Password</label> <h6 style="color: red;">*กรอกรหัสผ่านให้ถูกต้องเพื่อแก้ไขข้อมูลส่วนตัว</h6>
+                          <input class="form-control " type="password" name="user_pass" id="pas1" value="">
+                      <label for="">confirm Password</label>
+                      <input class="form-control" type="password" name="" id="pas2" value="" >
+                      <input class="form-control" type="password" namyye="stat" id="" value="0" hidden>
+                      <input class="form-control" type="password" name="" id="pas3" value="<?php echo $row['user_pass']; ?>"  hidden>
+                      <input id="btn"type="submit" name="" style="background:#8378f7; border:#8378f7;" value="ยืนยัน" class="btn btn-success mt-3" >
+                    </div>
+                    </form>
+                </div>
+            </div>  
+            </div>    
                 <?php include('script.php');?>
 
         <?php  }

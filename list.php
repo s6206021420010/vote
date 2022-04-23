@@ -116,17 +116,6 @@ $_SESSION["event_id"] = $_GET["event_id"];
           margin-bottom:10px;
           ">รายชื่อผู้มีสิทธิ์เลือกตั้ง</button>
     </a>
-    <a href="scores.php?user_id=<?php echo $user_id ?>&&event_id=<?php echo $event_id ?>">
-    <button type="button" style="
-          background-color: #8378f7;
-          border-width: 0px;
-          padding: 10px 10px;
-          color: white;
-          width:18%;
-          border-radius: 6px;
-          margin-bottom:10px;
-          ">ผลการเลือกตั้ง</button>
-    </a>
     <hr style="    margin-top: 1rem;
     margin-bottom: 1rem;
     border: 2px;

@@ -70,7 +70,7 @@ $result6 = mysqli_query($conn,$sql_idcard);
           $dep_m = $row2["department2_id"];
           
           $sql9 = "INSERT INTO user (name, id_card, `number`, image, user_name, user_pass, organization_id,	department_id,department2_id,status,email,`provinces`, `amphures`, `districts`)
-          VALUES ('{$name}', '{$id_card}', '{$number}', '', '{$user_name}', '{$user_pass}', '$org_n', '$dep_n', '$dep_m','$status','$email','$provinces','$amphures','$districts')";
+          VALUES ('{$name}', '{$id_card}', '{$number}', 'user1.png', '{$user_name}', '{$user_pass}', '$org_n', '$dep_n', '$dep_m','$status','$email','$provinces','$amphures','$districts')";
           mysqli_query($conn,$sql9);
            $err[] = "success";
 
