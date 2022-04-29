@@ -1,3 +1,26 @@
+
+var stat = $("#stat").html()
+if(stat=="Private"){
+  $("#pi").fadeIn(0)
+  $("#pu").fadeOut(0)
+}else{
+  $("#pi").fadeOut(0)
+  $("#pu").fadeIn(0)
+}
+$("#pi").click(function(){
+  $("#pi").fadeOut(0)
+  $("#pu").fadeIn()
+})
+$("#pu").click(function(){
+  $("#pu").fadeOut(0)
+  $("#pi").fadeIn()  
+})
+
+$("#set_ev").click(function(){
+  alert(ck) 
+
+})
+///////////////////
 $(document).ready(function(){
   $("#body").fadeIn(3000);
   $("#b_pass").click(function(){

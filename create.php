@@ -33,6 +33,9 @@ if ($_POST) {
     pointer-events: none;
     
   }
+  #s_otp_mod_2{
+    display:none;
+  }
 </style>
 
 <body>
@@ -67,8 +70,8 @@ if ($_POST) {
                   <!-- otp -->
                   <label for="">เบอร์โทร</label>
                   <div class="input-group mb-3">
-                    <input type="text" placeholder="เบอร์โทร" id="phone"  name="phone" value="<?php if($_GET){ echo $_GET['number']; } ?>" maxlength="10"required class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-secondary" id="s_otp" data-toggle="modal" data-target="#setotp" type="button" id="button-addon2">ส่ง OTP</button>
+                    <input type="text" placeholder="เบอร์โทร" id="phone"  name="phone" value="<?php if($_GET){ echo $_GET['number']; } ?>" maxlength="10" required class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <input type="button" class="btn btn-outline-secondary" id="s_otp" data-toggle="modal" data-target="#setotp" type="button" id="button-addon2" value="ส่ง OTP">
                   </div>
                   <h6 style="color: #f45d5d;" id="err_num">*เบอร์โทรนี้ถูกใช้ไปแล้ว</h6>
                   <!-- Modal -->
@@ -84,15 +87,15 @@ if ($_POST) {
                         <div class="modal-body">
                           ยืนยันตัวตน
                           <div class="input-group mb-3">
-                            <input type="text" id="otp_stay" > 
-                            <input type="text" class="form-control" value="" id="phone_mod" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2" hidden>
+                            <input type="text" id="otp_stay" hidden> 
+                            <input type="text" class="form-control " value="" id="phone_mod" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2" hidden>
                             <input type="text" class="form-control" value="" id="phone_mod_otp" placeholder="รหัส otp" aria-label="Recipient's username" aria-describedby="button-addon2">
-                            <button class="btn btn-outline-secondary" id="s_otp_mod" type="button" >รับ OTP</button>
-                          </div>
+                            <input type="button" class="btn btn-outline-secondary rounded" id="s_otp_mod_2" type="button" value="รอ 60 วิ">
+                            <input type="button" class="btn btn-outline-secondary" id="s_otp_mod" type="button" value="รับ OTP" >                          </div>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button type="button" id="sub" class="btn btn-primary">ยืนยัน</button>
+                          <button type="button" id="sub" data-dismiss="modal" class="btn btn-primary">ยืนยัน</button>
                         </div>
                       </div>
                     </div>
@@ -236,7 +239,18 @@ if ($_POST) {
     var otp2 = $("#otp_stay").val()
     if (otp1==otp2) {
       $("#display_none").css("pointer-events","auto")
-      $('#setotp').modal('toggle')
+      Swal.fire(
+        'ยืนยันตัวตนสำเร็จ',
+        'รหัส OTP ถูกต้อง',
+        'success'
+      )
+    }
+    else{
+      Swal.fire({
+          icon: 'error',
+          title: 'ยืนยันตัวตนไม่สำเร็จ',
+          text: 'รหัส OTP ไม่ถูกต้อง'
+        })
     }
   })
   $("#s_otp").click(function(){
@@ -247,7 +261,8 @@ if ($_POST) {
   
   $("#s_otp_mod").click(function(){
     var phone_mod = $("#phone_mod").val()
-    
+    $("#s_otp_mod_2").fadeIn(0).delay(6000).fadeOut(0)
+    $("#s_otp_mod").fadeOut(0).delay(6000).fadeIn(0)
     $.ajax({
       type: "POST",
       url: "sms.php",

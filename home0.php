@@ -106,14 +106,12 @@ $txt_search = $_GET["txt_search"];
 <?php
 
 include "function.php";
- $sql = "SELECT *
-FROM event_user
-LEFT JOIN event
-ON event_user.event_id = event.event_id
-WHERE event_user.user_id = $user_id AND `event_name` LIKE '$txt_search%'";
+ $sql = "SELECT * FROM event_user LEFT JOIN event ON event_user.event_id = event.event_id 
+ WHERE (status_event = 'Public' OR event_user.user_id = $user_id AND event.event_id NOT LIKE 'NULL%') 
+ AND event.event_type = '2' 
+ GROUP BY event.event_id;";
 $result = mysqli_query($conn,$sql);
-$sql1 = "SELECT * FROM `event` WHERE `status_event`='Public' AND `event_name` LIKE '$txt_search%'";
-  $result1 = mysqli_query($conn,$sql1);
+
   ?>
 <div class="body" style="position:absolute; top:15%; left:13%;" id="body">
 
@@ -175,47 +173,7 @@ $sql1 = "SELECT * FROM `event` WHERE `status_event`='Public' AND `event_name` LI
 
 
 
-  <div class="container" id="body" >
-    <div class="row" id="pub">
-      <?php
-
-      if ($result1->num_rows > 0) {
-        while ($row1 = $result1->fetch_assoc()) {
-      ?>
-          <div class="card col-3" id="card" onmouseover="setblurCard(<?php echo $row1['event_id']; ?>);" onmouseout="removeblurCard(<?php echo $row1['event_id']; ?>)" style="border-radius:5px;background:#ffffff;height:220px; width:1067px;">
-            <label style="filter:blur(px);"><?php echo $row1["event_name"]; ?></label>
-            <hr style="margin: 1px;">
-            <?php $sta = $row1["status_event"];
-            if ($sta == "Public") {
-              $sta = "#49915a";
-            } else {
-              $sta = "#da4d5a";
-            } ?>
-            <label style="background:<?php echo $sta; ?>; border-radius:3px; color:white; padding:0px 7px; position:absolute; right:10px; top:10px;" for=""><?php echo $row1["status_event"]; ?></label>
-            <?php
-            $img = $row1["image"];
-            if ($img == "") { ?>
-              <img id="img_bg_vote_<?php echo $row1["event_id"]; ?>" class="img_bg_vote" style="filter: blur(5px);border-radius:2px;position:absolute; left:5px; top:66px;width:272px; height:150px;object-fit:cover;" src="images/vote.png; ?>" alt="">
-
-            <?php
-            } else { ?>
-              <img id="img_bg_vote_<?php echo $row1["event_id"]; ?>" class="img_bg_vote" style="filter: blur(0.7px);border-radius:2px;position:absolute; left:5px; top:66px;width:272px; height:150px;object-fit:cover;" src="images/<?php echo $row1["image"]; ?>" alt="">
-            <?php
-            }
-            ?>
-            <?php $date_now = date("Y-m-d"); ?>
-            <a style="position:absolute; left:35.5%; color:white; background:#28a745;" id="btn_vote_<?php echo $row1["event_id"]; ?>" href="datavote.php?event_id=<?php echo $row1["event_id"]; ?>&user_id=<?php echo $user_id; ?>&date=<?php echo $row1["date_end"]?>" class="btn btn_vote">ลงคะแนน</a>
-            <!--  -->
-          </div>
-      <?php
-        }
-      } else {
-        // echo "<h4>ไม่พบข้อมูล</h4>";
-      }
-      ?>
-    </div>
-  </div>
-</div>
+  
 
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">

@@ -29,7 +29,13 @@ if ($_POST) {
   h6{
       display: none;
     }
-
+    #display_none{
+    pointer-events: none;
+    
+  }
+    #s_otp_mod_2{
+      display:none;
+    }
 </style>
 
 <body>
@@ -61,9 +67,41 @@ if ($_POST) {
                   <input type="text" value="4" name="status" id="status" hidden>
                   <label  for="">รหัสบัตรประชาชน</label><input id="idcard" maxlength="13" type="text" class="form-control form-control-sm" name="idcard" value="<?php if($_GET){ echo $_GET['id_card']; } ?>" required>
                   <h6 style="color: #f45d5d;" id="err_idc">*รหัสบัตรประชาชนนี้ถูกใช้ไปแล้ว"</h6>
-                  <label for="">เบอร์โทร</label><input id="phone" type="text" maxlength="10" class="form-control form-control-sm" name="phone" value="<?php if($_GET){ echo $_GET['number']; } ?>" maxlength="10"required>
-                  <h6 style="color: #f45d5d;" id="err_num">*เบอร์โทรนี้ถูกใช้ไปแล้ว"</h6>
-              </div>
+                  <!-- otp -->
+                  <label for="">เบอร์โทร</label>
+                  <div class="input-group mb-3">
+                    <input type="text" placeholder="เบอร์โทร" id="phone"  name="phone" value="<?php if($_GET){ echo $_GET['number']; } ?>" maxlength="10" required class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <input type="button" class="btn btn-outline-secondary" id="s_otp" data-toggle="modal" data-target="#setotp" type="button" id="button-addon2" value="ส่ง OTP">
+                  </div>
+                  <h6 style="color: #f45d5d;" id="err_num">*เบอร์โทรนี้ถูกใช้ไปแล้ว</h6>
+                  <!-- Modal -->
+                  <div class="modal fade" id="setotp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">ยืนยันตัวตนด้วย OTP</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          ยืนยันตัวตน
+                          <div class="input-group mb-3">
+                            <input type="text" id="otp_stay" > 
+                            <input type="text" class="form-control " value="" id="phone_mod" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2" hidden>
+                            <input type="text" class="form-control" value="" id="phone_mod_otp" placeholder="รหัส otp" aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <input type="button" class="btn btn-outline-secondary rounded" id="s_otp_mod_2" type="button" value="รอ 60 วิ">
+                            <input type="button" class="btn btn-outline-secondary" id="s_otp_mod" type="button" value="รับ OTP" >                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" id="sub" data-dismiss="modal" class="btn btn-primary">ยืนยัน</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- otp -->  
+                </div>
               <div class="col-6">
                 <label for="">ชื่อ - นามสกุล</label><input type="text" class="form-control form-control-sm" name="name" value="<?php if($_GET){ echo $_GET['name']; } ?>"required>
                 <label for="">Email</label><input type="text" class="form-control form-control-sm" name="email" value="<?php if($_GET){ echo $_GET['email']; } ?>"required>
@@ -102,10 +140,7 @@ if ($_POST) {
               <div class="col-3">
                 <label for="sel1">รหัสไปรษณีย์:</label>
                 <input type="text" name="zip_code" id="zip_code" class="form-control"required>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-4">
+              </div> 
                 <label for="">Username</label><input type="text" class="form-control form-control-sm" name="user_name" value="<?php if($_GET){ echo $_GET['user_name']; } ?>">
                 <h6 style="color: #f45d5d;" id="err_use"> *ยูสเซอร์เนมนี้ถูกใช้ไปแล้ว"</h6>
               </div>
@@ -160,7 +195,8 @@ if ($_POST) {
                 <a href="regis_head.php" class="btn btn-danger" style="width:100%;">ยกเลิก</a>
               </div>
               <div class="col-3">
-                <button type="button" id="display_none" name="button">btn</button>
+              <a type="button" id="display_none" class="btn btn-success rounded-pill w-100 " name="button">ลงทะเบียน</a>
+                
                 </form>
               </div>
               <div class="col-3">
@@ -182,6 +218,69 @@ if ($_POST) {
 <script src="https://code.jquery.com/jquery-3.6.0.min.js">
 </script>
 <script type="text/javascript">
+  // num
+  $("#idcard").on("keypress" , function (e) {
+        var code = e.keyCode ? e.keyCode : e.which;
+        if(code > 57){
+            return false;
+        }else if(code < 48 && code != 8){
+            return false;
+        }
+    });
+  
+  $("#phone").on("keypress" , function (e) {
+        var code = e.keyCode ? e.keyCode : e.which;
+        if(code > 57){
+            return false;
+        }else if(code < 48 && code != 8){
+            return false;
+        }
+    });
+  // num
+  // otp
+  $("#sub").click(function(){
+    var otp1 = $("#phone_mod_otp").val()
+    var otp2 = $("#otp_stay").val()
+    if (otp1==otp2) {
+      $("#display_none").css("pointer-events","auto")
+      Swal.fire(
+        'ยืนยันตัวตนสำเร็จ',
+        'รหัส OTP ถูกต้อง',
+        'success'
+      )
+    }
+    else{
+      Swal.fire({
+          icon: 'error',
+          title: 'ยืนยันตัวตนไม่สำเร็จ',
+          text: 'รหัส OTP ไม่ถูกต้อง'
+        })
+    }
+  })
+  $("#s_otp").click(function(){
+    var phone = $("#phone").val()
+    $("#phone_mod").val(phone)
+    
+  })
+  
+  $("#s_otp_mod").click(function(){
+    var phone_mod = $("#phone_mod").val()
+    $("#s_otp_mod_2").fadeIn(0).delay(60000).fadeOut(0)
+    $("#s_otp_mod").fadeOut(0).delay(60000).fadeIn(0)
+    $.ajax({
+      type: "POST",
+      url: "sms.php",
+      data: {
+        phone: phone_mod
+      },
+      success: function(data) {
+        $("#otp_stay").val(data)
+       
+      }
+    })
+  })
+  // otp
+
 $("#display_none").click(function(){
   $.ajax({
     type : 'POST',

@@ -16,7 +16,7 @@ $result = $db->select("*", "applicant", "event_id = '$event_id'");
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="container" id="body" style="position:absolute; top:10%; left:12%;display:none;">
-  <h3 style="margin:10px;">ลงคะแนน</h3> <a href="home0.php" type="button" class="btn btn-danger" style="border-radius: 35px;"><i class="material-icons" style="font-size:10px">navigate_before</i>กลับ </a>
+  <h3 style="margin:10px;">ลงคะแนน</h3> <a href="home0.php" type="button" class="btn btn-danger" style="border-radius: 35px;">กลับ</a>
 
   <table class="table " style="width:100%;">
     <tr>
@@ -24,10 +24,10 @@ $result = $db->select("*", "applicant", "event_id = '$event_id'");
         รูป
       </th>
       <th scope="col" style="text-align: center;">
-        ชื่อ
+        ชื่อหมายเลข
       </th>
       <th scope="col" style="text-align: center;">
-        หมายเลข
+        ชื่อ
       </th>
       <th scope="col" style="text-align: center;">
         ดูข้อมูล
@@ -52,48 +52,44 @@ $result = $db->select("*", "applicant", "event_id = '$event_id'");
           <td style="align-items: center;">
             <img style="width:100px; height:49px;border-radius:5px;object-fit:cover;position:absolute; " src="images/<?php echo $row['applicant_image']; ?>" alt="">
           </td>
-          <td style="text-align: center;"><?php echo $row['applicant_name']; ?></td>
+          
           <td style="text-align: center;"><?php echo $row['applicant_number']; ?></td>
+          <td style="text-align: center;"><?php echo $row['applicant_name']; ?></td>
           <td style="text-align: center;"><a style="margin:5px; border-radius:5px;" data-target="#myModal-detail-<?php echo $row["applicant_id"] ?>" data-toggle="modal" class="btn btn-success">ข้อมูล</a></td>
-
           <td style="text-align: center;">
             <?php
             $sql = "SELECT * FROM `vote` WHERE user_id='$user_id' and event_id='$event_id'";
             $result1 = mysqli_query($conn, $sql);
-
             
-            if ($date >= $date_now) {
-              if( $time <= $row2['time_end']){
-              if ($result1->num_rows > 0) {
-                $row1 = $result1->fetch_assoc()
+            if ($result1->num_rows > 0) {
             ?>
-                <a style="margin:5px; border-radius:5px;" class="btn btn-danger">ลงคะแนนแล้ว</a>
-              <?php
-              } else { ?>
-                <a style="margin:5px;" href="result.php?user_id=<?php echo $user_id; ?>&event_id=<?php echo $event_id; ?>&applicant_id=<?php echo $row['applicant_id']; ?>&date=<?php echo $date ?>" class="btn btn-success">ลงคะแนน</a>
-              <?php
-              }
-            }else{?>
-          <a style="margin:5px; border-radius:5px;" class="btn btn-danger">หมดเวลาโหวต</a>
+              <a style="margin:5px; border-radius:5px;" class="btn btn-danger">ลงคะแนนแล้ว</a>
             <?php
-            }
-
-            } else { ?>
-              <a style="margin:5px; border-radius:5px;" class="btn btn-danger">หมดเวลาโหวต</a>
-            <?php }
+            }else{
+              if ($date <= $date_now) {
             ?>
-          </td>
-
-          <td style="text-align: center;">
-            <!-- <?php
-
-                  if (isset($row1)) {
-                    $row_n = $row1['vote_id'];
-                    $sql = "SELECT * FROM `vote` WHERE vote_id='$row_n'";
-                    $result2 = mysqli_query($conn, $sql);
-                    echo $data = $result1->num_rows;
-                  }
-                  ?> -->
+              <a style="margin:5px; border-radius:5px;" class="btn btn-danger">หมดเวลาโหวต(วันที่)</a>
+            <?php
+              }
+              else{
+                if( $time >= $row2['time_end']){
+              ?>
+                <a style="margin:5px; border-radius:5px;" class="btn btn-danger">หมดเวลาโหวต(เวลา)</a>
+              <?php
+                }
+                else{
+              ?>    
+                  <a style="margin:5px;" href="result.php?user_id=<?php echo $user_id; ?>&event_id=<?php echo $event_id; ?>&applicant_id=<?php echo $row['applicant_id']; ?>&date=<?php echo $date ?>" class="btn btn-success">ลงคะแนน</a>
+              <?php  
+                }
+            ?>
+            <?php
+              }
+            }
+            ?>
+            
+            
+            
           </td>
         </tr>
         <div class="modal fade" id="myModal-detail-<?php echo $row["applicant_id"] ?>" role="dialog">

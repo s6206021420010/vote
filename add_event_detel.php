@@ -14,7 +14,9 @@
   else {
     // echo "haha";
   }
-
+  if ($imageName==NULL) {
+    $imageName="user.png";
+  }
   echo $sql = "INSERT INTO `applicant`(`applicant_id`, `applicant_name`, `applicant_number`,`applicant_image`, `event_id`)
    VALUES ('','$list','$number','$imageName','$id')";
 

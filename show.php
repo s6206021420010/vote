@@ -35,13 +35,7 @@ $user_id = $_SESSION['user_id'];
   color:  #D6D2FE ;
 }
 
-  #search{
-    display: none;
-  }
-  #search2{
-    display: none;
 
-  }
 </style>
 </body>
 
@@ -53,9 +47,10 @@ $user_id = $_SESSION['user_id'];
 <?php
 ?>
   <div class="body" id="body" style="position:absolute; top:13%; left:13%;display: none">
+  <h3 class="ml-3">รายการเลือกตั้งที่สร้าง</h3>
     <?php
     $db = new db();
-    $sql1=  "SELECT * FROM `event`WHERE user_id=$user_id";
+    $sql1=  "SELECT * FROM `event`WHERE user_id=$user_id ";
     $result = mysqli_query($conn, $sql1);
     ?>
     <meta charset="UTF-8">
@@ -65,16 +60,24 @@ $user_id = $_SESSION['user_id'];
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
     ?>
-        <div class="card w-25 h-75 m-1 mt-2 ml-5 p-2">
+        <div class="card overflow-hidden w-25 h-75 m-1 mt-2 ml-5 p-2">
           <div class="row">
               <div class="col">
                 <?php echo $row["event_name"]; ?>
               </div>
           </div>
           <div class="row">
-              <div class="col bg-success rounded text-light">
-                private
-              </div>
+              <?php if($row["status_event"]=="Public"){?>
+                <div class="col w-75 bg-success rounded text-light" >
+                <?php echo $row["status_event"]; ?>
+                </div>
+              <?php }
+                    else{?>
+                <div class="col w-75 bg-danger rounded text-light" >
+                <?php echo $row["status_event"]; ?>               </div>
+                   <?php } ?>
+             
+              
           </div>
           <div class="row">
             <div class="col d-flex justify-content-center">

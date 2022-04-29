@@ -60,8 +60,64 @@ $_SESSION["event_id"] = $_GET["event_id"];
             <h3>รหัสเลือกตั้ง : <?php echo $row_event['event_id']; ?> </h3>
           </div>
           <div class="col-6 text-end">
-            <button type="button" class="btn btn-warning col-3" style="background:#E3BF40 ; color:#fff;" value="<?php echo $row_event['event_id']; ?>">แก้ไข</button>
+            <button type="button" class="btn btn-warning col-3" data-toggle="modal" data-target="#exampleModal" style="background:#E3BF40 ; color:#fff;" value="<?php echo $row_event['event_id']; ?>">แก้ไข</button>
           </div>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">แก้ไขข้อมูลการเลือกตั้ง</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <h5>ชื่อการเลือกตั้ง</h5>
+                    <input type="text"  class="form-control"  value="<?php echo $row_event['event_name']; ?>" required>
+                    <h5>รายละเอียด</h5>
+                    <input type="text"  class="form-control"  value="<?php echo $row_event['event_detail']; ?>" required>
+                    <div class="row p-2 bg-success mt-2 text-light rounded">
+                      <div class="col">
+                        <h5>วันเปิดโหวต</h5> 
+                        <input type="date"  class="form-control"  value="<?php echo $row_event['date_start']; ?>" required>
+                      </div>
+                      <div class="col">
+                        <h5>เวลาเปิดโหวต</h5>
+                        <input type="time"  class="form-control"  value="<?php echo $row_event['time_start']; ?>" required>
+                      </div>
+                    </div>
+
+                    <div class="row p-2 bg-danger mt-2 text-light rounded">
+                      <div class="col">
+                        <h5>วันปิดโหวต</h5>
+                        <input type="date"  class="form-control"  value="<?php echo $row_event['date_end']; ?>" required>
+                      </div>
+                      <div class="col">
+                        <h5>เวลาปิดโหวต</h5>
+                        <input type="time"  class="form-control"  value="<?php echo $row_event['time_end']; ?>" required>
+                      </div>
+                    </div>
+                    <p id="stat" hidden><?php echo $row_event['status_event']; ?></p>
+                    <div class="row d-flex justify-content-center mt-4 border-top pt-2">
+                      <div class="col border-right">
+                        <h5>สถานะการเลือกตั้ง</h5>
+                      </div>
+                      <div class="col">  
+                        <input type="button"  class="btn btn-danger" id="pi" value="Private" required>
+                        <input type="button"  class="btn btn-success" id="pu" value="Public" required>        
+                      </div>
+                    </div>
+                    
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="set_ev" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
         </div>
         <div class="row">
           <div class="col-6">
