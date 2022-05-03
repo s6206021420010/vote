@@ -10,14 +10,17 @@ include "navbar0.php";
 $event_id = $_GET['event_id'];
 $date = $_GET['date'];
 
-$db = new db();
-$result = $db->select("*", "applicant", "event_id = '$event_id'");
+$sql = "SELECT * FROM `applicant` WHERE event_id = '$event_id'";     
+$result = mysqli_query($conn,$sql);
 ?>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="container" id="body" style="position:absolute; top:10%; left:12%;display:none;">
-  <h3 style="margin:10px;">ลงคะแนน</h3> <a href="home0.php" type="button" class="btn btn-danger" style="border-radius: 35px;">กลับ</a>
-
+  <h3 style="margin:10px;">ลงคะแนน</h3> 
+  <div class="d-flex justify-content-between">
+    <a href="home0.php" type="button" class="btn btn-danger" style="border-radius: 35px;">กลับ</a>
+    <a style="margin:5px;" href="result.php?user_id=<?php echo $user_id; ?>&event_id=<?php echo $event_id; ?>&applicant_id=<?php echo $row['applicant_id']; ?>&date=<?php echo $date ?>" class="btn btn-secondary ">ไม่ลงคะแนน</a>
+  </div>
   <table class="table " style="width:100%;">
     <tr>
       <th scope="col" style="text-align: center;">
@@ -34,7 +37,7 @@ $result = $db->select("*", "applicant", "event_id = '$event_id'");
       </th>
 
       <th scope="col" style="text-align: center;">
-        time now
+        ลงคะแนน
       </th>
 
 
@@ -66,13 +69,13 @@ $result = $db->select("*", "applicant", "event_id = '$event_id'");
               <a style="margin:5px; border-radius:5px;" class="btn btn-danger">ลงคะแนนแล้ว</a>
             <?php
             }else{
-              if ($date <= $date_now) {
+              if ($date < $date_now) {
             ?>
               <a style="margin:5px; border-radius:5px;" class="btn btn-danger">หมดเวลาโหวต(วันที่)</a>
             <?php
               }
-              else{
-                if( $time >= $row2['time_end']){
+              else if($date == $date_now){
+                if( $time > $row2['time_end']){
               ?>
                 <a style="margin:5px; border-radius:5px;" class="btn btn-danger">หมดเวลาโหวต(เวลา)</a>
               <?php
@@ -84,6 +87,10 @@ $result = $db->select("*", "applicant", "event_id = '$event_id'");
                 }
             ?>
             <?php
+              }
+              else{?>
+                <a style="margin:5px;" href="result.php?user_id=<?php echo $user_id; ?>&event_id=<?php echo $event_id; ?>&applicant_id=<?php echo $row['applicant_id']; ?>&date=<?php echo $date ?>" class="btn btn-success">ลงคะแนน</a>  
+              <?php
               }
             }
             ?>

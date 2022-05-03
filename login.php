@@ -7,7 +7,7 @@
       $username = $_POST['username'];
       $password = $conn->real_escape_string($_POST['password']);
 
-      $sql = "SELECT * FROM user WHERE user_name = '{$username}' and user_pass = '{$password}'";
+      $sql = "SELECT * FROM user WHERE user_name = '{$username}' and user_pass = '{$password}' AND dell = ''";
       $result = mysqli_query($conn, $sql);
       $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
       $count = mysqli_num_rows($result);
@@ -45,7 +45,14 @@
                     }
        }
        else {
-         header("location: index.php?sweet=1");
+         ?>
+         <p id="sent_back">error</p>
+         <input type="text" class="btn" value="submit">
+         <?php
        }
    }
 ?>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script>
+    $("sent_back")
+ </script>

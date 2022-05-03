@@ -90,9 +90,9 @@ $user_id = $_SESSION['user_id'];
             </div>
           </div>
           <div class="row mt-1">
-            <div class="col d-flex aling-items-center">
-            <a href="list.php?event_id=<?php echo $row["event_id"]; ?>&user_id=<?php echo $row["user_id"]; ?>" class="btn btn-for">จัดการ</a>
-            <a href="delete.php?event_id=<?php echo $row["event_id"]; ?>" class="btn btn-far ml-2 ">ลบ</a><br>
+            <div class="col d-flex justify-content-between aling-items-center">
+                  <a href="list.php?event_id=<?php echo $row["event_id"]; ?>&user_id=<?php echo $row["user_id"]; ?>" class="btn btn-for w-100">จัดการ</a>
+                  <a href="delete.php?event_id=<?php echo $row["event_id"]; ?>" class="btn btn-far ml-2 w-100"    >ลบ</a>      
             </div>
           </div>
         </div>

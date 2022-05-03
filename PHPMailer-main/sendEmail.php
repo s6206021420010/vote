@@ -1,11 +1,12 @@
 <?php
+    
     use PHPMailer\PHPMailer\PHPMailer;
-
-    if(isset($_POST['name']) && isset($_POST['email'])) {
-        $name = $_POST['name'];
+    echo $rand =  rand(10000,99999);
+    if(isset($_POST['email'])) {
+        $name = "VoteOnline";
         $email = $_POST['email'];
-        $header = $_POST['header'];
-        $detail = $_POST['detail'];
+        $header = "Identity Verification";
+        $detail = "Authentication Code : $rand";
 
         require_once "PHPMailer/PHPMailer.php";
         require_once "PHPMailer/SMTP.php";
@@ -37,6 +38,6 @@
             $response = "Something is wrong" . $mail->ErrorInfo;
         }
 
-        exit(json_encode(array("status" => $status, "response" => $response)));
+        // exit(json_encode(array("status" => $status, "response" => $response)));
     }
 ?>

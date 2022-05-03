@@ -84,6 +84,7 @@ $result = mysqli_query($conn,$sql);
          <th>เบอร์โทร</th>
          <th>อีเมล</th>
          <th>ดูข้อมูล</th>
+         <th>เพิ่มผู้ใช้</th>
          <th>ลบผู้ใช้</th>
 
        <?php
@@ -104,10 +105,12 @@ $result = mysqli_query($conn,$sql);
                     <?php echo $row["email"]; ?>
                 </td>
                 <td>
-                    <input type="button" class="btn btn-warning" value="ดูข้อมูล">
+                    <a href="view_user.php?user_id=<?php echo $row["user_id"]; ?>" type="button"  class="btn btn-warning" >ดูข้อมูล</a>
                 </td>
                 <td>
-                    
+                    <input type="button" onClick="add(<?php echo $row["user_id"]; ?>)" class="btn btn-SUCCESS" value="เพิ่มข้อมูล">
+                </td>
+                <td>
                     <input type="button" onClick="dell(<?php echo $row["user_id"]; ?>)" class="btn btn-danger" value="ลบข้อมูล">
                 </td>
             </tr>
@@ -116,10 +119,36 @@ $result = mysqli_query($conn,$sql);
         }
         ?>
 
+
      </div>  
      <script src="https://code.jquery.com/jquery-3.6.0.min.js">
      </script>
      <script type="text/javascript">
+      //  adduser
+        function add(id){
+            //  var id = $("#id_user").html()
+            //  alert(id)
+            Swal.fire(
+              'สำเร็จ!',
+              'เพิ่มผู้ใช้สำเร็จ!',
+              'success'
+            )
+                $.ajax({
+                type:"POST",
+                url:"admin_user_add.php",
+                data:{
+                    id:id
+                },
+                success: function (data) {
+                  
+                }
+            })
+               
+            }
+            
+         
+
+        //  delete
          function dell(id){
             //  var id = $("#id_user").html()
             //  alert(id)

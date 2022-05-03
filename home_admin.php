@@ -1,11 +1,11 @@
 <?php 
+error_reporting(0);
 session_start();
 $user_id =  $_SESSION['user_id'];
 
 include "header.php";
 include "conn.php";
-$sql = "SELECT * FROM `event` WHERE 1";
-$result = mysqli_query($conn,$sql);
+
  ?>
  <body>
    <!DOCTYPE html>
@@ -47,7 +47,7 @@ $result = mysqli_query($conn,$sql);
        <a style="margin-left:50px;"class="navbar-brand" href="home_admin.php"><img style="width:3%; position:fixed; left:15px;"src="images/vote.png" alt="">รายการเลือกตั้ง</a>
 
        <d iv class="collapse navbar-collapse" id="navbarTogglerDemo03">
-         <form class="form-inline my-2 my-lg-0" method="get" action="">
+         <form class="form-inline my-2 my-lg-0" method="POST" action="">
            <input  class="form-control mr-sm-2" type="text" name="txt_search" placeholder="Search" aria-label="Search">
            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
          </form>
@@ -69,17 +69,22 @@ $result = mysqli_query($conn,$sql);
     
        </ul>
      </div>
+     <?php
+     $txt = $_POST['txt_search'];
+    
+     $sql = "SELECT * FROM `event` WHERE event_name LIKE '$txt%'";
+     $result = mysqli_query($conn,$sql);
+     ?>
      <div class="col-10" style="position:absolute;left:14%;top: 12%; z-index:1;">
        <h2>รายการเลือกตั้ง</h2>
        <div class="row">
          <div class="col-8">
          </div>
-         <div class="col-4"
-           <label class="switch" style="">
-             <a href="home_admin.php" onclick="checkall()" class="btn btn-success" style="width:130px; border-radius:30px; display:inline; margin-left:90px;">เปิดทั้งหมด</a>
-             <a href="home_admin.php"  onclick="unall()" class="btn btn-danger" style="width:130px; border-radius:30px; display:inline;">ปิดทั้งหมด</a>
-
-           </label>
+         <div class="col-4">
+           
+             <a href="home_admin.php" onclick="checkall()" class="btn btn-success" >เปิดทั้งหมด</a>
+             <a href="home_admin.php"  onclick="unall()" class="btn btn-danger" >ปิดทั้งหมด</a>
+           
          </div>
        </div>
        <table class="table table-hover" style="margin-top:13px;">
@@ -134,7 +139,8 @@ echo "checked";
     });
        }
        function checkall(){
-         $.ajax({
+        window.location.href = 'home_admin.php'; 
+        $.ajax({
            type:"GET",
            url:"ajax.php",
            data:{
@@ -142,12 +148,13 @@ echo "checked";
            },
            dataType:"html",
            success: function (html) {
-
+            
            }
          });
        }
        function unall(){
-         $.ajax({
+        window.location.href = 'home_admin.php'; 
+        $.ajax({
            type:"GET",
            url:"ajax.php",
            data:{
@@ -155,7 +162,7 @@ echo "checked";
            },
            dataType:"html",
            success: function (html) {
-
+            
            }
          });
        }

@@ -16,7 +16,7 @@ if ($_POST) {
   }
 
   .btn-success {
-    background: #38d9a9;
+
     border: #38d9a9;
     border-radius: 30px;
     width: 15%;
@@ -30,7 +30,7 @@ if ($_POST) {
       display: none;
     }
     #display_none{
-    pointer-events: none;
+    display: none;
     
   }
     #s_otp_mod_2{
@@ -87,7 +87,7 @@ if ($_POST) {
                         <div class="modal-body">
                           ยืนยันตัวตน
                           <div class="input-group mb-3">
-                            <input type="text" id="otp_stay" > 
+                            <input type="text" id="otp_stay" hidden> 
                             <input type="text" class="form-control " value="" id="phone_mod" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2" hidden>
                             <input type="text" class="form-control" value="" id="phone_mod_otp" placeholder="รหัส otp" aria-label="Recipient's username" aria-describedby="button-addon2">
                             <input type="button" class="btn btn-outline-secondary rounded" id="s_otp_mod_2" type="button" value="รอ 60 วิ">
@@ -104,8 +104,47 @@ if ($_POST) {
                 </div>
               <div class="col-6">
                 <label for="">ชื่อ - นามสกุล</label><input type="text" class="form-control form-control-sm" name="name" value="<?php if($_GET){ echo $_GET['name']; } ?>"required>
-                <label for="">Email</label><input type="text" class="form-control form-control-sm" name="email" value="<?php if($_GET){ echo $_GET['email']; } ?>"required>
-                <h6 style="color: #f45d5d;" id="err_em">*อีเมลนี้ถูกใช้ไปแล้ว</h6>
+              <!-- email --> 
+              <label for="">Email</label>
+                <div class="input-group mb-3">
+                
+                  <input placeholder="Email" type="text" id="email" class="form-control form-control" name="email" value="<?php if($_GET){ echo $_GET['email']; } ?>"required aria-label="Recipient's username" aria-describedby="basic-addon2">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" id="s_email" type="button" data-toggle="modal" data-target="#email_mod">ยืนยันEmail</button>
+                  </div>
+                </div>
+                <h6 style="color: #f45d5d;" id="err_em">*อีเมลนี้ถูกใช้ไปแล้ว"</h6>
+                <!-- Modal -->
+                <div class="modal fade" id="email_mod" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">ยืนยันตัวตนด้วยEmail</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                      <!-- content   -->
+                      <p id="mail1"></p>
+                      <p id="mail2" hidden></p>
+                      <div class="input-group mb-3">
+                        <input id="in_mod_mail" type="text" class="form-control" placeholder="กรอกรหัส 6 หลัก" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary" id="btn_mod_mail" type="button">Sent to email</button>
+                        </div>
+                      </div>
+                      <!-- content   -->
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="check_mail">ยืนยัน</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- email -->
+
               </div>
             </div>
 
@@ -187,7 +226,12 @@ if ($_POST) {
 
 
             </div>
+                   <!-- unlock -->
+                   <p id="lock1" class="bg-success rounded text-light w-25 d-flex justify-content-center" ></p>
+                   <p id="lock2" class="bg-success rounded text-light w-25 d-flex justify-content-center" ></p> 
+                <!-- unlock -->
 
+      
             <div class="row" style="margin-top:10px;">
               <div class="col-3">
               </div>
@@ -196,7 +240,8 @@ if ($_POST) {
               </div>
               <div class="col-3">
               <a type="button" id="display_none" class="btn btn-success rounded-pill w-100 " name="button">ลงทะเบียน</a>
-                
+              <a type="button" id="display_none2"  class="btn btn-secondary rounded-pill w-100 " name="button">กรุณายืนยัน OTP และ Email</a>
+              
                 </form>
               </div>
               <div class="col-3">
@@ -218,6 +263,60 @@ if ($_POST) {
 <script src="https://code.jquery.com/jquery-3.6.0.min.js">
 </script>
 <script type="text/javascript">
+    // lock
+    $("#display_none2").mouseenter(function(){
+  // alert("mouse")
+  lock1 = $("#lock1").html()
+  lock2 = $("#lock2").html()
+  if (lock1 == "*ยืนยัน Email สำเร็จ" && lock2 == "*ยืนยัน OTP สำเร็จ") {
+    alert("true")
+    $("#display_none2").fadeOut(0)
+    $("#display_none").fadeIn()
+  }
+  })
+  // lock
+  // email
+  $("#check_mail").click(function(){
+
+        mail1 = $("#in_mod_mail").val()
+        mail2 = $("#mail2").html()
+        // alert(mail1+mail2)
+          if (mail2 == mail1) {
+            Swal.fire(
+            'ยืนยันตัวสำเร็จ',
+            'รหัสการยืนยันตัวตนถูกต้อง',
+            'success'
+          )
+          $("#lock1").html("*ยืนยัน Email สำเร็จ")
+          }
+          else{
+      Swal.fire({
+          icon: 'error',
+          title: 'ยืนยันตัวตนไม่สำเร็จ',
+          text: 'รหัสไม่ถูกต้อง'
+        })
+    }
+        }) 
+  $("#btn_mod_mail").click(function(){
+    var email = $("#email").val()
+    // alert(email)
+    $.ajax({
+      type: "POST",
+      url: "PHPMailer-main/sendEmail.php",
+      data: {
+        email: email
+      },
+      success: function(data) {
+        // alert(data)
+         var mail2 = data
+         $("#mail2").html(data)
+       }
+    })
+  })
+  $("#s_email").click(function(){
+    
+  })
+  // email
   // num
   $("#idcard").on("keypress" , function (e) {
         var code = e.keyCode ? e.keyCode : e.which;
@@ -242,7 +341,9 @@ if ($_POST) {
     var otp1 = $("#phone_mod_otp").val()
     var otp2 = $("#otp_stay").val()
     if (otp1==otp2) {
-      $("#display_none").css("pointer-events","auto")
+      $("#lock2").html("*ยืนยัน OTP สำเร็จ")
+      $("#dlock2").css("display","none")
+      // $("#display_none").css("pointer-events","auto")
       Swal.fire(
         'ยืนยันตัวตนสำเร็จ',
         'รหัส OTP ถูกต้อง',
@@ -275,7 +376,7 @@ if ($_POST) {
       },
       success: function(data) {
         $("#otp_stay").val(data)
-       
+      //  alert(data)
       }
     })
   })

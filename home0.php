@@ -3,6 +3,7 @@
 <?php include "header.php";
 include "conn.php";
 include "chart.php";
+
 session_start();
 if ($_SESSION['user_id'] == NULL) {
   header("location:index.php");
@@ -19,7 +20,7 @@ $dep = $_SESSION['dep'];
 $dep2 = $_SESSION['dep2'];
 
 include "navbar0.php";
-$txt_search = $_GET["txt_search"];
+
 ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <style>
@@ -106,10 +107,14 @@ $txt_search = $_GET["txt_search"];
 <?php
 
 include "function.php";
+if ($_GET) {
+  $txt = $_GET['txt_search'];
+}
  $sql = "SELECT * FROM event_user LEFT JOIN event ON event_user.event_id = event.event_id 
  WHERE (status_event = 'Public' OR event_user.user_id = $user_id AND event.event_id NOT LIKE 'NULL%') 
  AND event.event_type = '2' 
- GROUP BY event.event_id;";
+ AND event.event_name LIKE '$txt%'
+ GROUP BY event.event_id";
 $result = mysqli_query($conn,$sql);
 
   ?>
@@ -122,8 +127,6 @@ $result = mysqli_query($conn,$sql);
       </div>
       <div class="col">
       <div class="form-check form-switch">
-      <input class="form-check-input" type="checkbox" onchange="check()" role="switch" value="1" id="flexSwitchCheckDefault">in
-      <label class="form-check-label" for="flexSwitchCheckDefault">เลือกรายการที่เกี่ยวข้อง</label>
       </div>
       </div>
     </div>
@@ -204,41 +207,6 @@ $result = mysqli_query($conn,$sql);
 
   </div>
 </div>
-<script type="text/javascript">
-  function check(){
-    if($("#flexSwitchCheckDefault").val() == 1){
-      $("#pub").fadeOut(19)
-      $("#pri").fadeIn()
-      $("#flexSwitchCheckDefault").val("0")
-    }
-    else{
-      $("#pub").fadeIn()
-      $("#pri").fadeOut(10)
-      $("#flexSwitchCheckDefault").val("1")
-    }
-  }
-  var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-  var yValues = [1, 2, 3, 4, 12];
-  var barColors = ["#264653", "#2a9d8f", "#e9c46a", "#f4a261", "#e76f51"];
-
-  new Chart("myChar
-  t", {
-    ype: "doughnut",
-    data: {
-      labels: xValues,
-      datasets: [{
-        backgroundColor: barColors,
-        data: yValues
-      }]
-    },
-    options: {
-      title: {
-        display: true,
-        text: "World Wide Wine Production 2018"
-      }
-    }
-  });
-</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="script.js"></script>
 

@@ -1,4 +1,9 @@
 
+// home0
+function check(){
+    alert("hello")
+}
+// home0   
 var stat = $("#stat").html()
 if(stat=="Private"){
   $("#pi").fadeIn(0)
