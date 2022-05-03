@@ -47,12 +47,11 @@
        else {
          ?>
          <p id="sent_back">error</p>
-         <input type="text" class="btn" value="submit">
          <?php
        }
    }
 ?>
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
  <script>
-    $("sent_back")
+    $("sent_back").html()
  </script>
