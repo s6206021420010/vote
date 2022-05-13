@@ -11,6 +11,7 @@ if ($_SESSION['user_id'] == NULL) {
 if ($_SESSION['login_user'] == "") {
   header("location:index.php");
 }
+ $qrcode = $_SESSION['ev_qr'];
 $sr = "2";
 $fn = $_SESSION['fn'];
 $img = $_SESSION['image'];
@@ -107,13 +108,17 @@ include "navbar0.php";
 <?php
 
 include "function.php";
+if (isset($_SESSION['ev_qr'])) {
+  $txt = $qrcode;
+}
 if ($_GET) {
   $txt = $_GET['txt_search'];
 }
- $sql = "SELECT * FROM event_user LEFT JOIN event ON event_user.event_id = event.event_id 
- WHERE (status_event = 'Public' OR event_user.user_id = $user_id AND event.event_id NOT LIKE 'NULL%') 
- AND event.event_type = '2' 
+ $sql = "SELECT * FROM event_user LEFT JOIN event ON event_user.event_id = event.event_id
+ WHERE (status_event = 'Public' OR event_user.user_id = $user_id AND event.event_id NOT LIKE 'NULL%')
+ AND event.event_type = '2'
  AND event.event_name LIKE '$txt%'
+ OR event.event_id LIKE '$txt%'
  GROUP BY event.event_id";
 $result = mysqli_query($conn,$sql);
 
@@ -176,7 +181,7 @@ $result = mysqli_query($conn,$sql);
 
 
 
-  
+
 
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">

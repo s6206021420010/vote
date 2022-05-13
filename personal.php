@@ -7,10 +7,15 @@ session_start();
   include "header.php";
   include "navbar.php";
   include "function.php";
-  $db = new db();
-  $result = $db->select("*","user
-LEFT JOIN organization ON user.organization_id = organization.organization_id
-","user_id = '$user_id'ORDER BY user.organization_id");
+  $sql = "SELECT * FROM user
+  LEFT JOIN organization ON user.organization_id = organization.organization_id 
+  WHERE user_id = '$user_id'ORDER BY user.organization_id";
+ 
+  $result = $conn->query($sql);
+//   $db = new db();
+//   $result = $db->select("*","user
+// LEFT JOIN organization ON user.organization_id = organization.organization_id
+// ","user_id = '$user_id'ORDER BY user.organization_id");
 
 ?>
 <style>

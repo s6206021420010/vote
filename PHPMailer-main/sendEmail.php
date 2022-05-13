@@ -1,5 +1,5 @@
 <?php
-    
+
     use PHPMailer\PHPMailer\PHPMailer;
     echo $rand =  rand(10000,99999);
     if(isset($_POST['email'])) {
@@ -38,6 +38,6 @@
             $response = "Something is wrong" . $mail->ErrorInfo;
         }
 
-        // exit(json_encode(array("status" => $status, "response" => $response)));
+      // exit(json_encode(array("status" => $status, "response" => $response)));
     }
 ?>

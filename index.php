@@ -1,5 +1,18 @@
-<!DOCTYPE html>
-<?php include "header.php"; ?>
+<?php
+
+include "header.php";
+if ($_GET['alert'] == 1) {
+  ?>
+  <p id="alert">1</p>
+  <?php
+}
+if(isset($_GET["event_id"])){
+    $event_id = $_GET["event_id"];
+}
+if(isset($_GET["sweet"])){
+    $sw = $_GET["sweet"];
+}
+?>
 <html lang="en" dir="ltr">
   <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -126,6 +139,9 @@
           font-size: 11px
         }
       }
+      .navtop{
+          height:140px;
+      }
       h1{
         background: #8378f7;
         border-radius: 40px;
@@ -148,16 +164,19 @@
       }
     </style>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-200 h-25"  style=" background:#8378f7;">
+
+      <input type="text" id="sw"  class="form-control form-control-sm"  value="<?php echo $sw ; ?>" name="password" hidden>
+    <nav class="navbar navbar-expand-lg navbar-light bg-200 navtop"  style=" background:#8378f7;">
       <div class="container-fluid">
-        <a class="navbar-brand d-none d-lg-inline" href="#"><img src="images/v.png" class="logo" alt=""></a>  
+        <a class="navbar-brand d-none d-lg-inline" href="#"><img src="images/v.png" class="logo" alt=""></a>
               <form class="" action="login.php" method="post">
                 <div class="row "style="">
                   <div class="col-12 mb-2 mb-sm-0 col-sm-4">
+                    <input type="text"  class="form-control form-control-sm"  value="<?php echo $event_id; ?>" name="event_id" hidden>
                     <input type="text"  class="form-control form-control-sm"  value="" name="username" placeholder="username">
                   </div>
                   <div class="col-12 mb-2 mb-sm-0 col-sm-4">
-                    <input type="text"  class="form-control form-control-sm"  value="" name="password" placeholder="password">
+                    <input type="password"  class="form-control form-control-sm"  value="" name="password" placeholder="password">
                   </div>
                   <div class="col-12 col-sm-4">
                     <input type="submit" name="" class="btn w-100 w-sm-"  value="Login" style="color:white; border: solid 1px white;">
@@ -168,11 +187,11 @@
                     <a href="regis_head.php" class="link">Register</a>
                   </div>
                   <div class="col">
-                    <a href="#" class="link">forget password</a>
+                    <a href="forget_pass.php" class="link">forget password</a>
                   </div>
                 </div>
               </form>
-            
+
           </ul>
         </div>
       </div>
@@ -217,7 +236,20 @@
       </div>
     </div>
   </body>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js">
+</script>
   <script>
+
+      var sw = $("#sw").val()
+      if(sw == 1){
+          Swal.fire({
+          icon: 'error',
+          title: 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง',
+          text: 'Invalid username or password',
+
+        })
+      }
+
   <?php
   if (isset($_POST['sweet'])) {
     if ($_POST['sweet'] == 1) {

@@ -1,5 +1,6 @@
 <?php
-$conn = mysqli_connect("localhost","root","","db_product");
+
+
 require_once('php-excel-reader/excel_reader2.php');
 require_once('SpreadsheetReader.php');
 
@@ -46,7 +47,14 @@ if (isset($_POST["import"]))
                 if (!empty($name) ||
                     !empty($description) ||
                     !empty($other)) {
-                    echo $name ;
+                     $name ;
+                      $sql = "SELECT * FROM `user` WHERE `id_card`=$name";
+                      $result = $conn->query($sql);
+                   
+                      $row = $result -> fetch_assoc();
+                      echo $row["user_id"];
+
+
                     ?>
                     <br>
                     <?php

@@ -1,7 +1,6 @@
-<?php
+<?php   
    session_start();
    include("conn.php");
-   $evnt = $_POST["event_id"];
    if($_SERVER["REQUEST_METHOD"] == "POST") {
       // username and password sent from form
       $username = $_POST['username'];
@@ -12,23 +11,6 @@
       $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
       $count = mysqli_num_rows($result);
        if($count == 1){
-         if ($_POST["event_id"]!="") {
-           if ($row["status"]==4) {
-             $_SESSION['ev_qr'] = $_POST["event_id"];
-             $_SESSION['image'] = $row['image'];
-             $_SESSION['login_user'] = $username;
-             $_SESSION['user_id'] = $row['user_id'];
-             $_SESSION['user_name'] = $row['user_name'];
-             $_SESSION['org'] = $row['organization_id'];
-             $_SESSION['dep'] = $row['department_id'];
-             $_SESSION['dep2'] = $row['department2_id'];
-             $_SESSION['fn'] = $row['name'];
-              header("location:home0.php");
-           }
-           else {
-             header("location:index.php?event_id=$evnt&alert=1");
-           }
-         }
         //   echo $row['status'];
                 // echo $row['status'];
          if ($row["status"]==2) {
@@ -53,7 +35,7 @@
                  header("location: index.php?sweet=0");
                }
          else if($row["status"]==4) {
-
+                    
                  $_SESSION['image'] = $row['image'];
                  $_SESSION['login_user'] = $username;
                  $_SESSION['user_id'] = $row['user_id'];
@@ -66,11 +48,9 @@
                     }
        }
        else {
-            if ($_POST["event_id"]!="") {
-               header("location:index.php?event_id=$evnt");
-            }
-            echo '<meta http-equiv="refresh" content="0;url=index.phpsweet=1">';
-
+        
+            echo '<meta http-equiv="refresh" content="0;url=index.php?sweet=1">';
+        
        }
    }
 ?>

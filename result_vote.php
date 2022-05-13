@@ -1,83 +1,48 @@
 <?php
-include "header.php";
 session_start();
-$sr = "1";
+
 $fn = $_SESSION['fn'];
 $img = $_SESSION['image'];
-$user_id = $_SESSION['user_id'];
-$org = $_SESSION['org'];
-$dep = $_SESSION['dep'];
-$dep2 = $_SESSION['dep2'];
+ $user_id = $_SESSION['user_id'];
+
 include "navbar0.php";
-$sql = "SELECT * FROM `event` WHERE status_event = 'Public'";
+include "header.php"; 
+$sql = "SELECT event.event_id ,event.event_name,event.event_detail,event.date_start,event.image,event.status_event,event.user_id,event.event_type,event.organization_id,event.department_id,event.department2_id,event.date_end,event.time_start,event.time_end FROM event LEFT JOIN event_user ON event.event_id = event_user.event_id WHERE event_user.user_id = $user_id OR status_event = 'Public' GROUP BY event.event_id";
 $result = mysqli_query($conn,$sql);
 ?>
-<style media="screen">
-  .container{
-    height: 100%
+<style>
+  #search{
+    display: none;
   }
-  .first{
-    height: 11%;
-  }
-  table{
-    width: 100%;
+  #search2{
+    display: none;
   }
 </style>
 <div class="container">
-  <div class="row first">
-  </div>
-  <div class="row">
-    <div class="col-1">
+    <div class="row" style="height: 56px; background:red;">
 
     </div>
-    <div class="col-11">
-      <h3>ผลการโหวต</h3>
-      <table class="table table-hover">
-        <th>ลำดับ</th>
-        <th>ชื่อการเลือกตั้ง</th>
-        <th>รายละเอียด</th>
-        <th>สถานะ</th>
-        <th>ผู้สร้าง</th>
-        <th>สถานะ(พิเศษ)</th>
-        <th>ตรวจสอบ</th>
+    <div class="row">
+        <div class="col-1" style="height: 56px; ">
+        </div>
+        <div class="col-11">
+        <table class="table">
+            <th>รูป</th>
+            <th>ชื่อ</th>
+            <th>รายละเอียด</th>
+            <th>คะแนนโหวต</th>
             <?php
-            $i = 0 ;
-            while ($row = mysqli_fetch_array($result)) {
-            $i = $i + 1 ;
-            ?>
+            while($row = $result->fetch_assoc()) {?>  
             <tr>
-              <td>
-            <?php   echo $i; ?>
-              </td>
-              <td>
-            <?php   echo $row['event_name']; ?>
-              </td>
-              <td>
-            <?php   echo $row['event_detail']; ?>
-              </td>
-              <td>
-            <?php   echo $row['status_event']; ?>
-              </td>
-              <td>
-            <?php   echo $row['user_id']; ?>
-              </td>
-              <td>
-            <?php   echo $row['event_type']; ?>
-              </td>
-              <td>
-                <a href="" data-bs-toggle="modal" data-bs-target="#" ><img src="images/eye.png" alt="" style="width:30px;"></a>
-              </td>
+                <td><img class="rounded " style="width:150px; height:150px; object-fit: cover;" src="images/<?php echo $row["image"]; ?>" alt=""></td>
+                <td><?php echo $row["event_name"]; ?></td>
+                <td><?php echo $row["event_detail"]; ?></td>
+                <td><a href="vote_commit2.php?event_id=<?php echo $row["event_id"];?>" class="btn btn-success"> ดูคะแนน </a></td>
             </tr>
-            <?php
-            }
-             ?>
-      </table>
+        <?php
+        }
+        ?>
+        </table>
+        </div>
     </div>
-  </div>
 </div>
-<!-- Modal -->
-<?php
-  function modal(){
-
-  }
- ?>

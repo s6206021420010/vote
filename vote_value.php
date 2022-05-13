@@ -7,7 +7,7 @@ $img = $_SESSION['image'];
 
 include "navbar.php";
 include "header.php"; 
-$sql = "SELECT * FROM `event` WHERE status_event = 'Public' OR user_id =  $user_id";
+$sql = "SELECT * FROM `event` WHERE user_id =  $user_id";
 $result = mysqli_query($conn,$sql);
 ?>
 <style>
@@ -34,7 +34,7 @@ $result = mysqli_query($conn,$sql);
             <?php
             while($row = $result->fetch_assoc()) {?>  
             <tr>
-                <td><img style="width:100px;" src="images/<?php echo $row["image"]; ?>" alt=""></td>
+                <td><img class="rounded " style="width:150px; height:150px; object-fit: cover;" src="images/<?php echo $row["image"]; ?>" alt=""></td>
                 <td><?php echo $row["event_name"]; ?></td>
                 <td><?php echo $row["event_detail"]; ?></td>
                 <td><a href="vote_commit.php?event_id=<?php echo $row["event_id"];?>" class="btn btn-success"> ดูคะแนน </a></td>

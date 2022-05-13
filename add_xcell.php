@@ -17,7 +17,8 @@ include "header.php"; ?>
   $dep=$_SESSION['dep'];
   $dep2=$_SESSION['dep2'];
   $sql = "SELECT event_id, event_name, event_detail, date_start, date_end, image, status_event FROM event";
-  $result = mysqli_query($conn, $sql);
+  $result = $conn->query($sql);
+  
   ?>
 <style>
   #search{
@@ -73,10 +74,10 @@ include "header.php"; ?>
                   <label >เลือกไฟล์ Excel ที่เพิ่มข้อมูลแล้ว</label>
                       <input style="width:30%;"class="form-control" type="file" name="file"
                       id="file" accept=".xls,.xlsx">
-
+                  <input type="text" name="ev_id" value="<?php echo $event_id;?>" hidden>
                   <button style="margin-top:1%;"type="submit" id="submit" name="import"
                       class="btn btn-primary">Import</button>
-                  </center>
+                   
           </form>
 
 <!-- -------------------------- -->
@@ -84,10 +85,11 @@ include "header.php"; ?>
 
 
 <?php
-$conn = mysqli_connect("localhost","root","","db_product");
+
    $sqlSelect = "SELECT * FROM user WHERE organization_id=$org and department_id=$dep and department2_id=$dep2 and (status=3 or status=4)
 ";
-    $result = mysqli_query($conn, $sqlSelect);
+$result = $conn->query($sqlSelect);
+
 
 if (mysqli_num_rows($result) > 0)
 {

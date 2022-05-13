@@ -127,7 +127,7 @@ if ($_POST) {
                       <div class="modal-body">
                       <!-- content   -->
                       <p id="mail1"></p>
-                      <p id="mail2" hidden></p>
+                      <p id="mail2"></p>
                       <div class="input-group mb-3">
                         <input id="in_mod_mail" type="text" class="form-control" placeholder="กรอกรหัส 6 หลัก" aria-label="Recipient's username" aria-describedby="basic-addon2">
                         <div class="input-group-append">

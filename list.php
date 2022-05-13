@@ -1,9 +1,10 @@
 <?php
+session_start();
 include "conn.php";
 ?>
 <!DOCTYPE html>
 <?php
-session_start();
+
 $fn = $_SESSION['fn'];
 $img = $_SESSION['image'];
 $user_id = $_SESSION['user_id'];
@@ -60,9 +61,43 @@ $_SESSION["event_id"] = $_GET["event_id"];
             <h3>รหัสเลือกตั้ง : <?php echo $row_event['event_id']; ?> </h3>
           </div>
           <div class="col-6 text-end">
+              <button type="button" class="btn border mr-2 col-3" data-toggle="modal" data-target="#qrc"  value="<?php echo $row_event['event_id']; ?>"><img style="width:50px;" src="images/scan.png" alt="">Generate QRcode</button>
             <button type="button" class="btn btn-warning col-3" data-toggle="modal" data-target="#exampleModal" style="background:#E3BF40 ; color:#fff;" value="<?php echo $row_event['event_id']; ?>">แก้ไข</button>
           </div>
+            <!-- //////////////////////////////// -->
+
+            <!-- Modal qr code-->
+            <div class="modal fade" id="qrc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">สร้าง QR Code</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body ">
+                    <div class="row d-flex justify-content-center">
+                      <div class="col">
+                        <h4>QR Code ของการเลือกตั้ง</h4>
+                      </div>
+                    </div>
+                    <div class="row border-top">
+                      <div class="col d-flex justify-content-center align-items-center">
+                        <img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=https://voteverything.000webhostapp.com/index.php?event_id=<?php echo $event_id; ?>" title="Link to my Website" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <!-- Modal -->
+            <form class=""  action="forget_pass00.php" method="POST" >
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -74,50 +109,51 @@ $_SESSION["event_id"] = $_GET["event_id"];
                   </div>
                   <div class="modal-body">
                     <h5>ชื่อการเลือกตั้ง</h5>
-                    <input type="text"  class="form-control"  value="<?php echo $row_event['event_name']; ?>" required>
+                        <input type="text"  class="form-control" name="ev_id" value="<?php echo $row_event['event_id']; ?>" hidden>
+                    <input type="text"  class="form-control" name="ev_n" value="<?php echo $row_event['event_name']; ?>" required>
                     <h5>รายละเอียด</h5>
-                    <input type="text"  class="form-control"  value="<?php echo $row_event['event_detail']; ?>" required>
+                    <input type="text"  class="form-control" name="ev_d" value="<?php echo $row_event['event_detail']; ?>" required>
                     <div class="row p-2 bg-success mt-2 text-light rounded">
                       <div class="col">
-                        <h5>วันเปิดโหวต</h5> 
-                        <input type="date"  class="form-control"  value="<?php echo $row_event['date_start']; ?>" required>
+                        <h5>วันเปิดโหวต</h5>
+                        <input type="date"  class="form-control" name="ev_ds" value="<?php echo $row_event['date_start']; ?>" required>
                       </div>
                       <div class="col">
                         <h5>เวลาเปิดโหวต</h5>
-                        <input type="time"  class="form-control"  value="<?php echo $row_event['time_start']; ?>" required>
+                        <input type="time"  class="form-control" name="ev_ts" value="<?php echo $row_event['time_start']; ?>" required>
+                                                 <h5>เวลาเดิม<?php echo $row_event['time_start']; ?></h5>
                       </div>
                     </div>
 
                     <div class="row p-2 bg-danger mt-2 text-light rounded">
                       <div class="col">
                         <h5>วันปิดโหวต</h5>
-                        <input type="date"  class="form-control"  value="<?php echo $row_event['date_end']; ?>" required>
+                        <input type="date"  class="form-control" name="ev_de"  value="<?php echo $row_event['date_end']; ?>" required>
                       </div>
                       <div class="col">
                         <h5>เวลาปิดโหวต</h5>
-                        <input type="time"  class="form-control"  value="<?php echo $row_event['time_end']; ?>" required>
+
+                        <input type="time"  class="form-control" name="ev_te" value="<?php echo $row_event['time_end']; ?>" required>
+                         <h5>เวลาเดิม<?php echo $row_event['time_end']; ?></h5>
+
                       </div>
                     </div>
                     <p id="stat" hidden><?php echo $row_event['status_event']; ?></p>
                     <div class="row d-flex justify-content-center mt-4 border-top pt-2">
-                      <div class="col border-right">
-                        <h5>สถานะการเลือกตั้ง</h5>
-                      </div>
-                      <div class="col">  
-                        <input type="button"  class="btn btn-danger" id="pi" value="Private" required>
-                        <input type="button"  class="btn btn-success" id="pu" value="Public" required>        
-                      </div>
+
+
                     </div>
-                    
+
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" id="set_ev" class="btn btn-primary">Save changes</button>
+                    <button type="submit"  class="btn btn-primary">Save changes</button>
                   </div>
                 </div>
               </div>
             </div>
-
+          </form>
+          <!-- //////////////////////////////// -->
         </div>
         <div class="row">
           <div class="col-6">
@@ -352,8 +388,7 @@ $_SESSION["event_id"] = $_GET["event_id"];
 
   </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js">
-</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="script.js"></script>
 <script type="text/javascript">
   let blah = document.getElementById('blah');

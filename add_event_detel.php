@@ -17,16 +17,16 @@
   if ($imageName==NULL) {
     $imageName="user.png";
   }
-  echo $sql = "INSERT INTO `applicant`(`applicant_id`, `applicant_name`, `applicant_number`,`applicant_image`, `event_id`)
-   VALUES ('','$list','$number','$imageName','$id')";
+   echo $sql = "INSERT INTO `applicant`(`applicant_name`, `applicant_number`,`applicant_image`, `event_id`,`applicant_detial`) 
+   VALUES ('$list','$number','$imageName','$id','')";
 
 
-  
-if ($conn->query($sql) === TRUE) {
+
+if ($conn->query($sql) == TRUE) {
   header("location: list.php?event_id=$event_id&&user_id=$user_id");
   }
  else {
- echo "Error: " . $sql . "<br>" . $conn->error;
+  
 }
 
 

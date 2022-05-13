@@ -60,7 +60,7 @@ $result_app = mysqli_query($conn,$sql_app);
     <div class="row">
     <div class="col-1"></div>
     <div class="col-3">
-    <h2>ผลการโหวต</h2><img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=https://voteverything.000webhostapp.com/vote_commit.php?event_id=210" title="Link to my Website" />
+    <h2>ผลการโหวต</h2>
     </div>
 
     </div>

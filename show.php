@@ -1,14 +1,17 @@
+<?php
+    session_start();
+?>
 <html>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <?php
-session_start();
-$fn = $_SESSION['fn'];
-$img = $_SESSION['image'];
-$user_id = $_SESSION['user_id'];
+
+ $fn = $_SESSION['fn'];
+ $img = $_SESSION['image'];
+ $user_id = $_SESSION["user_id"];
  include "header.php"; include "conn.php";  include "function.php"; include "navbar.php";
 
- if ($_SESSION['login_user'] == "") {
+ if (empty($_SESSION['login_user'])) {
      header("location:index.php");
  }
 ?>
@@ -45,12 +48,13 @@ $user_id = $_SESSION['user_id'];
   </head>
 
 <?php
+$txt = $_POST['txt_search'];
 ?>
   <div class="body" id="body" style="position:absolute; top:13%; left:13%;display: none">
   <h3 class="ml-3">รายการเลือกตั้งที่สร้าง</h3>
     <?php
-    $db = new db();
-    $sql1=  "SELECT * FROM `event`WHERE user_id=$user_id ";
+   
+    $sql1=  "SELECT * FROM `event`WHERE user_id=$user_id AND event_name LIKE '$txt%' ";
     $result = mysqli_query($conn, $sql1);
     ?>
     <meta charset="UTF-8">
@@ -60,7 +64,7 @@ $user_id = $_SESSION['user_id'];
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
     ?>
-        <div class="card overflow-hidden w-25 h-75 m-1 mt-2 ml-5 p-2">
+        <div class="card overflow-hidden h-75 m-1 mt-2 ml-5 p-2" style="width:230px;">
           <div class="row">
               <div class="col">
                 <?php echo $row["event_name"]; ?>

@@ -26,8 +26,8 @@ else {
 if($image == NULL){
   $image = "79.png";
 }
-$sql = "INSERT INTO `event`(`event_id`, `event_name`, `event_detail`, `date_start`, `image`, `status_event`, `user_id`, `event_type`, `organization_id`, `department_id`, `department2_id`, `date_end`, `time_start`, `time_end`) 
-VALUES ('[value-1]','$event_name','$event_detail','$date_start','$image','$status','$sec','$event_type','$org','$dep','$dep2','$date_end','$time_start','$time_end')";
-if($result = mysqli_query($conn,$sql)){
+echo $sql = "INSERT INTO `event`(`event_name`, `event_detail`, `date_start`, `image`, `status_event`, `user_id`, `event_type`, `organization_id`, `department_id`, `department2_id`, `date_end`, `time_start`, `time_end`) VALUES ('$event_name','$event_detail','$date_start','$image','$status','$sec','$event_type','$org','$dep','$dep2','$date_end','$time_start','$time_end')";
+ 
+if($result = $conn->query($sql)){
   header("location:show.php");
 }

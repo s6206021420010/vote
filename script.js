@@ -3,7 +3,7 @@
 function check(){
     alert("hello")
 }
-// home0   
+// home0
 var stat = $("#stat").html()
 if(stat=="Private"){
   $("#pi").fadeIn(0)
@@ -18,13 +18,24 @@ $("#pi").click(function(){
 })
 $("#pu").click(function(){
   $("#pu").fadeOut(0)
-  $("#pi").fadeIn()  
+  $("#pi").fadeIn()
 })
-
+// 88888888888888
 $("#set_ev").click(function(){
-  alert(ck) 
 
+  $.ajax({
+    type : 'POST',
+    url : 'forget_pass00.php',
+    dataType:"json",
+    data : $('#update').serialize(),
+    success : function(data){
+      if (data == "string") {
+        alert("แก้ไขข้อมูลสำเร็จ")
+      }
+    }
+  })
 })
+// 88888888888888
 ///////////////////
 $(document).ready(function(){
   $("#body").fadeIn(3000);
